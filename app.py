@@ -28,8 +28,8 @@ def compute_embeddings(prompts):
 
 # Streamlit UI
 st.set_page_config(page_title="🧬 Cancer Q&A Semantic Search", layout="centered")
-st.title("🧠 Semantic Search on Cancer Clinical Data")
-st.markdown("Search for information from clinical trial Q&A using AI-powered semantic search.")
+st.title(" Semantic Search on Cancer Clinical Data")
+st.markdown(" Keyword based search from clinical trial,using AI-powered semantic search.")
 
 # Load
 data, prompts = load_data()
