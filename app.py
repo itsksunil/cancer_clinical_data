@@ -63,3 +63,5 @@ if query:
         st.warning("❗ No results found above the threshold. Try lowering it.")
 else:
     st.info("Enter a question above to search the dataset.")
+
+this app.py code in Streamlit  platform and i wanted to improve search capabilities
