@@ -4,12 +4,12 @@ import numpy as np
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 
-# Load the SentenceTransformer model
+# Load the model only once
 @st.cache_resource
 def load_model():
     return SentenceTransformer("all-MiniLM-L6-v2")
 
-# Load the JSON dataset
+# Load the JSON data only once
 @st.cache_data
 def load_data():
     with open("cancer_clinical_dataset.json", "r", encoding="utf-8") as f:
@@ -17,33 +17,34 @@ def load_data():
     prompts = [entry["prompt"] for entry in data if "prompt" in entry]
     return data, prompts
 
-# Compute prompt embeddings
+# Compute prompt embeddings (only pass hashable 'prompts')
 @st.cache_data
-def compute_embeddings(prompts, model):
+def compute_embeddings(prompts):
+    model = load_model()
     return model.encode(prompts, show_progress_bar=False)
 
-# Streamlit Page Settings
-st.set_page_config(page_title="🧬 Cancer Clinical Q&A - Semantic Search", layout="centered")
-st.title("🧠 Cancer Clinical Trial Semantic Q&A")
-st.markdown("Ask any question about cancer trials, biomarkers, immune responses, or clinical outcomes.")
+# App UI
+st.set_page_config(page_title="🧬 Cancer Clinical Q&A", layout="centered")
+st.title("🧠 Semantic Search: Cancer Clinical Trial Q&A")
+st.markdown("Ask a clinical question and discover the most relevant answers using AI-based semantic search.")
 
-# Load model and data
-model = load_model()
+# Load data
 data, prompts = load_data()
-prompt_embeddings = compute_embeddings(prompts, model)
+embeddings = compute_embeddings(prompts)
 
-# User query input
-query = st.text_input("🔍 Ask your clinical question here:")
+# Get user input
+query = st.text_input("🔍 Type your clinical question here:")
 
 if query:
+    model = load_model()
     query_embedding = model.encode([query])
-    similarities = cosine_similarity(query_embedding, prompt_embeddings)[0]
-    top_indices = similarities.argsort()[-3:][::-1]  # Top 3 most similar prompts
+    similarities = cosine_similarity(query_embedding, embeddings)[0]
+    top_indices = np.argsort(similarities)[-3:][::-1]
 
-    for i, idx in enumerate(top_indices, 1):
-        st.success(f"✅ Match {i}")
+    for rank, idx in enumerate(top_indices, 1):
+        st.success(f"✅ Match {rank}")
         st.markdown(f"**Prompt:** {data[idx]['prompt']}")
         st.markdown(f"**Answer:** {data[idx]['completion']}")
         st.markdown("---")
 else:
-    st.info("Please enter a clinical question to see relevant answers.")
+    st.info("Enter a clinical question to get started.")
