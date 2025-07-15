@@ -5,7 +5,7 @@ from difflib import get_close_matches
 # Load the JSON dataset safely
 @st.cache_data
 def load_data():
-    with open("cancer_clinical_dataset.json", "r", encoding="utf-8") as f:
+    with open("cancer_clinical_data.json", "r", encoding="utf-8") as f:
         raw_data = json.load(f)
 
     # Only entries with both 'prompt' and 'completion'
