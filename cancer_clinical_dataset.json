@@ -1375,8 +1375,874 @@
   {
     "prompt": "What increases the risk of cardiotoxicity from 5FU in CRC survivors?",
     "completion": "A history of coronary artery disease and prior mediastinal radiation increase the risk."
+  },
+
+  {
+    "prompt": "What was the most frequent presenting symptom of breast cancer in the study?",
+    "completion": "The most frequent presenting symptom was a breast lump, reported by 83% of women."
+  },
+  {
+    "prompt": "What percentage of women reported nipple abnormalities as a presenting symptom?",
+    "completion": "Nipple abnormalities were reported by 7% of women with breast cancer."
+  },
+  {
+    "prompt": "How common was breast pain among presenting symptoms?",
+    "completion": "Breast pain was reported by 6% of the women in the study."
+  },
+  {
+    "prompt": "What were some of the non-breast symptoms reported in this study?",
+    "completion": "Non-breast symptoms included back pain (1%) and weight loss (0.3%)."
+  },
+  {
+    "prompt": "How did the diagnostic delay vary by symptom type?",
+    "completion": "Women with non-lump symptoms or both lump and non-lump symptoms were more likely to wait 90 days or longer before seeking help, compared to those with breast lump only (15% and 20% vs. 7%)."
+  },
+  {
+    "prompt": "Did differences in patient interval remain after adjusting for demographics?",
+    "completion": "Yes, differences in the patient interval persisted even after adjusting for age and ethnicity."
+  },
+  {
+    "prompt": "Was there significant variation in the primary care interval across symptom groups?",
+    "completion": "There was little variation in the primary care interval for the majority of women, regardless of symptom type."
+  },
+  {
+    "prompt": "What proportion of women had symptoms other than breast lump?",
+    "completion": "About 1 in 6 women presented with symptoms other than a breast lump."
+  },
+  {
+    "prompt": "What does the study suggest for public health campaigns?",
+    "completion": "The study suggests that symptom awareness campaigns should place greater emphasis on breast symptoms other than breast lumps to reduce diagnostic delays."
+  },
+  {
+    "prompt": "How were the presenting symptoms categorized in the study?",
+    "completion": "Symptoms were categorized topographically into breast lump, non-lump breast symptoms (e.g., nipple abnormalities, breast pain), and non-breast symptoms (e.g., back pain, weight loss)."
+  },
+
+
+  {
+    "prompt": "How many distinct symptoms were recorded in the study?",
+    "completion": "A total of 56 distinct presenting symptoms were recorded among 2316 women with breast cancer."
+  },
+  {
+    "prompt": "What was the average number of symptoms per woman in the study?",
+    "completion": "On average, 1.1 symptoms were reported per woman in the study."
+  },
+  {
+    "prompt": "What was the relative frequency of breast lump among symptomatic women?",
+    "completion": "Breast lump was reported by 83.0% of the women (95% CI: 81.4%–84.5%)."
+  },
+  {
+    "prompt": "What proportion of women with breast pain experienced delays greater than 90 days in seeking care?",
+    "completion": "12% of women with breast pain had a patient interval greater than 90 days (95% CI: 8%–19%)."
+  },
+  {
+    "prompt": "Which symptom had the longest median patient interval before presentation?",
+    "completion": "Breast ulceration had the longest median patient interval before presentation at 122 days (IQR: 0–276)."
+  },
+  {
+    "prompt": "Which symptom had the highest percentage of patients waiting more than 90 days before presentation?",
+    "completion": "Breast ulceration had the highest proportion of delays over 90 days, affecting 56% of patients (95% CI: 27%–81%)."
+  },
+  {
+    "prompt": "What was the median primary care interval for women presenting with a breast lump?",
+    "completion": "The median primary care interval for women with a breast lump was 0 days (IQR: 0–0)."
+  },
+  {
+    "prompt": "Which symptom had the highest percentage of patients requiring two or more pre-referral consultations?",
+    "completion": "Chest pain had the highest rate of two or more pre-referral consultations, with 75% of cases."
+  },
+  {
+    "prompt": "What percentage of women reporting nipple abnormalities waited more than 90 days to present?",
+    "completion": "23% of women reporting nipple abnormalities experienced a patient interval over 90 days (95% CI: 17%–31%)."
+  },
+  {
+    "prompt": "How many women in the study reported nipple abnormalities?",
+    "completion": "A total of 158 women (6.8%, 95% CI: 5.9%–7.9%) reported nipple abnormalities."
+  },
+  {
+    "prompt": "What was the diagnostic delay associated with axillary lumps?",
+    "completion": "Women with axillary lumps had a median patient interval of 2.5 days (IQR: 0–12), with 0% waiting more than 90 days."
+  },
+  {
+    "prompt": "Which non-breast symptoms showed high primary care intervals?",
+    "completion": "Back pain and musculoskeletal pain had high primary care intervals, with median values of 21 days (IQR: 0–105) and 54 days (IQR: 0–187.5), respectively."
+  },
+  {
+    "prompt": "What was the proportion of women with breast infection or inflammation needing two or more pre-referral consultations?",
+    "completion": "60% of women with breast infection or inflammation had two or more pre-referral consultations."
+  },
+  {
+    "prompt": "How many women reported musculoskeletal pain as a symptom?",
+    "completion": "Fourteen women (0.6%, 95% CI: 0.4%–1.0%) reported musculoskeletal pain."
+  },
+  {
+    "prompt": "Which symptom had the lowest pre-presentation patient interval median?",
+    "completion": "Musculoskeletal pain had the shortest median patient interval at 0.5 days (IQR: 0–22)."
+  },
+  {
+    "prompt": "What is the importance of these findings for breast cancer awareness campaigns?",
+    "completion": "The findings highlight that many women with non-lump symptoms experience diagnostic delays, suggesting the need to broaden breast cancer awareness campaigns to include symptoms beyond breast lumps."
+  },
+
+
+
+
+  {
+    "prompt": "How many women waited longer than 90 days before seeking medical help?",
+    "completion": "A total of 164 women, or 9% of those with patient interval data, waited longer than 90 days before seeking help."
+  },
+  {
+    "prompt": "Which symptoms were associated with the highest proportion of delays over 90 days before seeking help?",
+    "completion": "Breast ulceration (50%), nipple abnormalities (23%), and breast infection or inflammation (21%) were associated with the highest delays."
+  },
+  {
+    "prompt": "What percentage of women with breast ulceration waited more than 90 days before presenting?",
+    "completion": "50% of women with breast ulceration had a patient interval exceeding 90 days."
+  },
+  {
+    "prompt": "How common were primary care intervals of 90 days or more?",
+    "completion": "Only 2% of women had a primary care interval of 90 days or more."
+  },
+  {
+    "prompt": "What types of symptoms were associated with long primary care delays?",
+    "completion": "Symptoms like non-specific breast abnormalities, back pain, musculoskeletal pain, chest pain, and fatigue or weakness were associated with prolonged primary care intervals."
+  },
+  {
+    "prompt": "How do patient intervals compare with primary care intervals in terms of diagnostic delays?",
+    "completion": "Patient intervals were more often prolonged, with 9% of women waiting over 90 days, compared to only 2% experiencing primary care delays of that length."
+  },
+  {
+    "prompt": "What is the significance of delayed help-seeking for non-lump symptoms?",
+    "completion": "Women with non-lump symptoms such as breast ulceration or nipple abnormalities were more likely to delay seeking help, highlighting the need for awareness beyond breast lumps."
+  },
+
+  {
+    "prompt": "What proportion of women presented without a breast lump in this study?",
+    "completion": "About 1 in 6 women with breast cancer presented without a breast lump, instead reporting a wide range of other symptoms."
+  },
+  {
+    "prompt": "How did patient and primary care intervals differ across symptom groups?",
+    "completion": "Patient intervals were longer for women with non-lump or both lump and non-lump symptoms compared to those with breast lump only, whereas primary care intervals were generally shorter and less variable."
+  },
+  {
+    "prompt": "What is the significance of short primary care intervals in this study?",
+    "completion": "The short primary care intervals suggest that delays in diagnosis primarily stem from patients' help-seeking behavior rather than inefficiencies in the healthcare system."
+  },
+  {
+    "prompt": "What factors might explain longer patient intervals in the 'both lump and non-lump' symptom group?",
+    "completion": "One possibility is that the presence of non-lump symptoms may lead women to normalize or misinterpret a breast lump, delaying help-seeking."
+  },
+  {
+    "prompt": "Why are findings from this study considered generalizable despite the healthcare setting?",
+    "completion": "Because the main source of diagnostic delay was the patient interval, which is less influenced by the publicly funded healthcare system context, the findings are considered relevant across different healthcare settings."
+  },
+  {
+    "prompt": "What are some limitations of the symptom data used in this study?",
+    "completion": "Limitations include reliance on patient recall, potential under-capture of non-specific symptoms, missing data for some outcomes, and lack of socioeconomic variables like deprivation or health literacy."
+  },
+  {
+    "prompt": "Why might awareness campaigns need to shift focus according to this study?",
+    "completion": "Because many women with non-lump symptoms delay help-seeking, campaigns should broaden awareness beyond just breast lumps to include other potential symptoms like nipple abnormalities or breast ulceration."
+  },
+  {
+    "prompt": "What challenges exist in diagnosing breast cancer from non-breast symptoms?",
+    "completion": "Non-breast symptoms like back pain or breathlessness are less specific and often appear in late-stage disease, making early detection and effective triage more difficult."
+  },
+  {
+    "prompt": "What does the study recommend for future awareness campaigns?",
+    "completion": "The study supports expanding symptom awareness to include non-lump breast symptoms and considering their predictive value for breast cancer."
+  },
+  {
+    "prompt": "How does this study improve on previous research?",
+    "completion": "It is the largest and most detailed study to date examining the association between a wide range of presenting symptoms and diagnostic delays in breast cancer."
+  },
+  {
+    "prompt": "What is the potential explanation for delayed presentation even when a lump is present along with non-lump symptoms?",
+    "completion": "Women may misinterpret or downplay a breast lump if it occurs alongside other non-lump symptoms, leading to delayed help-seeking."
+  },
+  {
+    "prompt": "What role could prospective designs play in future studies?",
+    "completion": "Prospective studies could clarify the time sequence between symptom onset and diagnostic intervals, though they may face logistical and sample size constraints."
+  },
+  {
+    "prompt": "What future diagnostic strategies are proposed for handling non-specific symptoms?",
+    "completion": "Initiatives like the Danish 'three-legged strategy' and England's ACE program may help improve diagnosis in patients presenting with vague or non-specific symptoms."
+  },
+
+  {
+    "prompt": "What is the most common cancer diagnosed in women worldwide?",
+    "completion": "Breast cancer is the most common cancer diagnosed in women worldwide."
+  },
+  {
+    "prompt": "Where in the breast does cancer most commonly arise?",
+    "completion": "Breast cancer most commonly arises in the ductal epithelium, known as ductal carcinoma."
+  },
+  {
+    "prompt": "What is lobular carcinoma?",
+    "completion": "Lobular carcinoma is a type of breast cancer that develops in the lobules of the breast."
+  },
+  {
+    "prompt": "What are the structural components of the breast?",
+    "completion": "The breast contains lobules, lobes, acini, lactiferous ducts, and is supported by Cooper's ligaments."
+  },
+  {
+    "prompt": "What are some common presenting symptoms of breast cancer in developing countries?",
+    "completion": "In developing countries, a breast mass or abnormal nipple discharge are often the initial symptoms of breast cancer."
+  },
+  {
+    "prompt": "How is breast cancer diagnosed?",
+    "completion": "Breast cancer is diagnosed through physical examination, breast imaging, and tissue biopsy."
+  },
+  {
+    "prompt": "What are the major treatment options for breast cancer?",
+    "completion": "Treatment options include surgery, chemotherapy, radiation, hormonal therapy, and immunotherapy."
+  },
+  {
+    "prompt": "What factors guide individualized treatment decisions for breast cancer?",
+    "completion": "Histology, stage, tumor markers, and genetic abnormalities guide individualized treatment decisions."
+  },
+  {
+    "prompt": "How does age affect breast cancer risk?",
+    "completion": "Breast cancer risk increases with advancing age."
+  },
+  {
+    "prompt": "How do BRCA1 and BRCA2 genes relate to breast cancer?",
+    "completion": "Mutations in BRCA1 and BRCA2 are major genetic factors increasing susceptibility to breast cancer."
+  },
+  {
+    "prompt": "What reproductive milestones are associated with increased breast cancer risk?",
+    "completion": "Early menarche (<12 years), late menopause (>55 years), nulliparity, and first childbirth after age 30 increase breast cancer risk."
+  },
+  {
+    "prompt": "What hormonal factors are associated with breast cancer risk?",
+    "completion": "Use of estrogen and progesterone, whether for contraception or hormone replacement, is associated with increased risk."
+  },
+  {
+    "prompt": "How does family history affect breast cancer risk?",
+    "completion": "First-degree relatives of breast cancer patients have a 2- to 3-fold increased risk of developing the disease."
+  },
+  {
+    "prompt": "What is lobular carcinoma in situ (LCIS) and why is it important?",
+    "completion": "LCIS is a histologic abnormality that indicates an increased risk for developing invasive breast cancer."
+  },
+  {
+    "prompt": "Which lifestyle and environmental factors are linked to higher breast cancer risk?",
+    "completion": "Radiation exposure, obesity, alcohol consumption, and environmental pollutants are linked to increased breast cancer risk."
+  },
+
+
+
+  {
+    "prompt": "What percentage of global cancer cases in 2020 were due to invasive breast cancer?",
+    "completion": "Invasive breast cancer accounted for approximately 11.7% of new cancer cases worldwide in 2020."
+  },
+  {
+    "prompt": "What is the lifetime risk of breast cancer in women and men in the US?",
+    "completion": "In the US, 1 in 8 women and 1 in 1000 men will develop breast cancer during their lifetime."
+  },
+  {
+    "prompt": "At what age does the incidence of breast cancer peak in women?",
+    "completion": "The incidence of breast cancer peaks at 421.3 cases per 100,000 in women aged 75 to 79 years."
+  },
+  {
+    "prompt": "What is the median age at diagnosis for breast cancer in women?",
+    "completion": "The median age of women at the time of breast cancer diagnosis is 61 years."
+  },
+  {
+    "prompt": "How much has breast cancer mortality decreased in the US since 1980?",
+    "completion": "Breast cancer mortality in the US has decreased by 43% from 1980 to 2020."
+  },
+  {
+    "prompt": "Which racial group has the highest breast cancer incidence in the US?",
+    "completion": "Non-Hispanic white women have the highest incidence of breast cancer at 128.1 per 100,000."
+  },
+  {
+    "prompt": "Which racial group has the highest mortality rate despite lower incidence?",
+    "completion": "African American women have a higher mortality rate despite a lower incidence compared to non-Hispanic whites."
+  },
+  {
+    "prompt": "What percentage of breast cancer cases are due to identifiable genetic mutations?",
+    "completion": "Only 5% to 10% of breast cancer cases are due to identifiable genetic mutations such as BRCA1 and BRCA2."
+  },
+  {
+    "prompt": "What are the four molecular subtypes of breast cancer?",
+    "completion": "The four molecular subtypes are Luminal A, Luminal B, HER-2 enriched, and Basal-like."
+  },
+  {
+    "prompt": "Which molecular subtype of breast cancer is associated with the worst prognosis?",
+    "completion": "Basal-like breast cancer, which is triple-negative, tends to have the worst prognosis and survival rates."
+  },
+  {
+    "prompt": "Which breast cancer subtype benefits most from targeted anti-HER2 therapy?",
+    "completion": "HER-2 enriched tumors benefit significantly from targeted therapy such as trastuzumab."
+  },
+  {
+    "prompt": "What is the most common histologic subtype of invasive breast cancer?",
+    "completion": "Invasive ductal carcinoma is the most common histologic subtype, accounting for 50% to 75% of cases."
+  },
+  {
+    "prompt": "What are the distinguishing features of invasive lobular carcinoma?",
+    "completion": "Invasive lobular carcinoma tends to grow in a single-file pattern, often remains clinically occult, and is E-cadherin negative."
+  },
+  {
+    "prompt": "What histologic subtype of breast cancer is associated with mucin production?",
+    "completion": "Mucinous (colloid) carcinoma is characterized by mucin production and typically occurs in older women."
+  },
+  {
+    "prompt": "Which breast cancer subtype is seen more frequently in BRCA mutation carriers?",
+    "completion": "Medullary carcinoma is more common in BRCA mutation carriers and tends to be aggressive."
+  },
+  {
+    "prompt": "What percentage of breast cancers are tubular carcinomas?",
+    "completion": "Tubular carcinoma accounts for 1% to 2% of all breast cancers."
+  },
+  {
+    "prompt": "What histological markers are routinely assessed in breast cancer specimens?",
+    "completion": "Hormone receptors (estrogen and progesterone), HER-2 receptors, Ki-67 index, and tumor grade are routinely assessed."
+  },
+
+
+  {
+    "prompt": "According to ACOG, how often should women aged 25 to 39 undergo clinical breast examinations?",
+    "completion": "ACOG recommends that women aged 25 to 39 may undergo clinical breast examinations every 1 to 3 years."
+  },
+  {
+    "prompt": "What are the common physical signs of advanced breast cancer?",
+    "completion": "Common physical signs of advanced breast cancer include peau d'orange, ulceration, axillary lymphadenopathy, and signs of distant metastasis."
+  },
+  {
+    "prompt": "What is peau d’orange and what does it indicate?",
+    "completion": "Peau d'orange refers to skin thickening and dimpling resembling orange peel and may indicate lymphatic obstruction in advanced breast cancer."
+  },
+  {
+    "prompt": "How often should high-risk or symptomatic women receive clinical breast examinations?",
+    "completion": "High-risk or symptomatic women should always receive a clinical breast examination, regardless of age."
+  },
+  {
+    "prompt": "What is the role of physical examination in breast cancer assessment?",
+    "completion": "Physical examination is a vital component of clinical breast cancer assessment and includes inspection and palpation in multiple positions with evaluation of lymph nodes."
+  },
+  {
+    "prompt": "Which breast cancer subtype can mimic a breast abscess clinically?",
+    "completion": "Inflammatory breast cancer may mimic a breast abscess and presents with swelling, redness, and local inflammatory signs."
+  },
+  {
+    "prompt": "Is breast pain a common symptom of breast cancer?",
+    "completion": "Breast pain is an uncommon symptom, occurring in only about 5% of breast cancer cases."
+  },
+  {
+    "prompt": "What imaging modality is most commonly used for breast cancer screening?",
+    "completion": "Mammography is the most commonly used modality for breast cancer screening and diagnosis."
+  },
+  {
+    "prompt": "What are the limitations of mammography?",
+    "completion": "Mammography is less effective in women with dense breast tissue, younger patients, and those who cannot tolerate breast compression."
+  },
+  {
+    "prompt": "When is breast MRI indicated for evaluation?",
+    "completion": "MRI is indicated for evaluating axillary lymph node disease, occult primary malignancy, Paget disease, multifocal or bilateral cancers, and high-risk screening or treatment response."
+  },
+  {
+    "prompt": "What is BI-RADS used for?",
+    "completion": "The BI-RADS system classifies breast imaging findings based on their malignancy risk and provides guidance for management decisions."
+  },
+  {
+    "prompt": "What imaging options are preferred for women with dense breasts?",
+    "completion": "Breast ultrasound and MRI are preferred in women with dense breast tissue where mammography may be limited."
+  },
+  {
+    "prompt": "How does diagnostic mammography differ from screening mammography?",
+    "completion": "Diagnostic mammography uses higher resolution and multiple views to further evaluate abnormalities seen on screening mammograms."
+  },
+  {
+    "prompt": "What are some abnormal findings on screening mammography?",
+    "completion": "Abnormal findings include mass lesions, calcifications, and architectural distortions."
+  },
+
+
+
+  {
+    "prompt": "What is the preferred biopsy method for a suspicious breast lesion?",
+    "completion": "Stereotactic core needle biopsy is the preferred method for sampling suspicious breast lesions."
+  },
+  {
+    "prompt": "Why is core needle biopsy preferred over fine needle aspiration in breast cancer?",
+    "completion": "Core needle biopsy provides more tissue for histopathologic evaluation and receptor testing, making it superior to fine needle aspiration."
+  },
+  {
+    "prompt": "What is the standard biopsy method for clinically positive lymph nodes?",
+    "completion": "An ultrasound-guided core needle biopsy is used to sample clinically positive regional lymph nodes."
+  },
+  {
+    "prompt": "Why are radiographic markers used during biopsy?",
+    "completion": "Radiographic markers are placed to localize the biopsy site for future identification during surgery or imaging."
+  },
+  {
+    "prompt": "What tests must be performed on biopsy breast tissue samples?",
+    "completion": "Biopsy specimens must undergo histopathologic evaluation including testing for estrogen receptors, progesterone receptors, and HER2."
+  },
+  {
+    "prompt": "Are routine systemic imaging tests recommended for all operable breast cancer patients?",
+    "completion": "No, systemic imaging is not routinely recommended unless the patient has symptoms suggestive of metastasis."
+  },
+  {
+    "prompt": "What imaging studies are used if metastatic symptoms are present?",
+    "completion": "MRI of the brain, chest CT, bone scan, or CT of the abdomen and pelvis may be performed if indicated by symptoms."
+  },
+  {
+    "prompt": "When are baseline blood tests indicated in breast cancer patients?",
+    "completion": "Baseline blood tests, including complete blood count and liver function tests, are indicated if neoadjuvant chemotherapy is planned."
+  },
+  {
+    "prompt": "What staging imaging is used in clinically advanced breast cancer?",
+    "completion": "For advanced disease, CT of the chest, abdomen, and pelvis, along with a bone scan or FDG-PET, is commonly used."
+  },
+  {
+    "prompt": "Which clinical signs suggest advanced breast cancer requiring systemic imaging?",
+    "completion": "Inflammatory breast cancer, chest wall or skin involvement, and bulky axillary lymphadenopathy are signs that may warrant systemic imaging."
+  },
+
+
+  {
+    "prompt": "What defines early breast cancer in terms of tumor size and lymph node status?",
+    "completion": "Early breast cancer includes tumors smaller than 5 cm in size without clinically positive lymph nodes."
+  },
+  {
+    "prompt": "What are the main surgical options for early breast cancer?",
+    "completion": "Surgical options for early breast cancer include breast conservation surgery (partial mastectomy or lumpectomy) and total mastectomy."
+  },
+  {
+    "prompt": "When is completion axillary dissection or radiation indicated after sentinel lymph node biopsy?",
+    "completion": "Completion axillary dissection or axillary radiation is indicated if more than 3 axillary lymph nodes are microscopically positive or if there is extranodal extension."
+  },
+  {
+    "prompt": "How is chemotherapy recommended for hormone receptor-positive early breast cancer patients?",
+    "completion": "Chemotherapy for hormone receptor-positive early breast cancer is guided by genomic risk stratification, with high-risk patients benefiting from chemotherapy in addition to hormonal therapy."
+  },
+  {
+    "prompt": "Which breast cancer patients should receive anti-HER2-directed therapy?",
+    "completion": "All HER2-positive patients with tumors larger than 1 cm should receive anti-HER2-directed therapy."
+  },
+  {
+    "prompt": "What chemotherapy approach is favored for early-stage triple-negative and HER2-positive tumors?",
+    "completion": "Up-front (neoadjuvant) chemotherapy is increasingly used in early-stage triple-negative and HER2-positive tumors to allow response assessment and increase breast conservation rates."
+  },
+  {
+    "prompt": "What defines locally advanced breast cancer (LABC)?",
+    "completion": "LABC primarily includes tumors larger than 5 cm or those with clinically positive lymph nodes."
+  },
+  {
+    "prompt": "What is the typical management strategy for LABC patients?",
+    "completion": "Most LABC patients receive neoadjuvant therapy followed by surgery and radiation therapy."
+  },
+  {
+    "prompt": "Why are radiographically detectable markers placed before neoadjuvant chemotherapy in LABC?",
+    "completion": "Markers are placed to localize the primary tumor and lymph nodes because tumors can shrink or disappear after chemotherapy."
+  },
+  {
+    "prompt": "What are contraindications to breast conservation surgery in LABC?",
+    "completion": "Contraindications include large tumors, chest wall or skin involvement, multifocal disease, inability to receive radiation, and unfavorable tumor-to-breast size ratio."
+  },
+  {
+    "prompt": "What is the axillary management for patients with clinically positive axilla at LABC diagnosis?",
+    "completion": "An axillary dissection is always performed regardless of response to neoadjuvant chemotherapy."
+  },
+  {
+    "prompt": "How is axillary management handled in clinically negative axilla at LABC diagnosis?",
+    "completion": "Sentinel lymph node biopsy is performed during surgery, and if residual disease is present, completion axillary dissection or radiation is indicated."
+  },
+  {
+    "prompt": "What is the role of radiation therapy after surgery in early breast cancer and LABC?",
+    "completion": "Radiation is mandatory after breast conservation surgery and indicated after mastectomy in cases such as large tumors, skin involvement, multifocal tumors, or multiple positive lymph nodes."
+  },
+  {
+    "prompt": "When is hormonal therapy indicated in breast cancer treatment?",
+    "completion": "Hormonal therapy with anti-estrogens or aromatase inhibitors is indicated in all hormone receptor-positive breast cancer patients."
+  },
+  {
+    "prompt": "What are the goals of neoadjuvant chemotherapy in LABC?",
+    "completion": "The goals are to reduce tumor size, eradicate micrometastatic disease, and assess tumor biology based on chemotherapy responsiveness."
+  },
+  {
+    "prompt": "How is systemic chemotherapy tailored in breast cancer?",
+    "completion": "Systemic chemotherapy regimens vary based on tumor pathology (hormone receptor, HER2 status, triple-negative), patient age, physical status, and local resources."
+  },
+
+
+
+  {
+    "prompt": "What is the primary treatment approach for metastatic breast cancer?",
+    "completion": "Metastatic breast cancer is managed primarily with systemic therapy, including chemotherapy, targeted therapy, immunotherapy, and hormonal therapy, depending on the molecular profile and patient fitness."
+  },
+  {
+    "prompt": "When is surgery recommended in metastatic breast cancer?",
+    "completion": "Surgery is generally not recommended in metastatic breast cancer except for symptom control and palliative therapy."
+  },
+  {
+    "prompt": "What role does radiation therapy play in metastatic breast cancer?",
+    "completion": "Palliative radiation is used to control bulky primary tumors and metastases to the brain, bone, and lung."
+  },
+  {
+    "prompt": "Name three common conditions in the differential diagnosis of breast cancer.",
+    "completion": "Mastitis or breast abscess, fat necrosis, and fibroadenoma are common conditions in the differential diagnosis of breast cancer."
+  },
+  {
+    "prompt": "How can mastitis be distinguished from inflammatory breast cancer?",
+    "completion": "Inflammation or cellulitis that does not respond to antibiotics should be evaluated further to rule out inflammatory breast cancer."
+  },
+  {
+    "prompt": "What is fat necrosis and how does it relate to breast cancer diagnosis?",
+    "completion": "Fat necrosis is a benign condition caused by trauma, which can harden and mimic a breast cancer mass."
+  },
+  {
+    "prompt": "What is the typical surgical approach for tumors smaller than 5 cm in breast cancer?",
+    "completion": "Breast conservation surgery, such as partial mastectomy or lumpectomy, is typically performed for tumors smaller than 5 cm."
+  },
+  {
+    "prompt": "When is mastectomy indicated in breast cancer treatment?",
+    "completion": "Mastectomy is indicated for large primary tumors, tumors invading the skin or chest wall, multifocal cancers, inflammatory breast cancer, or when patients cannot undergo radiation."
+  },
+  {
+    "prompt": "What is the role of sentinel lymph node biopsy in breast cancer surgery?",
+    "completion": "Sentinel lymph node biopsy is a vital staging procedure performed in patients with clinically negative axilla to assess lymph node involvement."
+  },
+  {
+    "prompt": "When can axillary lymph node dissection be safely avoided?",
+    "completion": "Axillary lymph node dissection can be safely avoided in patients with 1 to 3 positive sentinel lymph nodes without gross extranodal extension."
+  },
+  {
+    "prompt": "Describe the procedure and purpose of partial mastectomy or lumpectomy.",
+    "completion": "Partial mastectomy or lumpectomy involves excision of a portion of breast tissue with healthy margins, aiming to conserve most of the breast while removing the tumor."
+  },
+  {
+    "prompt": "How are nonpalpable breast lesions localized before surgery?",
+    "completion": "Nonpalpable lesions are localized preoperatively using wire or radioactive seed localization to ensure complete tumor removal."
+  },
+
+
+  {
+    "prompt": "What does a simple mastectomy involve?",
+    "completion": "A simple mastectomy involves excision of the entire breast and nipple-areola complex along with the underlying pectoralis major fascia. The amount of skin preserved varies depending on reconstruction plans."
+  },
+  {
+    "prompt": "How does a nipple-sparing mastectomy differ from a simple mastectomy?",
+    "completion": "A nipple-sparing mastectomy spares the nipple-areolar complex while removing the breast tissue through a small circumareolar incision, resulting in superior cosmetic outcomes but with a slightly increased oncologic risk compared to simple mastectomy."
+  },
+  {
+    "prompt": "What is a modified radical mastectomy?",
+    "completion": "A modified radical mastectomy combines the removal of the entire breast (simple mastectomy) with axillary lymph node dissection via an extended mastectomy incision."
+  },
+  {
+    "prompt": "Is radical mastectomy commonly performed today?",
+    "completion": "No, radical mastectomy, which includes removal of pectoral muscles and nerves, is seldom performed nowadays."
+  },
+  {
+    "prompt": "Describe the procedure of axillary sentinel lymph node biopsy.",
+    "completion": "In axillary sentinel lymph node biopsy, a radiotracer or blue dye is injected near the tumor, and 1 to 3 lymph nodes with the highest uptake or blue color in the axilla are removed for pathological examination."
+  },
+  {
+    "prompt": "How is axillary lymph node dissection performed?",
+    "completion": "Axillary lymph node dissection involves removal of fibrofatty and lymphoid tissue in axillary levels 2 and 3, while preserving the long thoracic and thoracodorsal nerves."
+  },
+  {
+    "prompt": "Where are the axillary lymph nodes located in relation to the pectoralis minor muscle?",
+    "completion": "Axillary lymph nodes are divided into three levels based on their location relative to the pectoralis minor muscle."
+  },
+  {
+    "prompt": "Can the same incision be used for lumpectomy and sentinel lymph node biopsy?",
+    "completion": "Sometimes, the same incision can be used for both lumpectomy and sentinel lymph node biopsy; otherwise, a separate incision at the axillary hairline may be required."
+  },
+
+  {
+    "prompt": "What is the role of radiation therapy in early-stage breast cancer?",
+    "completion": "Radiation therapy primarily serves as adjuvant treatment in early-stage breast cancer, reducing the risk of breast recurrence by approximately 50%, though it has not been shown to improve overall survival."
+  },
+  {
+    "prompt": "What are the common modalities used to deliver adjuvant radiotherapy in breast cancer?",
+    "completion": "Adjuvant radiotherapy can be delivered using external beam radiation, brachytherapy, or a combination of both."
+  },
+  {
+    "prompt": "What is Accelerated Partial Breast Irradiation (APBI) and who is it suitable for?",
+    "completion": "APBI is a technique delivering targeted radiation to the surgical cavity over approximately 1 week, suitable for select patients as per ASTRO guidelines; it can be delivered via brachytherapy with implantable catheters or external beam radiation using surgical clips or markers for planning."
+  },
+  {
+    "prompt": "What are the advantages and limitations of APBI compared to whole breast radiation?",
+    "completion": "APBI offers a shorter treatment duration (about 1 week) compared to whole breast radiation (3 to 6 weeks), but catheter-based APBI may require additional surgery and possible treatment delays."
+  },
+  {
+    "prompt": "Describe the whole breast radiation therapy (WBRT) technique and dosing.",
+    "completion": "WBRT involves 3D conformal radiation covering all visible breast tissue, typically dosed between 40.05 to 50.4 Gy over 15 to 25 fractions, aiming to minimize dose to the ipsilateral lung and heart."
+  },
+  {
+    "prompt": "What is the purpose of a radiation boost in breast cancer treatment?",
+    "completion": "A radiation boost is an additional dose (10 to 16 Gy) delivered to the surgical cavity after WBRT to improve local control and reduce recurrence, especially beneficial for women under 60 years old."
+  },
+  {
+    "prompt": "What are the potential risks associated with a radiation boost?",
+    "completion": "Radiation boost increases the risk of breast fibrosis, which may affect cosmetic outcomes, with severe fibrosis rates reported at 4.4% compared to 1.6% without the boost."
+  },
+  {
+    "prompt": "When is post-mastectomy radiation therapy (PMRT) indicated?",
+    "completion": "PMRT is indicated in patients with nodal disease after axillary staging, positive surgical margins, tumors larger than 5 cm, and high-risk pathological features such as central or medial tumors ≥2 cm with lymphovascular invasion, grade 3, or hormone receptor negativity."
+  },
+  {
+    "prompt": "What areas are covered in comprehensive nodal irradiation (CNI)?",
+    "completion": "CNI covers lymphatic drainage areas including axillary levels I to III, supraclavicular nodes, and internal mammary nodes, and can be included with WBRT or PMRT."
+  },
+  {
+    "prompt": "What challenges are associated with comprehensive nodal irradiation?",
+    "completion": "CNI is technically challenging due to the need for multiple radiation fields, increased dose exposure to lungs and heart, especially when treating the left breast, and may increase risks of lymphedema and radiation pneumonitis."
+  },
+  {
+    "prompt": "How does comprehensive nodal irradiation compare to axillary lymph node dissection in terms of axillary control?",
+    "completion": "CNI has similar axillary control rates compared to axillary lymph node dissection in patients with 1 to 3 positive nodes."
+  },
+  {
+    "prompt": "What techniques can help minimize heart dose during radiation therapy for left-sided breast cancer?",
+    "completion": "Techniques such as deep inspiratory breath hold (DIBH) and intensity-modulated radiation therapy (IMRT) can reduce heart exposure during radiation."
+  },
+
+
+
+  {
+    "prompt": "What is intensity-modulated radiation therapy (IMRT) in breast cancer treatment?",
+    "completion": "IMRT is an advanced radiation technique that delivers radiation more precisely to the breast tissue and is used as an alternative to conventional 3D planning, especially when heart dose constraints cannot be met."
+  },
+  {
+    "prompt": "What are the benefits of IMRT compared to conventional 3D or 2D radiation planning?",
+    "completion": "IMRT significantly reduces the incidence of grade 2 or higher radiation dermatitis compared to conventional 3D or 2D planning, with no differences observed in recurrence or survival."
+  },
+  {
+    "prompt": "What long-term cardiac risks are associated with breast irradiation?",
+    "completion": "Breast irradiation increases the risk of major coronary events due to accelerated atherosclerosis of the coronary arteries, with risk rising linearly by 7.4% per gray of radiation dose to the heart."
+  },
+  {
+    "prompt": "Which patients are at higher risk for cardiac toxicity from breast radiation therapy?",
+    "completion": "Women with preexisting cardiac risk factors have an even higher risk of radiation-induced cardiac toxicity."
+  },
+  {
+    "prompt": "What is radiation pneumonitis and how common is it after breast radiotherapy?",
+    "completion": "Radiation pneumonitis is inflammation of the lung caused by radiation, occurring in approximately 0.8% to 2.9% of patients after breast radiotherapy, typically within one year post-treatment."
+  },
+  {
+    "prompt": "What factors increase the risk of radiation pneumonitis in breast cancer patients?",
+    "completion": "Higher lung volume irradiated, comprehensive nodal radiation, and concurrent use of taxane chemotherapy drugs such as paclitaxel increase the risk of radiation pneumonitis."
+  },
+  {
+    "prompt": "How can radiation pneumonitis be prevented during breast cancer radiotherapy?",
+    "completion": "Careful radiation planning and adherence to lung dose constraints are the most effective measures to prevent radiation pneumonitis."
+  },
+  {
+    "prompt": "What is breast fibrosis and when does it typically occur after radiation therapy?",
+    "completion": "Breast fibrosis is a condition characterized by breast shrinkage, hardening, pain, and poor wound healing, typically occurring 4 to 12 months after adjuvant radiotherapy."
+  },
+  {
+    "prompt": "What factors influence the risk of moderate to severe breast fibrosis after radiation?",
+    "completion": "Risk factors include total breast radiation dose, beam energy, dose heterogeneity, radiation boost to the surgical cavity, and chemotherapy."
+  },
+  {
+    "prompt": "What preventive measures can reduce the risk of breast fibrosis after radiation therapy?",
+    "completion": "Preventive measures include weighing the benefits of radiation boost, lowering beam energy, limiting dose hotspots to less than 107% of prescribed dose, and use of pentoxifylline with vitamin E for six months post-radiation in high-risk patients."
+  },
+  {
+    "prompt": "Is breast fibrosis reversible, and how is it managed?",
+    "completion": "Breast fibrosis is mostly irreversible once developed; management is symptomatic, including NSAIDs, SNRIs, and anticonvulsants such as gabapentin."
+  },
+
+
+
+  {
+    "prompt": "What is lymphedema in breast cancer patients, and when does it typically occur?",
+    "completion": "Lymphedema is progressive swelling of the upper extremity that may occur about 6 months after radiation therapy in breast cancer patients."
+  },
+  {
+    "prompt": "What are common symptoms of lymphedema after breast cancer treatment?",
+    "completion": "Symptoms include increased arm girth, swelling, heaviness, poor wound healing, and increased risk of infection."
+  },
+  {
+    "prompt": "What factors increase the risk of lymphedema in breast cancer patients?",
+    "completion": "Risk factors include the number of lymph nodes removed, body mass index, and the extent of irradiated lymphatics."
+  },
+  {
+    "prompt": "How does the risk of lymphedema compare between sentinel lymph node biopsy and full axillary dissection?",
+    "completion": "Sentinel lymph node biopsy has a 5.6% risk of lymphedema, whereas full axillary dissection carries a higher risk of 19.9%."
+  },
+  {
+    "prompt": "What was the 5-year lymphedema rate in the AMAROS trial for axillary dissection versus regional nodal radiation?",
+    "completion": "The AMAROS trial reported a 5-year lymphedema rate of 25% in patients undergoing axillary dissection and 12% in those receiving regional nodal radiation alone."
+  },
+  {
+    "prompt": "What preventive measures may help reduce lymphedema risk after breast cancer treatment?",
+    "completion": "Weight-bearing exercise and maintaining a healthy body weight are suggested preventive measures."
+  },
+  {
+    "prompt": "How is lymphedema managed in breast cancer patients?",
+    "completion": "Management includes fitted compression garments, arm elevation, and exercise."
+  },
+  {
+    "prompt": "What is brachial plexopathy in the context of breast cancer radiotherapy?",
+    "completion": "Brachial plexopathy is nerve injury causing hand and arm paresthesia, weakness, and shoulder pain, typically occurring 8 to 12 months after regional nodal radiation."
+  },
+  {
+    "prompt": "What is the incidence and primary prevention strategy for brachial plexopathy in breast cancer patients?",
+    "completion": "It affects approximately 1% of patients, and prevention involves limiting radiation doses to below 50 Gy."
+  },
+  {
+    "prompt": "How is brachial plexopathy treated in breast cancer patients?",
+    "completion": "Treatment includes gabapentin and physical therapy to manage symptoms."
+  },
+  {
+    "prompt": "How common are rib fractures as a complication of breast radiotherapy?",
+    "completion": "Rib fractures are rare, occurring in approximately 0.3% to 1.8% of patients."
+  },
+  {
+    "prompt": "What factors increase the risk of rib fractures after breast radiotherapy?",
+    "completion": "Risk is associated with the use of lower energy radiation beams and higher radiation doses."
+  },
+  {
+    "prompt": "What is the typical treatment approach for rib fractures caused by breast radiation?",
+    "completion": "Treatment is generally conservative and supportive."
+  },
+  {
+    "prompt": "What is the risk of secondary malignancies following breast cancer radiotherapy?",
+    "completion": "The absolute risk of developing secondary malignancies is low, around 1% to 2% at 10 years after radiotherapy."
+  },
+  {
+    "prompt": "Which secondary cancers are patients at increased risk for after breast radiation therapy?",
+    "completion": "Patients have an increased risk of non-breast cancers, including sarcomas, lung cancer, and esophageal cancer."
+  },
+  {
+    "prompt": "What factors influence the risk of radiation-induced secondary malignancies?",
+    "completion": "Age, gender, radiation field size, and radiation dose are important risk factors."
+  },
+
+
+  {
+    "prompt": "What types of systemic therapies are used in breast cancer management?",
+    "completion": "Systemic therapies used in breast cancer management include chemotherapy, hormone therapy, immunotherapy, and targeted therapy."
+  },
+  {
+    "prompt": "In which breast cancer subtypes is cytotoxic chemotherapy most effective?",
+    "completion": "Cytotoxic chemotherapy is most effective in high-grade, poorly differentiated tumors such as triple-negative and HER2-positive breast cancers."
+  },
+  {
+    "prompt": "What are some early and modern chemotherapy regimens used in breast cancer treatment?",
+    "completion": "Early regimens included CMF (cyclophosphamide, methotrexate, and 5-fluorouracil), while modern regimens often use anthracyclines (doxorubicin or epirubicin) and taxanes, such as TAC (docetaxel, adriamycin, and cyclophosphamide)."
+  },
+  {
+    "prompt": "How is chemotherapy recommended for triple-negative and HER2-positive breast tumors?",
+    "completion": "Adjuvant chemotherapy is recommended for most patients with triple-negative and HER2-positive tumors larger than T1 stage."
+  },
+  {
+    "prompt": "What role does neoadjuvant chemotherapy play in breast cancer treatment?",
+    "completion": "Neoadjuvant chemotherapy is increasingly used in triple-negative and HER2-positive tumors to improve compliance, downstage tumors, and assess tumor biological response."
+  },
+  {
+    "prompt": "What is anti-HER2 therapy and when is it used?",
+    "completion": "Anti-HER2 therapy targets HER2/neu overexpression found in about 17% of breast cancers. Trastuzumab is the first approved monoclonal antibody that reduces recurrence and death risks when combined with chemotherapy in HER2-positive early breast cancer."
+  },
+  {
+    "prompt": "What benefits does dual HER2 blockade with trastuzumab and pertuzumab provide?",
+    "completion": "Dual HER2 blockade improves response rates in HER2-positive breast cancer compared to trastuzumab alone."
+  },
+  {
+    "prompt": "What are PARP inhibitors, and who benefits from them?",
+    "completion": "PARP inhibitors like olaparib and talazoparib inhibit DNA repair enzymes and are indicated in HER2-negative breast cancer patients with BRCA mutations, primarily in the adjuvant setting."
+  },
+  {
+    "prompt": "How do CDK4/6 inhibitors work and for which breast cancer patients are they indicated?",
+    "completion": "CDK4/6 inhibitors (e.g., palbociclib) block proteins that promote cell division, promoting tumor cell death. They are used in metastatic HR-positive, HER2-negative tumors and selected early HR-positive tumors."
+  },
+  {
+    "prompt": "What is the mechanism and indication for immune checkpoint inhibitors in breast cancer?",
+    "completion": "Immune checkpoint inhibitors such as pembrolizumab and nivolumab act on the PD-1/PD-L1 pathway to activate the immune system and are currently indicated in triple-negative breast cancer, especially in the metastatic setting."
+  },
+  {
+    "prompt": "What hormonal treatments are used for HR-positive breast cancers?",
+    "completion": "Selective estrogen receptor modulators (e.g., tamoxifen) and aromatase inhibitors (e.g., exemestane, letrozole) are used in HR-positive breast cancers, with modulators mainly for premenopausal women and aromatase inhibitors for postmenopausal women."
+  },
+  {
+    "prompt": "What additional hormonal therapy options may benefit premenopausal women with breast cancer?",
+    "completion": "Premenopausal women may benefit from oophorectomy or chemical ovarian suppression using GnRH antagonists to reduce estrogen production."
+  },
+  {
+    "prompt": "For how long is hormonal therapy typically indicated in breast cancer patients?",
+    "completion": "Hormonal therapy is usually indicated for 5 to 10 years to reduce the risk of breast cancer recurrence and mortality."
+  },
+
+
+  {
+    "prompt": "What is the purpose of breast cancer staging?",
+    "completion": "Breast cancer staging groups patients into risk categories that define prognosis and guide treatment recommendations for patients with similar prognosis."
+  },
+  {
+    "prompt": "What are the two main types of breast cancer staging?",
+    "completion": "Breast cancer staging is determined clinically based on physical examination and imaging before treatment, and histologically based on pathologic examination of the tumor and lymph nodes after surgery."
+  },
+  {
+    "prompt": "What system is most widely used for breast cancer staging?",
+    "completion": "The TNM classification system by the American Joint Committee on Cancer is the most widely used system for breast cancer staging."
+  },
+  {
+    "prompt": "What does the 'T' in the TNM system represent in breast cancer staging?",
+    "completion": "The 'T' represents the size and extent of the primary tumor, ranging from Tis (carcinoma in situ) to T4 (tumor with chest wall or skin involvement)."
+  },
+  {
+    "prompt": "What are the size criteria for T1 tumors and its subcategories?",
+    "completion": "T1 tumors are less than 2 cm, subdivided as T1a (0.1 to 0.5 cm), T1b (0.5 to 1.0 cm), and T1c (1.0 to 2.0 cm)."
+  },
+  {
+    "prompt": "How is the regional lymph node involvement classified in breast cancer staging?",
+    "completion": "Regional lymph nodes are classified as N1 (mobile ipsilateral axillary nodes), N2 (fixed/matted ipsilateral axillary nodes), and N3 with subcategories N3a (infraclavicular nodes), N3b (mammary nodes), and N3c (supraclavicular nodes)."
+  },
+  {
+    "prompt": "What does M1 indicate in breast cancer staging?",
+    "completion": "M1 indicates the presence of distant metastases."
+  },
+  {
+    "prompt": "What breast cancer stages correspond to early invasive cancer?",
+    "completion": "Stages I, IIa, and IIb are considered early invasive breast cancer."
+  },
+  {
+    "prompt": "Which stages of breast cancer are classified as locally advanced disease?",
+    "completion": "Stages IIIa, IIIb, and IIIc primarily involve locally advanced breast cancer."
+  },
+  {
+    "prompt": "What defines Stage 0 breast cancer?",
+    "completion": "Stage 0 comprises ductal carcinoma in situ (DCIS) and noninvasive breast cancer."
+  },
+  {
+    "prompt": "What is the 5-year survival rate for Stage 0 and Stage I breast cancer?",
+    "completion": "Both Stage 0 and Stage I breast cancer have a 100% 5-year survival rate."
+  },
+  {
+    "prompt": "How does the 5-year survival rate change with Stage II and Stage III breast cancer?",
+    "completion": "The 5-year survival rate is approximately 93% for Stage II and 72% for Stage III breast cancer."
+  },
+  {
+    "prompt": "What is the prognosis for Stage IV metastatic breast cancer?",
+    "completion": "Stage IV metastatic breast cancer has a poor prognosis, with only about 22% of patients surviving 5 years after diagnosis."
+  },
+
+
+  {
+    "prompt": "What are some common surgical complications of breast cancer treatment?",
+    "completion": "Surgical complications include infection, pain, bleeding, cosmetic issues, permanent scarring, and alteration or loss of sensation in the chest area and reconstructed breasts."
+  },
+  {
+    "prompt": "What are typical chemotherapy-related complications in breast cancer patients?",
+    "completion": "Common chemotherapy complications include nausea and vomiting, diarrhea, hair loss, memory loss ('chemo brain'), vaginal dryness, menopausal symptoms and fertility issues, and neuropathy."
+  },
+  {
+    "prompt": "What side effects are associated with hormonal therapy in breast cancer treatment?",
+    "completion": "Hormonal therapy side effects include hot flashes, vaginal discharge or dryness, fatigue, nausea, and impotence in males with breast cancer."
+  },
+  {
+    "prompt": "What complications can arise from radiation therapy in breast cancer patients?",
+    "completion": "Radiation therapy complications include pain and skin changes, fatigue, nausea, hair loss, chronic heart and lung issues, and neuropathy."
   }
 ]
+
 
 
 
