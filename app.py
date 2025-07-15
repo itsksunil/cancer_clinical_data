@@ -14,7 +14,7 @@ data = load_data()
 
 # App title and description
 st.title("🧬 Cancer Clinical Data prompt and response")
-st.markdown("Ask questions about Atezolizumab trials, immune mechanisms, PD-L1, or clinical results.")
+st.markdown("Ask questions about Cancer trials,biomarker, side effects, immune mechanisms, or clinical results.")
 
 # User input
 user_question = st.text_input("🔍 Ask your clinical question:")
