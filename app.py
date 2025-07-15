@@ -1,67 +1,49 @@
 import streamlit as st
 import json
-import numpy as np
-from sentence_transformers import SentenceTransformer
-from sklearn.metrics.pairwise import cosine_similarity
+from difflib import get_close_matches
 
-# Load the SentenceTransformer model
-@st.cache_resource
-def load_model():
-    return SentenceTransformer("all-MiniLM-L6-v2")
-
-# Load only valid Q&A entries
+# Load the JSON dataset
 @st.cache_data
 def load_data():
     with open("cancer_clinical_dataset.json", "r", encoding="utf-8") as f:
-        full_data = json.load(f)
+        return json.load(f)
 
-    # Filter only Q&A format
-    filtered_data = [d for d in full_data if "prompt" in d and "completion" in d]
-    prompts = [d["prompt"] for d in filtered_data]
-    return filtered_data, prompts
+data = load_data()
 
-# Compute embeddings from prompts
-@st.cache_data
-def compute_embeddings(prompts):
-    model = load_model()
-    return model.encode(prompts, show_progress_bar=False)
+# App title and description
+st.set_page_config(page_title="Cancer Clinical Q&A", layout="centered")
+st.title("🧬 Cancer Clinical Trial Q&A")
+st.markdown("Ask any question about cancer trials, biomarkers, immune response, or clinical outcomes.")
 
-# Streamlit UI
-st.set_page_config(page_title="🧬 Cancer Q&A Semantic Search", layout="centered")
-st.title(" Semantic Search on Cancer Clinical Data")
-st.markdown(" Keyword based search from clinical trial,using AI-powered semantic search.")
+# User input
+user_question = st.text_input("🔍 Ask your clinical question here:")
 
-# Load
-data, prompts = load_data()
-prompt_embeddings = compute_embeddings(prompts)
+# Search logic: Fuzzy matching + keyword fallback
+def find_top_matches(question, dataset, top_n=3):
+    question_lower = question.lower()
+    prompts = [entry["prompt"] for entry in dataset]
 
-# Input
-query = st.text_input("🔍 Ask your clinical question:")
+    # Fuzzy match
+    close_matches = get_close_matches(question, prompts, n=top_n, cutoff=0.4)
+    matched_results = [entry for entry in dataset if entry["prompt"] in close_matches]
 
-if query:
-    model = load_model()
-    query_embedding = model.encode([query])
-    similarity_scores = cosine_similarity(query_embedding, prompt_embeddings)[0]
+    # Fallback: keyword match
+    if not matched_results:
+        for entry in dataset:
+            prompt = entry["prompt"].lower()
+            if any(word in prompt for word in question_lower.split()):
+                matched_results.append(entry)
 
-    # Sort all by similarity
-    ranked_indices = np.argsort(similarity_scores)[::-1]
+    return matched_results[:top_n]
 
-    # Slider for cutoff
-    threshold = st.slider("🔎 Similarity threshold", 0.0, 1.0, 0.4, step=0.01)
-
-    results_found = False
-    for rank, idx in enumerate(ranked_indices, 1):
-        score = similarity_scores[idx]
-        if score >= threshold:
-            results_found = True
-            st.success(f"🔹 Rank {rank} | Similarity: {score:.2f}")
-            st.markdown(f"**Prompt:** {data[idx]['prompt']}")
-            st.markdown(f"**Answer:** {data[idx]['completion']}")
+# Display results
+if user_question:
+    results = find_top_matches(user_question, data)
+    if results:
+        for i, result in enumerate(results, 1):
+            st.success(f"✅ Match {i}")
+            st.markdown(f"**Prompt:** {result['prompt']}")
+            st.markdown(f"**Answer:** {result['completion']}")
             st.markdown("---")
-
-    if not results_found:
-        st.warning("❗ No results found above the threshold. Try lowering it.")
-else:
-    st.info("Enter a question above to search the dataset.")
-
-this app.py code in Streamlit  platform and i wanted to improve search capabilities
+    else:
+        st.error("❌ No relevant match found. Try rephrasing or using different keywords.")
