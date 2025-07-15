@@ -1,4 +1,8 @@
 streamlit
 sentence-transformers
-scikit-learn
-numpy
+scikit-learn==1.4.0
+numpy==1.26.0
+pandas==2.1.0
+tqdm==4.65.0
+torch==2.1.0
+transformers==4.35.0
