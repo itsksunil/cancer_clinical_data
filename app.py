@@ -8,9 +8,8 @@ def load_data():
     with open("cancer_clinical_data.json", "r", encoding="utf-8") as f:
         raw_data = json.load(f)
 
-    # Only entries with both 'prompt' and 'completion'
-    filtered_data = [entry for entry in raw_data if "prompt" in entry and "completion" in entry]
-    return filtered_data
+    # Only entries with both 'prompt' and 'completion' and are dicts
+    return [entry for entry in raw_data if isinstance(entry, dict) and "prompt" in entry and "completion" in entry]
 
 data = load_data()
 
@@ -23,11 +22,12 @@ user_question = st.text_input("🔍 Ask your clinical question:")
 
 # Search logic using fuzzy matching
 def find_best_match(question, dataset):
-    prompts = [entry["prompt"] for entry in dataset]
+    prompts = [entry["prompt"] for entry in dataset if "prompt" in entry]
     matches = get_close_matches(question, prompts, n=1, cutoff=0.4)
     if matches:
+        matched_prompt = matches[0]
         for entry in dataset:
-            if entry["prompt"] == matches[0]:
+            if entry.get("prompt") == matched_prompt:
                 return entry
     return None
 
