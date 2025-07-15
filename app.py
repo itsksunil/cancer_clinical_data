@@ -1,42 +1,49 @@
-# app.py
-
 import streamlit as st
 import json
-from difflib import get_close_matches
+import numpy as np
+from sentence_transformers import SentenceTransformer
+from sklearn.metrics.pairwise import cosine_similarity
 
-# Load the JSON dataset
+# Load the model once
+@st.cache_resource
+def load_model():
+    return SentenceTransformer("all-MiniLM-L6-v2")
+
+# Load the dataset once
 @st.cache_data
 def load_data():
     with open("cancer_clinical_dataset.json", "r", encoding="utf-8") as f:
-        return json.load(f)
+        data = json.load(f)
+    prompts = [entry["prompt"] for entry in data]
+    return data, prompts
 
-data = load_data()
+# Precompute embeddings
+@st.cache_data
+def compute_embeddings(prompts, model):
+    return model.encode(prompts)
 
-# App title and description
-st.title("🧬 Cancer Clinical Data prompt and response")
-st.markdown("Ask questions about Cancer trials,biomarker, side effects, immune mechanisms, or clinical results.")
+# Initialize
+st.set_page_config(page_title="Cancer Clinical Q&A - Semantic Search", layout="centered")
+st.title("🧬 Semantic Search in Cancer Clinical Q&A")
+st.markdown("Ask your clinical question and find the most relevant answers using AI-based search.")
 
-# User input
-user_question = st.text_input("🔍 Ask your clinical question:")
+# Load data and model
+data, prompts = load_data()
+model = load_model()
+prompt_embeddings = compute_embeddings(prompts, model)
 
-# Search logic using fuzzy matching
-def find_best_match(question, dataset):
-    prompts = [entry["prompt"] for entry in dataset]
-    matches = get_close_matches(question, prompts, n=1, cutoff=0.4)
-    if matches:
-        for entry in dataset:
-            if entry["prompt"] == matches[0]:
-                return entry
-    return None
+# Input box
+query = st.text_input("🔍 Ask a clinical question:")
 
-# Show answer
-if user_question:
-    result = find_best_match(user_question, data)
-    if result:
-        st.success("✅ Match found!")
-        st.markdown(f"**Prompt:** {result['prompt']}")
-        st.markdown(f"**Answer:** {result['completion']}")
+if query:
+    query_embedding = model.encode([query])
+    similarities = cosine_similarity(query_embedding, prompt_embeddings)[0]
+    top_k = similarities.argsort()[-3:][::-1]  # Top 3 results
+
+    for idx in top_k:
+        st.success("✅ Match Found")
+        st.markdown(f"**Prompt:** {data[idx]['prompt']}")
+        st.markdown(f"**Answer:** {data[idx]['completion']}")
         st.markdown("---")
-        st.json(result)
-    else:
-        st.error("❌ No match found. Try rephrasing your question.")
+else:
+    st.info("Enter a question to see results.")
