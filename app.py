@@ -177,7 +177,7 @@ def filter_results(results, min_score, keyword_filters, cancer_types, genes):
 
 # Home page layout
 def show_home():
-    st.title("🧬 Precision Cancer Clinical Search")
+    st.title("🧬 Cancer Clinical Search Modeling")
     st.markdown("""
     **Find precise answers about cancer treatments and clinical trials**  
     This tool helps researchers access structured clinical trial information.
