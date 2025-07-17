@@ -1,5 +1,4 @@
 import streamlit as st
-import json
 import pandas as pd
 import numpy as np
 from datetime import datetime
@@ -10,8 +9,16 @@ from sentence_transformers import SentenceTransformer
 from sklearn.cluster import KMeans
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import TfidfVectorizer
-import umap.umap_ as umap
+from sklearn.decomposition import PCA  # Fallback for UMAP
 import plotly.express as px
+
+# Try to import UMAP with fallback to PCA
+try:
+    import umap.umap_ as umap
+    UMAP_AVAILABLE = True
+except ImportError:
+    UMAP_AVAILABLE = False
+    st.warning("UMAP not available - using PCA for dimensionality reduction")
 
 # Initialize session state
 if 'search_history' not in st.session_state:
@@ -45,6 +52,46 @@ if 'model' not in st.session_state:
 DATA_FILE = "cancer_clinical_dataset.json"
 HISTORY_FILE = "search_history.json"
 MODEL_NAME = "all-MiniLM-L6-v2"
+
+# Load and save search history
+def load_search_history():
+    if os.path.exists(HISTORY_FILE):
+        try:
+            with open(HISTORY_FILE, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except:
+            return []
+    return []
+
+def save_search_history():
+    try:
+        with open(HISTORY_FILE, "w", encoding="utf-8") as f:
+            json.dump(st.session_state.search_history, f)
+    except:
+        pass
+
+# Dimensionality reduction with fallback
+def reduce_dimensionality(embeddings):
+    if UMAP_AVAILABLE:
+        reducer = umap.UMAP(random_state=42)
+    else:
+        reducer = PCA(n_components=2)
+    return reducer.fit_transform(embeddings)
+
+# Visualization function
+def visualize_clusters(embeddings, labels):
+    reduced_embeddings = reduce_dimensionality(embeddings)
+    
+    fig = px.scatter(
+        x=reduced_embeddings[:, 0],
+        y=reduced_embeddings[:, 1],
+        color=labels,
+        title="Knowledge Cluster Visualization",
+        labels={'color': 'Cluster'},
+        width=800,
+        height=600
+    )
+    st.plotly_chart(fig)
 
 # Load and save search history
 def load_search_history():
