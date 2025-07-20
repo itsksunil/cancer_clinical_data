@@ -1,0 +1,183 @@
+{
+  "nct_id": "NCT02394626",
+  "study_id": "EORTC-1511-BTG",
+  "cancer_type": "Brain",
+  "study_title": "RESURGE – Randomized Controlled Comparative Phase II Trial on Surgery for Glioblastoma Recurrence",
+  "status": "Recruiting",
+  "phase": "Phase 2",
+  "design": "Randomized open-label",
+  "target_sample_size": 120,
+  "intervention": "Surgery",
+  "sponsor_groups": ["EORTC Brain Tumor Group", "RESURGE"],
+  "prompt_completion": [
+    {
+      "theme": "study_purpose",
+      "prompt": "What is the primary aim of the RESURGE clinical trial (NCT02394626)?",
+      "completion": "To compare the effect of craniotomy and tumor resection followed by second-line therapy versus no surgery followed by second-line therapy on overall survival, neurological status, and quality of life in patients with recurrent glioblastoma."
+    },
+    {
+      "theme": "study_rationale",
+      "prompt": "Why is a randomized controlled trial necessary in the RESURGE study for glioblastoma recurrence?",
+      "completion": "Although retrospective analyses suggest a survival benefit from surgery for recurrent glioblastoma, an EORTC meta-analysis found no difference. A randomized trial is needed to provide reliable evidence for or against surgical intervention at recurrence."
+    },
+    {
+      "theme": "treatment_arms",
+      "prompt": "What are the treatment arms in the RESURGE trial (NCT02394626)?",
+      "completion": "One arm receives craniotomy and tumor resection followed by second-line therapy; the other arm receives second-line therapy without surgery."
+    },
+    {
+      "theme": "outcomes",
+      "prompt": "What outcomes are measured in the RESURGE trial for recurrent glioblastoma?",
+      "completion": "Primary outcomes include overall survival, neurological status, and quality of life. The data will also support planning for a future phase III trial."
+    },
+
+
+    {
+      "theme": "background",
+      "prompt": "What challenges are associated with treating recurrent glioblastoma?",
+      "completion": "Glioblastoma is highly invasive and recurs almost invariably after initial treatment. Despite advances in surgery and radio-chemotherapy, recurrence poses significant therapeutic challenges with limited effective options."
+    },
+    {
+      "theme": "rationale",
+      "prompt": "Why is a second surgery being considered in recurrent glioblastoma cases?",
+      "completion": "Second surgery may reduce tumor burden and potentially enhance the effectiveness of second-line treatments, possibly improving survival. However, it also carries risks of neurological deficits and surgical complications, necessitating evidence from randomized trials."
+    },
+    {
+      "theme": "objective_primary",
+      "prompt": "What is the primary objective of the RESURGE trial (NCT02394626)?",
+      "completion": "To compare overall survival in patients receiving surgery followed by second-line therapy versus those receiving second-line therapy alone for recurrent glioblastoma."
+    },
+    {
+      "theme": "objective_auxiliary",
+      "prompt": "What is the auxiliary objective in the RESURGE trial?",
+      "completion": "To compare survival outcomes between surgery and control groups stratified by extent of resection: complete resection (CRET) vs incomplete resection (non-CRET)."
+    },
+    {
+      "theme": "objectives_secondary",
+      "prompt": "What are the secondary objectives of the RESURGE trial?",
+      "completion": "To assess recruitment rates, compare progression-free survival between arms, evaluate crossover, and compare quality of life between treatment groups."
+    },
+    {
+      "theme": "objectives_safety",
+      "prompt": "What are the safety outcomes being assessed in the RESURGE trial?",
+      "completion": "Neurological deficits, local infections, and surgical morbidity during hospital stay and follow-up are key safety parameters."
+    },
+    {
+      "theme": "methods_eligibility",
+      "prompt": "Who is eligible for inclusion in the RESURGE trial?",
+      "completion": "Patients aged 18 or older with radiological evidence of first recurrence of glioblastoma are eligible for screening and potential randomization."
+    },
+    {
+      "theme": "methods_intervention",
+      "prompt": "What treatments do patients receive in the RESURGE trial arms?",
+      "completion": "The intervention arm receives craniotomy and tumor resection followed by second-line therapy. The control arm receives second-line therapy alone based on local practice guidelines."
+    },
+    {
+      "theme": "follow_up",
+      "prompt": "How is patient outcome monitored in the RESURGE trial?",
+      "completion": "Outcomes are measured at 3-month intervals to assess survival, quality of life, and complications."
+    },
+  
+    {
+      "theme": "recruitment_monitoring",
+      "prompt": "What recruitment-related data is monitored in the RESURGE trial?",
+      "completion": "Recruitment rate and reasons for non-inclusion of screened patients are being monitored to assess feasibility and potential biases in enrollment."
+    },
+    {
+      "theme": "eligibility_inclusion_criteria",
+      "prompt": "What are the inclusion criteria for patients participating in the RESURGE trial (NCT02394626)?",
+      "completion": "Participants must: (1) provide written informed consent, (2) be 18 years or older, (3) have prior histologically confirmed resection of glioblastoma, (4) have been pretreated with standard radiotherapy (with or without temozolomide), and (5) present first progression according to RANO criteria not occurring within 3 months of radiation therapy."
+    },
+    {
+      "theme": "eligibility_imaging_criteria",
+      "prompt": "What MRI-based conditions are required for inclusion in the RESURGE trial?",
+      "completion": "MRI must confirm: (1) feasibility of complete resection without significant speech/motor risk, (2) no encroachment of M1 or A1 segments, (3) absence of enhancement in speech or motor cortex, (4) no midline shift, (5) no enhancing ventricular spread, multifocal recurrence, meningeosis carcinomatosa, or contralateral infiltration."
+    },
+    {
+      "theme": "eligibility_functional_status",
+      "prompt": "What functional status is required for eligibility in the RESURGE trial?",
+      "completion": "A Karnofsky Performance Status (KPS) score of 70 or higher is required to ensure participants can tolerate intervention and follow-up procedures."
+    },
+    {
+      "theme": "eligibility_exclusions",
+      "prompt": "What are the key surgical exclusion conditions in the RESURGE trial?",
+      "completion": "Patients with contraindications for surgery or MRI findings indicating high surgical risk, such as midline shift, multifocal recurrence, or contrast enhancement in eloquent brain areas, are excluded."
+    },
+
+    {
+      "arm_name": "Experimental: Surgery followed by second-line therapy",
+      "intervention_type": "Procedure",
+      "intervention_name": "Surgery followed by adjuvant second-line therapy",
+      "description": "Surgery occurs between day 1 and 14 after inclusion and within 21 days from diagnostic MRI. Pre- and intra-operative tools (e.g., iMRI, fluorescence, electrophysiology) should be used when warranted. Post-surgery, second-line therapy is given based on local guidelines."
+    },
+    {
+      "arm_name": "Active Comparator: Second-line therapy alone",
+      "intervention_type": "Procedure",
+      "intervention_name": "Second-line therapy alone",
+      "description": "Patients receive second-line therapy according to local guidelines without surgery. Therapy modalities are not specified by the study protocol."
+    },
+  
+    {
+      "type": "Primary",
+      "measure": "Overall survival",
+      "description": "Overall survival from the date of inclusion until death or end of study.",
+      "time_frame": "Up to 5.7 years"
+    },
+    {
+      "type": "Secondary",
+      "measure": "Recruitment rate",
+      "description": "Rate of inclusion from all screened patients.",
+      "time_frame": "During screening and inclusion"
+    },
+    {
+      "type": "Secondary",
+      "measure": "Progression-free survival",
+      "description": "Time from inclusion to objective progression or death.",
+      "time_frame": "Up to 5.7 years"
+    },
+    {
+      "type": "Secondary",
+      "measure": "Morbidity of surgery",
+      "description": "Assessed every 3 months for up to 2 years or until death.",
+      "time_frame": "Up to 5.7 years"
+    },
+    {
+      "type": "Secondary",
+      "measure": "Total days spent at home after recurrence",
+      "description": "From date of inclusion until death or end of study.",
+      "time_frame": "Up to 5.7 years"
+    },
+    {
+      "type": "Secondary",
+      "measure": "Total days spent outside home after recurrence",
+      "description": "From date of inclusion until death or end of study.",
+      "time_frame": "Up to 5.7 years"
+    },
+  
+    {
+      "theme": "trial_design",
+      "prompt": "What is the study design of the RESURGE trial (NCT02394626)?",
+      "completion": "The RESURGE trial is a Phase 2, randomized, open-label, parallel assignment study with a primary purpose of treatment."
+    },
+    {
+      "theme": "arms_interventions",
+      "prompt": "What are the intervention arms in the RESURGE trial and what treatments do they receive?",
+      "completion": "The experimental arm undergoes surgery followed by second-line therapy. The comparator arm receives only second-line therapy according to local standards."
+    },
+    {
+      "theme": "surgical_guidelines",
+      "prompt": "What are the surgical requirements for patients in the intervention group of the RESURGE trial?",
+      "completion": "Surgery must occur within 14 days of inclusion and 21 days from MRI diagnosis. Tools like intraoperative MRI, fluorescence guidance, and electrophysiology should be used when needed."
+    },
+    {
+      "theme": "primary_outcome",
+      "prompt": "What is the primary outcome measure in the RESURGE trial?",
+      "completion": "Overall survival from the date of inclusion until death or end of study, assessed over a period of up to 5.7 years."
+    },
+    {
+      "theme": "secondary_outcomes",
+      "prompt": "What secondary outcomes are measured in the RESURGE trial?",
+      "completion": "Secondary outcomes include recruitment rate, progression-free survival, morbidity of surgery, total days at home after recurrence, and total days spent outside home."
+    }
+  ]
+}
