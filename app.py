@@ -35,7 +35,7 @@ if 'use_remote_data' not in st.session_state:  # New for remote data
     st.session_state.use_remote_data = False
 
 # Constants
-DATA_FILE = "cancer_clinical_dataset.json"
+DATA_FILES = ["cancer_clinical_dataset.json", "NCT02394626.json"]
 HISTORY_FILE = "search_history.json"
 REMOTE_DATA_TIMEOUT = 10  # seconds
 
