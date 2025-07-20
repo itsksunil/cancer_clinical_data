@@ -1,5 +1,13 @@
-streamlit==1.36.0
-pandas==2.2.2
-requests==2.32.3
-fuzzywuzzy==0.18.0
-python-Levenshtein==0.25.1
+--extra-index-url https://download.pytorch.org/whl/cpu
+streamlit
+sentence-transformers
+numpy
+pandas
+scikit-learn
+torch
+transformers
+tqdm
+python-dateutil
+pytz
+six
+tzdata
