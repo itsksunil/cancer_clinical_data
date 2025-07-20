@@ -1,3 +1,5 @@
+# app.py
+
 import streamlit as st
 import json
 import pandas as pd
@@ -5,10 +7,27 @@ from datetime import datetime
 from collections import defaultdict
 import random
 import os
-from difflib import get_close_matches
-from typing import List, Dict, Set, Optional
+import re
+from nltk.stem import PorterStemmer
+from nltk.corpus import stopwords
+from Levenshtein import distance as levenshtein_distance # For fuzzy matching
 
-# Initialize session state
+# --- NLTK Data Download (Run once if not already downloaded) ---
+# This block ensures that necessary NLTK data (stopwords) are available.
+# It will download them if they are not found, which might take a moment on first run.
+try:
+    _ = stopwords.words('english')
+    _ = PorterStemmer()
+except LookupError:
+    import nltk
+    st.warning("Downloading NLTK data (stopwords). This will only happen once.")
+    nltk.download('stopwords')
+    st.success("NLTK data downloaded. Please rerun the app if it doesn't automatically refresh.")
+    # You might need to manually rerun the app after the download completes if it doesn't auto-refresh.
+
+# --- Session State Initialization ---
+# Initialize all necessary variables in Streamlit's session state.
+# Session state persists values across reruns of the app.
 if 'search_history' not in st.session_state:
     st.session_state.search_history = []
 if 'current_query' not in st.session_state:
@@ -29,662 +48,439 @@ if 'cancer_types' not in st.session_state:
     st.session_state.cancer_types = []
 if 'genes' not in st.session_state:
     st.session_state.genes = []
-if 'all_keywords' not in st.session_state:
-    st.session_state.all_keywords = set()
-if 'nct_numbers' not in st.session_state:
-    st.session_state.nct_numbers = set()
-if 'show_advanced_filters' not in st.session_state:
-    st.session_state.show_advanced_filters = False
 
-# Constants
-DATA_FILE = "cancer_clinical_dataset.json"
-HISTORY_FILE = "search_history.json"
+# --- Constants ---
+DATA_FILE = "cancer_clinical_dataset.json" # Name of your JSON dataset file
+HISTORY_FILE = "search_history.json"      # File to store search history
+LEVENSHTEIN_THRESHOLD = 2                 # Max Levenshtein distance for fuzzy matching (tune as needed)
 
-# Load and save search history
+# --- NLP Tools Initialization ---
+stemmer = PorterStemmer()                  # Initialize the Porter Stemmer
+stop_words = set(stopwords.words('english')) # Load English stop words into a set for fast lookup
+
+# --- Utility Functions for Text Preprocessing ---
+
+def preprocess_text(text):
+    """
+    Converts text to lowercase, removes punctuation, stems words, and removes stop words.
+    This function is used for general text cleaning.
+    """
+    text = str(text).lower()
+    text = re.sub(r'[^\w\s]', '', text) # Remove punctuation (keep alphanumeric and spaces)
+    words = [stemmer.stem(word) for word in text.split() if word.strip() and word not in stop_words]
+    return " ".join(words)
+
+def get_clean_words(text):
+    """
+    Returns a set of stemmed, non-stop words from a given text.
+    Useful for creating word sets for comparison.
+    """
+    text = str(text).lower()
+    text = re.sub(r'[^\w\s]', '', text)
+    return set(stemmer.stem(word) for word in text.split() if word.strip() and word not in stop_words)
+
+# --- Search History Management ---
+
 def load_search_history():
+    """Loads search history from a JSON file."""
     if os.path.exists(HISTORY_FILE):
         try:
             with open(HISTORY_FILE, "r", encoding="utf-8") as f:
                 return json.load(f)
-        except:
+        except Exception as e:
+            st.warning(f"Could not load search history: {e}")
             return []
     return []
 
 def save_search_history():
+    """Saves current search history to a JSON file."""
     try:
         with open(HISTORY_FILE, "w", encoding="utf-8") as f:
             json.dump(st.session_state.search_history, f)
-    except:
-        pass
+    except Exception as e:
+        st.warning(f"Could not save search history: {e}")
 
-# Levenshtein distance for partial NCT matching
-def levenshtein_distance(s1: str, s2: str) -> int:
-    if len(s1) < len(s2):
-        return levenshtein_distance(s2, s1)
-    if len(s2) == 0:
-        return len(s1)
-    
-    previous_row = range(len(s2) + 1)
-    for i, c1 in enumerate(s1):
-        current_row = [i + 1]
-        for j, c2 in enumerate(s2):
-            insertions = previous_row[j + 1] + 1
-            deletions = current_row[j] + 1
-            substitutions = previous_row[j] + (c1 != c2)
-            current_row.append(min(insertions, deletions, substitutions))
-        previous_row = current_row
-    
-    return previous_row[-1]
+# --- Data Loading and Indexing ---
 
-# Enhanced data loading with NCT number handling
-@st.cache_data
+@st.cache_data # Cache the data loading and indexing for performance
 def load_and_index_data():
+    """
+    Loads the JSON dataset, cleans it, creates a word index for searching,
+    and extracts unique cancer types and genes.
+    """
     try:
+        if not os.path.exists(DATA_FILE):
+            st.error(f"Data file '{DATA_FILE}' not found. Please ensure it's in the same directory.")
+            return None, None, [], [], []
+
         with open(DATA_FILE, "r", encoding="utf-8") as f:
             raw_data = json.load(f)
         
         clean_data = []
-        word_index = defaultdict(list)
+        word_index = defaultdict(list) # Maps stemmed words to a list of document IDs
         cancer_types = set()
         genes = set()
-        all_prompts = []
-        all_keywords = set()
-        nct_numbers = set()
+        all_prompts = [] # Used for generating random suggestions
 
         for idx, entry in enumerate(raw_data):
+            # Ensure entry is a dictionary and has 'prompt' and 'completion' fields
             if isinstance(entry, dict) and "prompt" in entry and "completion" in entry:
-                # Clean and standardize data
-                entry["prompt"] = str(entry["prompt"]).strip()
-                entry["completion"] = str(entry["completion"]).strip()
+                prompt = str(entry["prompt"]).strip()
+                completion = str(entry["completion"]).strip()
                 
-                # Extract NCT numbers from nct_id field if present
-                found_ncts = []
-                if "nct_id" in entry:
-                    nct_id = str(entry["nct_id"]).strip()
-                    if nct_id.startswith("NCT") and len(nct_id) == 11 and nct_id[3:].isdigit():
-                        found_ncts.append(nct_id)
-                        nct_numbers.add(nct_id)
+                # Extract and clean metadata (cancer_type, genes)
+                entry_cancer_types = [ct.strip() for ct in str(entry.get("cancer_type", "")).split(",") if ct.strip()]
+                cancer_types.update(entry_cancer_types)
                 
-                # Also search for NCT numbers in text as fallback
-                text = f"{entry['prompt']} {entry['completion']}"
-                for word in text.split():
-                    if word.startswith("NCT") and len(word) == 11 and word[3:].isdigit():
-                        if word not in found_ncts:
-                            found_ncts.append(word)
-                            nct_numbers.add(word)
+                entry_genes = [g.strip() for g in str(entry.get("genes", "")).split(",") if g.strip()]
+                genes.update(entry_genes)
                 
-                # Extract metadata
-                entry_cancer_types = []
-                if "cancer_type" in entry:
-                    entry_cancer_types = [ct.strip().title() for ct in str(entry["cancer_type"]).split(",") if ct.strip()]
-                    cancer_types.update(entry_cancer_types)
-                
-                entry_genes = []
-                if "genes" in entry:
-                    entry_genes = [g.strip().upper() for g in str(entry["genes"]).split(",") if g.strip()]
-                    genes.update(entry_genes)
-                
-                # Store cleaned entry
-                clean_data.append({
-                    "prompt": entry["prompt"],
-                    "completion": entry["completion"],
+                # Store cleaned entry in our main data list
+                clean_entry = {
+                    "prompt": prompt,
+                    "completion": completion,
                     "cancer_type": ", ".join(entry_cancer_types) if entry_cancer_types else "",
-                    "genes": ", ".join(entry_genes) if entry_genes else "",
-                    "nct_numbers": found_ncts,
-                    "nct_id": entry.get("nct_id", ""),
-                    "id": idx
-                })
-                all_prompts.append(entry["prompt"])
+                    "genes": ", ".join(entry_genes) if entry_genes else ""
+                }
+                clean_data.append(clean_entry)
+                all_prompts.append(prompt)
 
-                # Index words with special handling for NCT numbers
-                text = f"{entry['prompt']} {entry['completion']}".lower()
-                words = set()
-                for word in text.split():
-                    # Keep NCT numbers as-is (case-sensitive)
-                    if word.startswith("NCT") and len(word) == 11 and word[3:].isdigit():
-                        words.add(word)  # Keep original case
+                # Index stemmed words from both prompt and completion for search
+                processed_prompt_words = get_clean_words(prompt)
+                processed_completion_words = get_clean_words(completion)
+
+                for word in processed_prompt_words.union(processed_completion_words):
+                    if len(word) > 2: # Only index words longer than 2 characters
                         word_index[word].append(idx)
-                        all_keywords.add(word)
-                    else:
-                        # Normal word processing
-                        word = word.strip(".,!?;:-_'\"()[]{}")
-                        if len(word) > 2 and word.isalpha():
-                            words.add(word.lower())
-                            all_keywords.add(word.lower())
-                
-                # Also index the nct_id separately if it exists
-                if "nct_id" in entry and entry["nct_id"]:
-                    nct = entry["nct_id"]
-                    word_index[nct].append(idx)
-                    all_keywords.add(nct)
-                
-                for word in words:
-                    word_index[word].append(idx)
 
         if not clean_data:
-            st.error("No valid Q&A pairs found in the dataset.")
-            return None, None, [], [], [], [], []
+            st.error("No valid Q&A pairs found in the dataset. Please check your JSON file.")
+            return None, None, [], [], []
         
-        # Generate random suggestions
+        # Generate random suggestions from the prompts
         random_suggestions = random.sample(all_prompts, min(10, len(all_prompts))) if all_prompts else []
         
-        return clean_data, word_index, sorted(cancer_types), sorted(genes), random_suggestions, sorted(all_keywords), sorted(nct_numbers)
+        # Return processed data, index, and metadata
+        return clean_data, word_index, sorted(list(cancer_types)), sorted(list(genes)), random_suggestions
     
+    except json.JSONDecodeError:
+        st.error(f"Error: '{DATA_FILE}' is not a valid JSON file. Please check its format.")
+        return None, None, [], [], []
     except Exception as e:
-        st.error(f"Error loading data: {str(e)}")
-        return None, None, [], [], [], [], []
+        st.error(f"An unexpected error occurred while loading data: {str(e)}")
+        return None, None, [], [], []
 
-# Auto-suggest function with NCT number support
-def get_suggestions(partial_query: str, all_keywords: Set[str], nct_numbers: Set[str]) -> List[str]:
-    if not partial_query or len(partial_query) < 2:
-        return []
-    
-    partial = partial_query.lower()
-    suggestions = []
-    
-    # NCT number suggestions (case-sensitive)
-    if partial.startswith("nct"):
-        partial_upper = partial.upper()
-        suggestions.extend([nct for nct in nct_numbers if nct.startswith(partial_upper)][:5])
-    
-    # Keyword suggestions
-    suggestions.extend([kw for kw in all_keywords if kw.startswith(partial)][:5])
-    
-    # Fuzzy matches
-    suggestions.extend(get_close_matches(partial, all_keywords, n=5, cutoff=0.6))
-    
-    # Remove duplicates and limit results
-    return list(set(suggestions))[:10]
+# --- Search Logic ---
 
-# Enhanced search with NCT number priority
-def keyword_search(query: str, dataset: List[Dict], word_index: Dict[str, List[int]]) -> List[Dict]:
+def keyword_search(query, dataset, word_index):
+    """
+    Performs a keyword search on the dataset, incorporating stemming,
+    stop word removal, exact matching, and fuzzy matching (Levenshtein distance).
+    Results are scored and ranked.
+    """
     if not query or not dataset:
         return []
     
-    # Check if query is an NCT number (case-sensitive)
-    is_nct_search = query.startswith("NCT") and len(query) == 11 and query[3:].isdigit()
+    # Preprocess the query words
+    query_words_stemmed = get_clean_words(query)
     
-    if is_nct_search:
-        # First check exact NCT ID matches
-        exact_nct_matches = []
-        for doc_id in word_index.get(query, []):
-            if doc_id < len(dataset):
-                entry = dataset[doc_id]
-                # Give higher score if it matches the nct_id field specifically
-                score = 200 if entry.get("nct_id", "") == query else 100
-                exact_nct_matches.append({
-                    "entry": entry,
-                    "score": score,
-                    "exact_matches": 1,
-                    "phrase_bonus": 0,
-                    "prompt_matches": 1 if query in entry["prompt"] else 0,
-                    "matched_keywords": {query},
-                    "doc_id": doc_id,
-                    "is_nct_match": True
-                })
-        
-        # If we found exact NCT ID matches, return them immediately
-        if exact_nct_matches:
-            return exact_nct_matches
-        
-        # Fallback to search in text if no exact NCT ID matches
-        doc_ids = set()
-        for word in word_index:
-            if word.startswith("NCT") and query in word:  # Partial NCT match
-                doc_ids.update(word_index[word])
-        
-        partial_matches = []
-        for doc_id in doc_ids:
-            if doc_id < len(dataset):
-                entry = dataset[doc_id]
-                # Calculate how closely the NCT numbers match
-                nct_similarity = max(
-                    (len(query) - levenshtein_distance(query, nct)) / len(query)
-                    for nct in entry["nct_numbers"]
-                ) if entry["nct_numbers"] else 0
-                score = int(50 * nct_similarity)  # Score based on similarity
-                partial_matches.append({
-                    "entry": entry,
-                    "score": score,
-                    "exact_matches": 1 if query in entry["nct_numbers"] else 0,
-                    "phrase_bonus": 0,
-                    "prompt_matches": 1 if query in entry["prompt"] else 0,
-                    "matched_keywords": {n for n in entry["nct_numbers"] if query in n},
-                    "doc_id": doc_id,
-                    "is_nct_match": True
-                })
-        
-        return exact_nct_matches + partial_matches
+    # Dictionary to store match information for each document
+    # Includes score, matched keywords, and counts for prompt/completion matches
+    doc_matches = defaultdict(lambda: {"score": 0, "matched_keywords": set(), "prompt_matches": 0, "completion_matches": 0})
     
-    # Normal keyword search processing
-    query = query.lower()
-    query_words = set(word.strip(".,!?;:-_'\"()[]{}") for word in query.split() 
-                     if len(word) > 2 and (word.isalpha() or (word.startswith("nct") and len(word) == 11 and word[3:].isdigit())))
-    
-    # Find similar words for fuzzy matching
-    expanded_words = set(query_words)
-    for word in query_words:
-        similar_words = get_close_matches(word, st.session_state.all_keywords, n=3, cutoff=0.7)
-        expanded_words.update(similar_words)
-    
-    # Find documents containing any of the words
-    doc_matches = defaultdict(int)
-    doc_word_matches = defaultdict(set)
-    
-    for word in expanded_words:
-        if word in word_index:
-            for doc_id in word_index[word]:
-                if doc_id < len(dataset):
-                    doc_matches[doc_id] += 1
-                    doc_word_matches[doc_id].add(word)
-    
-    # Rank results
-    ranked_results = []
-    for doc_id, count in doc_matches.items():
-        entry = dataset[doc_id]
-        full_text = f"{entry['prompt']} {entry['completion']}".lower()
+    # Iterate through each document in the dataset
+    for doc_id, entry in enumerate(dataset):
+        # Get clean (stemmed, no stop words) words from the document's prompt and completion
+        processed_prompt_words = get_clean_words(entry["prompt"])
+        processed_completion_words = get_clean_words(entry["completion"])
         
-        # Calculate exact matches
-        exact_matches = sum(1 for word in query_words if word in full_text)
-        
-        # Phrase detection - check if multiple query words appear together
-        phrase_bonus = 0
-        for i in range(len(query.split()) - 1):
-            phrase = " ".join(query.split()[i:i+2]).lower()
-            if phrase in full_text:
-                phrase_bonus += 3
-        
-        # Position bonus - matches in prompt are more valuable
-        prompt_matches = sum(1 for word in query_words if word in entry["prompt"].lower())
-        
-        total_score = (exact_matches * 2) + phrase_bonus + (prompt_matches * 1.5)
-        
-        ranked_results.append({
-            "entry": entry,
-            "score": total_score,
-            "exact_matches": exact_matches,
-            "phrase_bonus": phrase_bonus,
-            "prompt_matches": prompt_matches,
-            "matched_keywords": doc_word_matches[doc_id],
-            "doc_id": doc_id,
-            "is_nct_match": False
-        })
+        current_matched_keywords = set() # Keywords that actually matched in this specific document
 
-    # Sort by score and then by number of exact matches
-    ranked_results.sort(key=lambda x: (-x["score"], -x["exact_matches"]))
+        # Compare each query word with words in the document
+        for q_word in query_words_stemmed:
+            # 1. Exact Match (higher score)
+            if q_word in processed_prompt_words:
+                doc_matches[doc_id]["prompt_matches"] += 1
+                current_matched_keywords.add(q_word)
+            if q_word in processed_completion_words:
+                doc_matches[doc_id]["completion_matches"] += 1
+                current_matched_keywords.add(q_word)
+
+            # 2. Fuzzy Match (Levenshtein distance - partial score)
+            # Check for fuzzy matches in prompt
+            found_fuzzy_prompt = False
+            for p_word in processed_prompt_words:
+                if levenshtein_distance(q_word, p_word) <= LEVENSHTEIN_THRESHOLD:
+                    doc_matches[doc_id]["prompt_matches"] += 0.5 # Partial score for fuzzy match
+                    current_matched_keywords.add(p_word) # Add the actual word from the document
+                    found_fuzzy_prompt = True
+                    break # Move to next query word once a fuzzy match is found in prompt
+
+            # Check for fuzzy matches in completion (only if no fuzzy match found in prompt for this q_word)
+            if not found_fuzzy_prompt: # Avoid double counting if a word is fuzzy matched in both
+                for c_word in processed_completion_words:
+                    if levenshtein_distance(q_word, c_word) <= LEVENSHTEIN_THRESHOLD:
+                        doc_matches[doc_id]["completion_matches"] += 0.25 # Smaller partial score
+                        current_matched_keywords.add(c_word) # Add the actual word from the document
+                        break # Move to next query word
+
+        # Calculate total score with weights: Prompt matches are weighted higher
+        doc_matches[doc_id]["score"] = (doc_matches[doc_id]["prompt_matches"] * 2) + doc_matches[doc_id]["completion_matches"]
+        # Update the set of matched keywords for this document
+        doc_matches[doc_id]["matched_keywords"].update(current_matched_keywords)
+
+    ranked_results = []
+    for doc_id, match_info in doc_matches.items():
+        if match_info["score"] > 0: # Only include documents with a non-zero score
+            ranked_results.append({
+                "entry": dataset[doc_id],
+                "score": match_info["score"],
+                "prompt_matches": match_info["prompt_matches"],
+                "completion_matches": match_info["completion_matches"],
+                "matched_keywords": match_info["matched_keywords"]
+            })
+
+    # Sort results by score in descending order
+    ranked_results.sort(key=lambda x: x["score"], reverse=True)
     return ranked_results
 
-# Filter results based on multiple criteria
-def filter_results(results: List[Dict], min_score: int, keyword_filters: List[str], 
-                  cancer_types: List[str], genes: List[str]) -> List[Dict]:
+# --- Filtering Logic ---
+
+def filter_results(results, min_score, keyword_filters, cancer_types, genes):
+    """
+    Filters a list of search results based on minimum score, keyword filters,
+    cancer type filters, and gene filters.
+    """
     filtered = []
+    
+    # Preprocess filter keywords for consistent comparison (stemming + stop words)
+    stemmed_keyword_filters = {stemmer.stem(kw.lower()) for kw in keyword_filters if kw.strip()}
+    
     for result in results:
         entry = result["entry"]
         
-        # Apply score filter
+        # 1. Apply Minimum Score Filter
         if result["score"] < min_score:
             continue
         
-        # Apply keyword filters
-        if keyword_filters:
-            text = f"{entry['prompt']} {entry['completion']}".lower()
-            if not all(kw.lower() in text for kw in keyword_filters):
+        # 2. Apply Keyword Filters (fuzzy matching for filters too)
+        if stemmed_keyword_filters:
+            matched_by_filter = False
+            # Check if any of the filter keywords (stemmed) are present in the result's matched keywords
+            # or if they are fuzzy matches to the result's matched keywords
+            for f_kw in stemmed_keyword_filters:
+                if any(levenshtein_distance(f_kw, matched_kw) <= LEVENSHTEIN_THRESHOLD for matched_kw in result["matched_keywords"]):
+                    matched_by_filter = True
+                    break
+            if not matched_by_filter:
                 continue
         
-        # Apply cancer type filter
+        # 3. Apply Cancer Type Filter
         if cancer_types and entry["cancer_type"]:
-            entry_types = set(ct.strip().title() for ct in entry["cancer_type"].split(","))
+            entry_types = {ct.strip() for ct in entry["cancer_type"].split(",")}
             if not any(ct in entry_types for ct in cancer_types):
                 continue
         
-        # Apply gene filter
+        # 4. Apply Gene Filter
         if genes and entry["genes"]:
-            entry_genes = set(g.strip().upper() for g in entry["genes"].split(","))
+            entry_genes = {g.strip() for g in entry["genes"].split(",")}
             if not any(g in entry_genes for g in genes):
                 continue
         
         filtered.append(result)
     return filtered
 
-# Display a single search result
-def display_single_result(result: Dict, result_num: int):
-    entry = result["entry"]
-    with st.expander(f"#{result_num} | Score: {result['score']} - {entry['prompt'][:50]}...", expanded=(result_num==1)):
-        # Highlight NCT numbers in prompt
-        prompt_display = entry["prompt"]
-        for nct in entry.get("nct_numbers", []):
-            prompt_display = prompt_display.replace(nct, f"**{nct}**")
-        st.markdown(f"**Question:** {prompt_display}")
-        
-        # Highlight in completion
-        completion_display = entry["completion"]
-        for nct in entry.get("nct_numbers", []):
-            completion_display = completion_display.replace(nct, f"**{nct}**")
-        st.markdown(f"**Answer:** {completion_display}")
-        
-        # Show metadata
-        metadata = []
-        if entry["cancer_type"]:
-            metadata.append(f"**Cancer Type:** {entry['cancer_type']}")
-        if entry["genes"]:
-            metadata.append(f"**Genes:** {entry['genes']}")
-        if entry.get("nct_numbers"):
-            metadata.append(f"**Clinical Trial IDs:** {', '.join(entry['nct_numbers'])}")
-        
-        if metadata:
-            st.markdown(" | ".join(metadata))
-        
-        # Score details
-        with st.expander("🔍 Match Details"):
-            st.markdown(f"**Total Score:** {result['score']}")
-            if result.get("is_nct_match", False):
-                st.markdown("**Match Type:** Clinical Trial ID")
-            st.markdown(f"**Exact Matches:** {result['exact_matches']}")
-            if "phrase_bonus" in result:
-                st.markdown(f"**Phrase Bonus:** {result['phrase_bonus']}")
-            st.markdown(f"**Prompt Matches:** {result['prompt_matches']}")
-            if result["matched_keywords"]:
-                st.markdown(f"**Matched Keywords:** {', '.join(result['matched_keywords'])}")
-        
-        # Download buttons
-        col1, col2 = st.columns(2)
-        with col1:
-            st.download_button(
-                "Download as JSON",
-                json.dumps(entry, indent=2),
-                file_name=f"cancer_result_{result_num}.json",
-                mime="application/json",
-                key=f"json_{result_num}"
-            )
-        with col2:
-            st.download_button(
-                "Download as CSV",
-                pd.DataFrame([entry]).to_csv(index=False),
-                file_name=f"cancer_result_{result_num}.csv",
-                mime="text/csv",
-                key=f"csv_{result_num}"
-            )
+# --- UI Helper for Keyword Highlighting ---
 
-# Display all search results
-def display_results(results: List[Dict], all_results: List[Dict]):
-    st.success(f"Found {len(results)} relevant results (from {len(all_results)} total matches)")
+def highlight_keywords(text, keywords):
+    """
+    Highlights (bolds) specified keywords within a given text using Markdown.
+    It handles case-insensitivity and ensures whole word matches.
+    """
+    highlighted_text = text
+    # Sort keywords by length descending to prevent shorter words from being bolded within longer ones
+    sorted_keywords = sorted(list(keywords), key=len, reverse=True)
     
-    # Score distribution chart
-    if len(results) > 1:
-        scores = [r["score"] for r in results]
-        st.bar_chart(pd.DataFrame({"Score": scores}), use_container_width=True)
-    
-    # Download buttons
-    all_results_data = [result["entry"] for result in results]
-    col1, col2 = st.columns(2)
-    with col1:
-        st.download_button(
-            "Download All as JSON",
-            json.dumps(all_results_data, indent=2),
-            file_name="cancer_search_results.json",
-            mime="application/json"
-        )
-    with col2:
-        st.download_button(
-            "Download All as CSV",
-            pd.DataFrame(all_results_data).to_csv(index=False),
-            file_name="cancer_search_results.csv",
-            mime="text/csv"
-        )
+    for keyword in sorted_keywords:
+        # Create a regex pattern to match the whole word (case-insensitive)
+        # re.escape handles special characters in keywords
+        pattern = r'\b(' + re.escape(keyword) + r')\b'
+        # Replace matched word with bolded version
+        highlighted_text = re.sub(pattern, r'**\1**', highlighted_text, flags=re.IGNORECASE)
+    return highlighted_text
 
-    # Group results by NCT number if this was an NCT search
-    if results and results[0].get("is_nct_match", False):
-        nct_groups = defaultdict(list)
-        for result in results:
-            for nct in result["entry"].get("nct_numbers", []):
-                nct_groups[nct].append(result)
-        
-        # Display each NCT group separately
-        for nct, group in nct_groups.items():
-            st.subheader(f"Clinical Trial: {nct}")
-            for i, result in enumerate(group, 1):
-                display_single_result(result, i)
-    else:
-        # Normal display
-        for i, result in enumerate(results, 1):
-            display_single_result(result, i)
+# --- Streamlit Page Layouts ---
 
-def show_no_results(data: List[Dict], word_index: Dict[str, List[int]]):
-    st.error("No matches found with current filters. Try these suggestions:")
-    
-    # Generate suggestions from query
-    query_words = set(word.lower() for word in st.session_state.current_query.split() if len(word) > 3)
-    suggestions = set()
-
-    if query_words and word_index and data:
-        doc_ids = set()
-        for word in query_words:
-            if word in word_index:
-                doc_ids.update(word_index[word])
-
-        for doc_id in list(doc_ids)[:50]:
-            if doc_id < len(data):
-                suggestions.add(data[doc_id]["prompt"])
-                if len(suggestions) >= 5:
-                    break
-
-    if suggestions:
-        st.write("**Similar questions in our database:**")
-        cols = st.columns(2)
-        for i, suggestion in enumerate(suggestions):
-            with cols[i % 2]:
-                if st.button(suggestion[:50] + "..." if len(suggestion) > 50 else suggestion, 
-                            key=f"nores_sugg_{i}"):
-                    st.session_state.current_query = suggestion
-                    st.rerun()
-    
-    st.markdown("""
-    **Search Tips:**
-    - Try lowering the minimum score filter
-    - Remove some filters to broaden your search
-    - Check for typos in your search terms
-    - Use more general terms if your search is too specific
-    - Try different combinations of keywords
-    """)
-
-# Home page layout
 def show_home():
+    """Defines the layout and behavior of the application's home page."""
     st.title("🧬 Precision Cancer Clinical Search")
     st.markdown("""
-    **Find precise answers about cancer treatments and clinical trials**  
+    **Find precise answers about cancer treatments and clinical trials** 🔍
     This tool helps researchers access structured clinical trial information.
     """)
 
-    # Display random suggestions
+    # Display random suggestions to guide the user
     if st.session_state.suggestions:
+        st.markdown("---")
         st.markdown("**💡 Try these sample questions:**")
-        cols = st.columns(2)
-        for i, suggestion in enumerate(st.session_state.suggestions[:6]):
-            with cols[i % 2]:
-                if st.button(suggestion[:50] + "..." if len(suggestion) > 50 else suggestion, 
-                            key=f"suggestion_{i}"):
-                    st.session_state.current_query = suggestion
+        cols = st.columns(2) # Display suggestions in two columns
+        for i, suggestion in enumerate(st.session_state.suggestions[:6]): # Limit to 6 suggestions
+            with cols[i % 2]: # Distribute buttons across columns
+                # Create a button for each suggestion
+                if st.button(suggestion[:70] + "..." if len(suggestion) > 70 else suggestion, 
+                             key=f"suggestion_{i}"):
+                    st.session_state.current_query = suggestion # Set query and navigate to results
                     st.session_state.show_home = False
-                    st.rerun()
+                    st.rerun() # Rerun the app to switch to results page
+        st.markdown("---")
 
+    # Search input form
     with st.form("search_form"):
-        # Search box with auto-suggest
         query = st.text_input(
-            "Search clinical questions or NCT numbers:",
-            value=st.session_state.current_query,
-            placeholder="e.g., NCT05512364 or 'What is the response rate for atezolizumab...'",
-            help="Enter your clinical question or NCT number",
-            key="search_input"
+            "Search clinical questions:",
+            value=st.session_state.current_query, # Pre-fill with current query if any
+            placeholder="e.g., What is the response rate for atezolizumab in PD-L1 high NSCLC patients?",
+            help="Enter your clinical question or keywords"
         )
-        
-        # Show auto-suggestions
-        if query and len(query) >= 2 and st.session_state.all_keywords:
-            suggestions = get_suggestions(query, st.session_state.all_keywords, st.session_state.nct_numbers)
-            if suggestions:
-                st.markdown("**Suggestions:**")
-                cols = st.columns(3)
-                for i, suggestion in enumerate(suggestions[:3]):
-                    with cols[i % 3]:
-                        if st.button(suggestion, key=f"sugg_{i}"):
-                            st.session_state.current_query = suggestion
-                            st.rerun()
 
-        # Advanced search options
-        with st.expander("🔍 Advanced Search Options", expanded=False):
-            st.markdown("**Search in:**")
-            search_in = st.radio(
-                "Search scope",
-                ["Both questions and answers", "Questions only", "Answers only"],
-                horizontal=True,
-                label_visibility="collapsed"
-            )
-            
-            st.markdown("**Match type:**")
-            match_type = st.radio(
-                "Matching strategy",
-                ["All words (AND)", "Any word (OR)", "Exact phrase"],
-                horizontal=True,
-                label_visibility="collapsed"
-            )
+        # Submit button for the search form
+        if st.form_submit_button("Search", type="primary"):
+            if query.strip(): # Only proceed if query is not empty
+                st.session_state.current_query = query.strip()
+                st.session_state.show_home = False
+                # Add current query to search history (most recent first)
+                st.session_state.search_history.insert(0, {
+                    "query": st.session_state.current_query,
+                    "timestamp": datetime.now().isoformat()
+                })
+                # Keep history limited to a reasonable number (e.g., 20)
+                st.session_state.search_history = st.session_state.search_history[:20]
+                save_search_history() # Save history to file
+                st.rerun() # Rerun to show results
+            else:
+                st.warning("Please enter a search query.")
 
-        if st.form_submit_button("Search", type="primary") and query.strip():
-            st.session_state.current_query = query
-            st.session_state.show_home = False
-            st.session_state.search_history.append({
-                "query": query,
-                "timestamp": datetime.now().isoformat()
-            })
-            save_search_history()
-            st.rerun()
-
-# Results page layout
 def show_results():
+    """Defines the layout and behavior of the search results page."""
+    # Button to go back to the home page
     if st.button("← Back to Home"):
         st.session_state.show_home = True
         st.rerun()
 
     st.title("🔍 Search Results")
     
-    # Enhanced filters sidebar
+    # --- Filters Sidebar ---
     with st.sidebar:
         st.subheader("🔎 Refine Results")
         
-        # Score filter with distribution info
+        # Slider for Minimum Match Score
         st.session_state.min_score = st.slider(
             "Minimum Match Score",
             min_value=0,
-            max_value=20,
-            value=1,
-            help="Higher scores mean more keywords matched"
+            max_value=20, # Max value adjusted for potential fuzzy scores
+            value=st.session_state.min_score,
+            help="Higher scores mean more keywords matched (exact and fuzzy)"
         )
         
-        # Keyword filters with better UI
+        # Input for adding keyword filters
         st.markdown("**Filter by keywords:**")
-        keyword_cols = st.columns([4, 1])
-        with keyword_cols[0]:
-            new_keyword = st.text_input("Add keyword filter", key="new_keyword")
-        with keyword_cols[1]:
-            if st.button("Add", key="add_keyword") and new_keyword.strip():
-                if new_keyword.lower() not in [k.lower() for k in st.session_state.keyword_filters]:
-                    st.session_state.keyword_filters.append(new_keyword.strip())
-                    st.rerun()
-        
-        # Show current keyword filters
-        if st.session_state.keyword_filters:
-            st.markdown("**Active keyword filters:**")
-            for i, kw in enumerate(st.session_state.keyword_filters):
-                cols = st.columns([1, 4])
-                with cols[0]:
-                    if st.button("❌", key=f"remove_kw_{i}"):
-                        st.session_state.keyword_filters.pop(i)
-                        st.rerun()
-                with cols[1]:
-                    st.markdown(kw)
-        
-        # Cancer type filter with search
+        new_keyword = st.text_input("Add keyword filter", key="new_keyword_filter_input")
+        add_keyword_button = st.button("Add Keyword Filter", key="add_keyword_filter_button")
+
+        if add_keyword_button and new_keyword.strip():
+            # Add keyword only if not already present (case-insensitive)
+            if new_keyword.lower() not in [k.lower() for k in st.session_state.keyword_filters]:
+                st.session_state.keyword_filters.append(new_keyword.strip())
+                st.rerun() # Rerun to apply filter
+
+        # Multiselect for Cancer Type filters
         if st.session_state.cancer_types:
+            st.markdown("---")
             st.markdown("**Filter by cancer type:**")
-            cancer_search = st.text_input("Search cancer types", key="cancer_search")
-            
-            if cancer_search:
-                cancer_options = [ct for ct in st.session_state.cancer_types 
-                                if cancer_search.lower() in ct.lower()]
-            else:
-                cancer_options = st.session_state.cancer_types
-            
             selected_cancers = st.multiselect(
                 "Select cancer types",
-                cancer_options,
+                st.session_state.cancer_types,
                 default=st.session_state.cancer_type_filter,
-                key="cancer_type_select",
-                label_visibility="collapsed"
+                key="cancer_type_select"
             )
+            # Update session state and rerun if selection changes
             if selected_cancers != st.session_state.cancer_type_filter:
                 st.session_state.cancer_type_filter = selected_cancers
                 st.rerun()
         
-        # Gene filter with search
+        # Multiselect for Gene filters
         if st.session_state.genes:
+            st.markdown("---")
             st.markdown("**Filter by genes:**")
-            gene_search = st.text_input("Search genes", key="gene_search")
-            
-            if gene_search:
-                gene_options = [g for g in st.session_state.genes 
-                              if gene_search.upper() in g.upper()]
-            else:
-                gene_options = st.session_state.genes
-            
             selected_genes = st.multiselect(
                 "Select genes",
-                gene_options,
+                st.session_state.genes,
                 default=st.session_state.gene_filter,
-                key="gene_select",
-                label_visibility="collapsed"
+                key="gene_select"
             )
+            # Update session state and rerun if selection changes
             if selected_genes != st.session_state.gene_filter:
                 st.session_state.gene_filter = selected_genes
                 st.rerun()
         
-        # Clear all filters button
+        st.markdown("---")
+        # Display active filters and provide 'X' buttons to remove them
+        if st.session_state.keyword_filters or st.session_state.cancer_type_filter or st.session_state.gene_filter:
+            st.markdown("**Active Filters:**")
+            filters_to_remove = []
+
+            # Display and allow removal of keyword filters
+            for i, f_kw in enumerate(st.session_state.keyword_filters):
+                if st.button(f"❌ Keyword: {f_kw}", key=f"remove_kw_{i}"):
+                    filters_to_remove.append(("keyword", f_kw))
+            
+            # Display and allow removal of cancer type filters
+            for i, f_ct in enumerate(st.session_state.cancer_type_filter):
+                if st.button(f"❌ Cancer Type: {f_ct}", key=f"remove_ct_{i}"):
+                    filters_to_remove.append(("cancer_type", f_ct))
+
+            # Display and allow removal of gene filters
+            for i, f_gene in enumerate(st.session_state.gene_filter):
+                if st.button(f"❌ Gene: {f_gene}", key=f"remove_gene_{i}"):
+                    filters_to_remove.append(("gene", f_gene))
+
+            # Apply removals if any 'X' button was clicked
+            if filters_to_remove:
+                for f_type, f_value in filters_to_remove:
+                    if f_type == "keyword":
+                        st.session_state.keyword_filters.remove(f_value)
+                    elif f_type == "cancer_type":
+                        st.session_state.cancer_type_filter.remove(f_value)
+                    elif f_type == "gene":
+                        st.session_state.gene_filter.remove(f_value)
+                st.rerun() # Rerun to update filters
+
+        # Button to clear all active filters
         if st.button("Clear All Filters", type="secondary"):
             st.session_state.keyword_filters = []
             st.session_state.cancer_type_filter = []
             st.session_state.gene_filter = []
-            st.session_state.min_score = 1
-            st.rerun()
+            st.session_state.min_score = 1 # Reset min score
+            st.rerun() # Rerun to clear filters
 
-    # Load data
+    # --- Main Results Area ---
+
+    # Load data and index (cached for efficiency)
     data, word_index, cancer_types, genes, _ = load_and_index_data()
-    if data is None:
+    if data is None: # Handle case where data loading failed
         return
 
-    # Display search history
-    if st.session_state.search_history:
-        with st.expander("📚 Search History", expanded=False):
-            history_cols = st.columns(2)
-            for i, search in enumerate(reversed(st.session_state.search_history)):
-                with history_cols[i % 2]:
-                    if st.button(f"{search['query'][:50]}{'...' if len(search['query']) > 50 else ''}",
-                               key=f"history_{i}"):
-                        st.session_state.current_query = search["query"]
-                        st.rerun()
+    # Store cancer types and genes in session state if not already populated
+    # This ensures multiselects have options even if data was loaded in a previous session
+    if not st.session_state.cancer_types and cancer_types:
+        st.session_state.cancer_types = cancer_types
+    if not st.session_state.genes and genes:
+        st.session_state.genes = genes
 
-    st.markdown(f"**Current Search:** `{st.session_state.current_query}`")
-    
-    # Show active filters
-    active_filters = []
-    if st.session_state.min_score > 1:
-        active_filters.append(f"Min Score: {st.session_state.min_score}")
-    if st.session_state.keyword_filters:
-        active_filters.append(f"Keywords: {', '.join(st.session_state.keyword_filters)}")
-    if st.session_state.cancer_type_filter:
-        active_filters.append(f"Cancer Types: {', '.join(st.session_state.cancer_type_filter)}")
-    if st.session_state.gene_filter:
-        active_filters.append(f"Genes: {', '.join(st.session_state.gene_filter)}")
-    
-    if active_filters:
-        st.markdown(f"**Active Filters:** `{' | '.join(active_filters)}`")
+    # Display current search query
+    st.markdown(f"**Current Search Query:** **`{st.session_state.current_query}`**")
 
+    # Perform search and filtering with a spinner for user feedback
     with st.spinner("Searching clinical knowledge base..."):
         ranked_results = keyword_search(st.session_state.current_query, data, word_index)
         filtered_results = filter_results(
@@ -693,63 +489,204 @@ def show_results():
             st.session_state.keyword_filters,
             st.session_state.cancer_type_filter,
             st.session_state.gene_filter
-        ) if ranked_results else []
+        ) if ranked_results else [] # Ensure ranked_results is not empty before filtering
 
         if filtered_results:
             display_results(filtered_results, ranked_results)
         else:
             show_no_results(data, word_index)
 
-# Main app flow
+def display_results(results, all_results):
+    """
+    Displays the filtered search results, including download options and match details.
+    """
+    st.success(f"Found {len(results)} relevant results (from {len(all_results)} total matches before filtering)")
+    
+    # Display a bar chart of scores if there are multiple results
+    if len(results) > 1:
+        scores = [r["score"] for r in results]
+        st.bar_chart(pd.DataFrame({"Match Score": scores}), use_container_width=True)
+    
+    # Download buttons for all currently filtered results (JSON and CSV)
+    all_results_data = [result["entry"] for result in results]
+    col1, col2 = st.columns(2)
+    with col1:
+        st.download_button(
+            "Download Filtered Results as JSON",
+            json.dumps(all_results_data, indent=2),
+            file_name="filtered_cancer_search_results.json",
+            mime="application/json"
+        )
+    with col2:
+        st.download_button(
+            "Download Filtered Results as CSV",
+            pd.DataFrame(all_results_data).to_csv(index=False),
+            file_name="filtered_cancer_search_results.csv",
+            mime="text/csv"
+        )
+
+    # Display each individual result in an expander
+    for i, result in enumerate(results, 1):
+        entry = result["entry"]
+        
+        # Prepare keywords for highlighting: original query words (stemmed) + actual matched words from the entry
+        highlight_terms = set(stemmer.stem(word) for word in st.session_state.current_query.lower().split() if word.strip())
+        highlight_terms.update(result["matched_keywords"]) # Add actual matched keywords from entry
+
+        with st.expander(f"#{i} | Score: {result['score']:.2f} - {entry['prompt'][:70]}...", expanded=(i==1)):
+            st.markdown(f"**Question:** {highlight_keywords(entry['prompt'], highlight_terms)}")
+            st.markdown(f"**Answer:** {highlight_keywords(entry['completion'], highlight_terms)}")
+            
+            # Display metadata if available
+            metadata_parts = []
+            if entry["cancer_type"]:
+                metadata_parts.append(f"**Cancer Type:** {entry['cancer_type']}")
+            if entry["genes"]:
+                metadata_parts.append(f"**Genes:** {entry['genes']}")
+            if metadata_parts:
+                st.markdown(" | ".join(metadata_parts))
+            
+            # Detailed match information in a nested expander
+            with st.expander("🔍 Match Details"):
+                st.markdown(f"**Total Score:** {result['score']:.2f}")
+                st.markdown(f"**Prompt Matches:** {result['prompt_matches']:.2f}")
+                st.markdown(f"**Answer Matches:** {result['completion_matches']:.2f}")
+                if result["matched_keywords"]:
+                    # Display the stemmed keywords that contributed to the match
+                    st.markdown(f"**Keywords Involved in Match:** `{', '.join(result['matched_keywords'])}`")
+            
+            # Download buttons for individual result
+            col1_dl, col2_dl = st.columns(2)
+            with col1_dl:
+                st.download_button(
+                    "Download as JSON",
+                    json.dumps(entry, indent=2),
+                    file_name=f"cancer_result_{i}.json",
+                    mime="application/json",
+                    key=f"json_single_{i}" # Unique key for each button
+                )
+            with col2_dl:
+                st.download_button(
+                    "Download as CSV",
+                    pd.DataFrame([entry]).to_csv(index=False),
+                    file_name=f"cancer_result_{i}.csv",
+                    mime="text/csv",
+                    key=f"csv_single_{i}" # Unique key for each button
+                )
+
+def show_no_results(data, word_index):
+    """
+    Displays a message when no results are found and provides search tips and suggestions.
+    """
+    st.error("😞 No matches found with current filters.")
+    st.info("Try these suggestions or adjust your filters:")
+    
+    # Generate suggestions based on the current query's stemmed words, including fuzzy matches
+    query_words_stemmed = get_clean_words(st.session_state.current_query)
+    suggestions_from_query = set()
+
+    if query_words_stemmed and word_index and data:
+        potential_doc_ids = set()
+        # Collect document IDs that contain any of the query words (stemmed)
+        for q_word in query_words_stemmed:
+            if q_word in word_index:
+                potential_doc_ids.update(word_index[q_word])
+        
+        # Also consider fuzzy matches to suggest more relevant prompts
+        all_indexed_words = list(word_index.keys())
+        for q_word in query_words_stemmed:
+            for indexed_word in all_indexed_words:
+                if levenshtein_distance(q_word, indexed_word) <= LEVENSHTEIN_THRESHOLD:
+                    # Add documents associated with fuzzy matched words
+                    potential_doc_ids.update(word_index[indexed_word])
+        
+        # Limit suggestions to a reasonable number of unique prompts
+        for doc_id in list(potential_doc_ids)[:20]: # Check up to 20 potential documents
+            if doc_id < len(data):
+                suggestions_from_query.add(data[doc_id]["prompt"])
+                if len(suggestions_from_query) >= 5: # Show up to 5 unique suggestions
+                    break
+
+    if suggestions_from_query:
+        st.write("**You might find these related questions helpful:**")
+        cols = st.columns(2)
+        for i, suggestion in enumerate(list(suggestions_from_query)):
+            with cols[i % 2]:
+                if st.button(suggestion[:70] + "..." if len(suggestion) > 70 else suggestion, 
+                             key=f"nores_sugg_{i}"):
+                    st.session_state.current_query = suggestion
+                    st.session_state.show_home = False
+                    st.rerun()
+    else:
+        st.write("**No immediate suggestions found based on your query.**")
+        st.markdown("Try broadening your search terms or removing some filters.")
+
+    st.markdown("---")
+    st.markdown("""
+    **General Search Tips:**
+    - Try lowering the **Minimum Match Score** filter.
+    - Remove some **Keyword**, **Cancer Type**, or **Gene** filters to broaden your search.
+    - Double-check for typos in your search terms.
+    - Use more general terms if your search is too specific.
+    - Consider alternative phrasing for your question.
+    """)
+
+# --- Main Application Flow ---
+
 def main():
+    """Main function to run the Streamlit application."""
     st.set_page_config(
         page_title="🧬 Cancer Clinical Trial Search",
         page_icon="🧬",
-        layout="wide",
-        initial_sidebar_state="expanded"
+        layout="wide", # Use wide layout for better display of results and filters
+        initial_sidebar_state="expanded" # Sidebar expanded by default
     )
 
-    # Load search history
+    # Load search history at the start of the app
     if not st.session_state.search_history:
         st.session_state.search_history = load_search_history()
 
-    # Load data and suggestions
+    # Load data and suggestions only once or if not already loaded (cached)
+    # This populates the multiselect options for filters
     if not st.session_state.suggestions or not st.session_state.cancer_types or not st.session_state.genes:
-        data, word_index, cancer_types, genes, suggestions, all_keywords, nct_numbers = load_and_index_data()
+        data, word_index, cancer_types, genes, suggestions = load_and_index_data()
         if suggestions:
             st.session_state.suggestions = suggestions
         if cancer_types:
             st.session_state.cancer_types = cancer_types
         if genes:
             st.session_state.genes = genes
-        if all_keywords:
-            st.session_state.all_keywords = set(all_keywords)
-        if nct_numbers:
-            st.session_state.nct_numbers = set(nct_numbers)
 
+    # Sidebar content (always visible)
     with st.sidebar:
-        st.image("https://via.placeholder.com/150x50?text=Cancer+Search", width=150)
+        st.image("https://via.placeholder.com/150x50?text=Cancer+Search+MVP", width=150) # Placeholder image
         st.title("Navigation")
 
+        # "Home" button only appears when not on the home page
         if not st.session_state.show_home:
             if st.button("🏠 Home"):
                 st.session_state.show_home = True
                 st.rerun()
 
         st.markdown("---")
-        st.markdown("### About")
+        st.markdown("### About This App")
         st.markdown("""
-        This platform helps researchers:
-        - Find clinical trial details
-        - Access treatment outcomes
-        - Download structured data
-        - Filter by cancer types and genes
+        This **MVP (Minimum Viable Product)** allows researchers to quickly **extract and filter** information from **JSON-formatted clinical trial data**. 
+        It supports:
+        - **Keyword-based search** with enhanced fuzzy matching.
+        - Filtering by **cancer types** and **genes**.
+        - Viewing and downloading **structured data**.
+        - A **search history** for easy recall of past queries.
+        
+        The app uses a basic text processing pipeline including **stemming** and **stop word removal** for more effective search results.
         """)
 
+    # Main content area: switch between home and results pages
     if st.session_state.show_home:
         show_home()
     else:
         show_results()
 
+# Entry point of the Streamlit application
 if __name__ == "__main__":
     main()
