@@ -12,6 +12,14 @@ from nltk.stem import PorterStemmer
 from nltk.corpus import stopwords
 from Levenshtein import distance as levenshtein_distance # For fuzzy matching
 
+# For semantic search and visualization
+import spacy
+import numpy as np
+import networkx as nx
+import matplotlib.pyplot as plt
+from io import BytesIO
+import base64
+
 # --- NLTK Data Download (Run once if not already downloaded) ---
 # This block ensures that necessary NLTK data (stopwords) are available.
 # It will download them if they are not found, which might take a moment on first run.
@@ -23,7 +31,20 @@ except LookupError:
     st.warning("Downloading NLTK data (stopwords). This will only happen once.")
     nltk.download('stopwords')
     st.success("NLTK data downloaded. Please rerun the app if it doesn't automatically refresh.")
-    # You might need to manually rerun the app after the download completes if it doesn't auto-refresh.
+
+# --- spaCy Model Loading ---
+# Load a pre-trained spaCy model for word embeddings.
+# 'en_core_web_sm' is a small model, good for quick demos.
+# For better semantic accuracy, consider 'en_core_web_md' or 'en_core_web_lg'
+# You might need to install it: python -m spacy download en_core_web_sm
+@st.cache_resource # Use st.cache_resource for models/heavy objects
+def load_spacy_model():
+    try:
+        return spacy.load("en_core_web_sm")
+    except OSError:
+        st.error("SpaCy model 'en_core_web_sm' not found. Please run 'python -m spacy download en_core_web_sm' in your terminal.")
+        st.stop() # Stop the app if model is not available
+nlp = load_spacy_model()
 
 # --- Session State Initialization ---
 # Initialize all necessary variables in Streamlit's session state.
@@ -34,8 +55,10 @@ if 'current_query' not in st.session_state:
     st.session_state.current_query = ""
 if 'show_home' not in st.session_state:
     st.session_state.show_home = True
-if 'min_score' not in st.session_state:
-    st.session_state.min_score = 1
+if 'min_keyword_score' not in st.session_state: # Renamed for clarity
+    st.session_state.min_keyword_score = 1
+if 'min_semantic_score' not in st.session_state: # New semantic score filter
+    st.session_state.min_semantic_score = 0.0 # Range 0.0 to 1.0
 if 'keyword_filters' not in st.session_state:
     st.session_state.keyword_filters = []
 if 'cancer_type_filter' not in st.session_state:
@@ -106,7 +129,7 @@ def save_search_history():
 def load_and_index_data():
     """
     Loads the JSON dataset, cleans it, creates a word index for searching,
-    and extracts unique cancer types and genes.
+    extracts unique cancer types and genes, and generates spaCy document objects for semantic search.
     """
     try:
         if not os.path.exists(DATA_FILE):
@@ -145,13 +168,18 @@ def load_and_index_data():
                 clean_data.append(clean_entry)
                 all_prompts.append(prompt)
 
-                # Index stemmed words from both prompt and completion for search
+                # Index stemmed words from both prompt and completion for keyword search
                 processed_prompt_words = get_clean_words(prompt)
                 processed_completion_words = get_clean_words(completion)
 
                 for word in processed_prompt_words.union(processed_completion_words):
                     if len(word) > 2: # Only index words longer than 2 characters
                         word_index[word].append(idx)
+
+        # Generate spaCy document objects for semantic similarity calculation
+        # Concatenate prompt and completion for a comprehensive document representation
+        for entry in clean_data:
+            entry["spacy_doc"] = nlp(entry["prompt"] + " " + entry["completion"])
 
         if not clean_data:
             st.error("No valid Q&A pairs found in the dataset. Please check your JSON file.")
@@ -170,86 +198,111 @@ def load_and_index_data():
         st.error(f"An unexpected error occurred while loading data: {str(e)}")
         return None, None, [], [], []
 
-# --- Search Logic ---
+# --- Search Logic (Combined Keyword and Semantic) ---
 
-def keyword_search(query, dataset, word_index):
+def combined_search(query, dataset, word_index, nlp_model):
     """
-    Performs a keyword search on the dataset, incorporating stemming,
-    stop word removal, exact matching, and fuzzy matching (Levenshtein distance).
-    Results are scored and ranked.
+    Performs a combined keyword and semantic search on the dataset.
+    Results are scored based on both exact/fuzzy keyword matches and semantic similarity.
     """
     if not query or not dataset:
         return []
     
-    # Preprocess the query words
+    # Preprocess the query for keyword search
     query_words_stemmed = get_clean_words(query)
     
+    # Create spaCy doc for the query for semantic search
+    query_doc = nlp_model(query)
+
     # Dictionary to store match information for each document
-    # Includes score, matched keywords, and counts for prompt/completion matches
-    doc_matches = defaultdict(lambda: {"score": 0, "matched_keywords": set(), "prompt_matches": 0, "completion_matches": 0})
+    doc_results = defaultdict(lambda: {
+        "keyword_score": 0,
+        "semantic_score": 0.0,
+        "total_score": 0.0,
+        "matched_keywords": set(),
+        "prompt_matches": 0,
+        "completion_matches": 0
+    })
     
     # Iterate through each document in the dataset
     for doc_id, entry in enumerate(dataset):
-        # Get clean (stemmed, no stop words) words from the document's prompt and completion
+        # --- Keyword Matching ---
         processed_prompt_words = get_clean_words(entry["prompt"])
         processed_completion_words = get_clean_words(entry["completion"])
         
-        current_matched_keywords = set() # Keywords that actually matched in this specific document
+        current_matched_keywords = set()
 
-        # Compare each query word with words in the document
         for q_word in query_words_stemmed:
             # 1. Exact Match (higher score)
             if q_word in processed_prompt_words:
-                doc_matches[doc_id]["prompt_matches"] += 1
+                doc_results[doc_id]["prompt_matches"] += 1
                 current_matched_keywords.add(q_word)
             if q_word in processed_completion_words:
-                doc_matches[doc_id]["completion_matches"] += 1
+                doc_results[doc_id]["completion_matches"] += 1
                 current_matched_keywords.add(q_word)
 
             # 2. Fuzzy Match (Levenshtein distance - partial score)
-            # Check for fuzzy matches in prompt
             found_fuzzy_prompt = False
             for p_word in processed_prompt_words:
                 if levenshtein_distance(q_word, p_word) <= LEVENSHTEIN_THRESHOLD:
-                    doc_matches[doc_id]["prompt_matches"] += 0.5 # Partial score for fuzzy match
-                    current_matched_keywords.add(p_word) # Add the actual word from the document
+                    doc_results[doc_id]["prompt_matches"] += 0.5
+                    current_matched_keywords.add(p_word)
                     found_fuzzy_prompt = True
-                    break # Move to next query word once a fuzzy match is found in prompt
+                    break
 
-            # Check for fuzzy matches in completion (only if no fuzzy match found in prompt for this q_word)
-            if not found_fuzzy_prompt: # Avoid double counting if a word is fuzzy matched in both
+            if not found_fuzzy_prompt:
                 for c_word in processed_completion_words:
                     if levenshtein_distance(q_word, c_word) <= LEVENSHTEIN_THRESHOLD:
-                        doc_matches[doc_id]["completion_matches"] += 0.25 # Smaller partial score
-                        current_matched_keywords.add(c_word) # Add the actual word from the document
-                        break # Move to next query word
+                        doc_results[doc_id]["completion_matches"] += 0.25
+                        current_matched_keywords.add(c_word)
+                        break
+        
+        # Calculate keyword score with weights
+        doc_results[doc_id]["keyword_score"] = (doc_results[doc_id]["prompt_matches"] * 2) + doc_results[doc_id]["completion_matches"]
+        doc_results[doc_id]["matched_keywords"].update(current_matched_keywords)
 
-        # Calculate total score with weights: Prompt matches are weighted higher
-        doc_matches[doc_id]["score"] = (doc_matches[doc_id]["prompt_matches"] * 2) + doc_matches[doc_id]["completion_matches"]
-        # Update the set of matched keywords for this document
-        doc_matches[doc_id]["matched_keywords"].update(current_matched_keywords)
+        # --- Semantic Similarity ---
+        # Calculate similarity between query and document's spacy_doc
+        # Ensure both docs have vectors (some words might not have vectors in sm model)
+        if query_doc.has_vector and entry["spacy_doc"].has_vector:
+            semantic_similarity = query_doc.similarity(entry["spacy_doc"])
+            doc_results[doc_id]["semantic_score"] = semantic_similarity
+        else:
+            doc_results[doc_id]["semantic_score"] = 0.0 # No vector, no semantic score
 
     ranked_results = []
-    for doc_id, match_info in doc_matches.items():
-        if match_info["score"] > 0: # Only include documents with a non-zero score
+    for doc_id, match_info in doc_results.items():
+        # Combine keyword and semantic scores. You can adjust weights here.
+        # For simplicity, let's use a sum, or a weighted sum.
+        # Example: total_score = (keyword_weight * keyword_score) + (semantic_weight * semantic_score)
+        # We need to normalize semantic score if it's not already in a comparable range.
+        # SpaCy similarity is 0-1, so it's already normalized.
+        
+        # A simple additive model, giving keyword matches more direct impact
+        # You can tune these weights (e.g., 10 * semantic_score to make it more impactful)
+        match_info["total_score"] = match_info["keyword_score"] + (match_info["semantic_score"] * 5) 
+        
+        if match_info["total_score"] > 0: # Only include documents with a non-zero total score
             ranked_results.append({
                 "entry": dataset[doc_id],
-                "score": match_info["score"],
+                "keyword_score": match_info["keyword_score"],
+                "semantic_score": match_info["semantic_score"],
+                "total_score": match_info["total_score"],
                 "prompt_matches": match_info["prompt_matches"],
                 "completion_matches": match_info["completion_matches"],
                 "matched_keywords": match_info["matched_keywords"]
             })
 
-    # Sort results by score in descending order
-    ranked_results.sort(key=lambda x: x["score"], reverse=True)
+    # Sort results by total score in descending order
+    ranked_results.sort(key=lambda x: x["total_score"], reverse=True)
     return ranked_results
 
 # --- Filtering Logic ---
 
-def filter_results(results, min_score, keyword_filters, cancer_types, genes):
+def filter_results(results, min_keyword_score, min_semantic_score, keyword_filters, cancer_types, genes):
     """
-    Filters a list of search results based on minimum score, keyword filters,
-    cancer type filters, and gene filters.
+    Filters a list of search results based on minimum keyword score, minimum semantic score,
+    keyword filters, cancer type filters, and gene filters.
     """
     filtered = []
     
@@ -259,15 +312,17 @@ def filter_results(results, min_score, keyword_filters, cancer_types, genes):
     for result in results:
         entry = result["entry"]
         
-        # 1. Apply Minimum Score Filter
-        if result["score"] < min_score:
+        # 1. Apply Minimum Keyword Score Filter
+        if result["keyword_score"] < min_keyword_score:
             continue
         
-        # 2. Apply Keyword Filters (fuzzy matching for filters too)
+        # 2. Apply Minimum Semantic Score Filter
+        if result["semantic_score"] < min_semantic_score:
+            continue
+
+        # 3. Apply Keyword Filters (fuzzy matching for filters too)
         if stemmed_keyword_filters:
             matched_by_filter = False
-            # Check if any of the filter keywords (stemmed) are present in the result's matched keywords
-            # or if they are fuzzy matches to the result's matched keywords
             for f_kw in stemmed_keyword_filters:
                 if any(levenshtein_distance(f_kw, matched_kw) <= LEVENSHTEIN_THRESHOLD for matched_kw in result["matched_keywords"]):
                     matched_by_filter = True
@@ -275,13 +330,13 @@ def filter_results(results, min_score, keyword_filters, cancer_types, genes):
             if not matched_by_filter:
                 continue
         
-        # 3. Apply Cancer Type Filter
+        # 4. Apply Cancer Type Filter
         if cancer_types and entry["cancer_type"]:
             entry_types = {ct.strip() for ct in entry["cancer_type"].split(",")}
             if not any(ct in entry_types for ct in cancer_types):
                 continue
         
-        # 4. Apply Gene Filter
+        # 5. Apply Gene Filter
         if genes and entry["genes"]:
             entry_genes = {g.strip() for g in entry["genes"].split(",")}
             if not any(g in entry_genes for g in genes):
@@ -308,6 +363,78 @@ def highlight_keywords(text, keywords):
         # Replace matched word with bolded version
         highlighted_text = re.sub(pattern, r'**\1**', highlighted_text, flags=re.IGNORECASE)
     return highlighted_text
+
+# --- Knowledge Map Visualization ---
+
+def create_knowledge_map(query, results, top_n_entities=5):
+    """
+    Generates a static knowledge map (graph) showing the query and top related
+    cancer types and genes from the search results.
+    """
+    G = nx.Graph()
+    G.add_node(query, type='query', color='skyblue', size=500)
+
+    # Collect entity frequencies from results
+    cancer_type_counts = defaultdict(int)
+    gene_counts = defaultdict(int)
+
+    for res in results:
+        if res["entry"]["cancer_type"]:
+            for ct in res["entry"]["cancer_type"].split(","):
+                cancer_type_counts[ct.strip()] += 1
+        if res["entry"]["genes"]:
+            for gene in res["entry"]["genes"].split(","):
+                gene_counts[gene.strip()] += 1
+
+    # Add top cancer types and genes
+    top_cancer_types = sorted(cancer_type_counts.items(), key=lambda item: item[1], reverse=True)[:top_n_entities]
+    top_genes = sorted(gene_counts.items(), key=lambda item: item[1], reverse=True)[:top_n_entities]
+
+    node_colors = []
+    node_sizes = []
+    labels = {}
+
+    # Add query node properties
+    labels[query] = query
+    node_colors.append('skyblue')
+    node_sizes.append(1000) # Larger size for query
+
+    # Add cancer type nodes and edges
+    for ct, count in top_cancer_types:
+        G.add_node(ct, type='cancer_type', color='lightcoral', size=300 + count*50)
+        G.add_edge(query, ct, relation='related_to', weight=count)
+        labels[ct] = ct
+        node_colors.append('lightcoral')
+        node_sizes.append(300 + count*50)
+
+    # Add gene nodes and edges
+    for gene, count in top_genes:
+        G.add_node(gene, type='gene', color='lightgreen', size=300 + count*50)
+        G.add_edge(query, gene, relation='related_to', weight=count)
+        labels[gene] = gene
+        node_colors.append('lightgreen')
+        node_sizes.append(300 + count*50)
+
+    if not G.nodes: # If no nodes were added (e.g., no results)
+        return None
+
+    # Draw the graph
+    fig, ax = plt.subplots(figsize=(10, 8))
+    pos = nx.spring_layout(G, k=0.8, iterations=50) # Use spring layout for better node distribution
+
+    nx.draw_networkx_nodes(G, pos, node_color=[G.nodes[node]['color'] for node in G.nodes()], node_size=[G.nodes[node]['size'] for node in G.nodes()])
+    nx.draw_networkx_edges(G, pos, width=1.0, alpha=0.5, edge_color='gray')
+    nx.draw_networkx_labels(G, pos, labels, font_size=9, font_weight='bold')
+
+    plt.title("Knowledge Map of Search Results", size=15)
+    plt.axis('off') # Hide axes
+    
+    # Save plot to a BytesIO object and encode to base64
+    buf = BytesIO()
+    plt.savefig(buf, format="png", bbox_inches='tight', pad_inches=0.5)
+    plt.close(fig) # Close the figure to free memory
+    data_url = base64.b64encode(buf.getvalue()).decode("utf-8")
+    return f"data:image/png;base64,{data_url}"
 
 # --- Streamlit Page Layouts ---
 
@@ -373,13 +500,23 @@ def show_results():
     with st.sidebar:
         st.subheader("🔎 Refine Results")
         
-        # Slider for Minimum Match Score
-        st.session_state.min_score = st.slider(
-            "Minimum Match Score",
+        # Slider for Minimum Keyword Match Score
+        st.session_state.min_keyword_score = st.slider(
+            "Minimum Keyword Match Score",
             min_value=0,
             max_value=20, # Max value adjusted for potential fuzzy scores
-            value=st.session_state.min_score,
-            help="Higher scores mean more keywords matched (exact and fuzzy)"
+            value=st.session_state.min_keyword_score,
+            help="Higher scores mean more exact/fuzzy keyword matches"
+        )
+
+        # Slider for Minimum Semantic Similarity Score
+        st.session_state.min_semantic_score = st.slider(
+            "Minimum Semantic Similarity (0.0 - 1.0)",
+            min_value=0.0,
+            max_value=1.0,
+            value=st.session_state.min_semantic_score,
+            step=0.05,
+            help="Higher scores mean more conceptual similarity. Requires spaCy model."
         )
         
         # Input for adding keyword filters
@@ -460,7 +597,8 @@ def show_results():
             st.session_state.keyword_filters = []
             st.session_state.cancer_type_filter = []
             st.session_state.gene_filter = []
-            st.session_state.min_score = 1 # Reset min score
+            st.session_state.min_keyword_score = 1 # Reset min score
+            st.session_state.min_semantic_score = 0.0 # Reset semantic score
             st.rerun() # Rerun to clear filters
 
     # --- Main Results Area ---
@@ -471,7 +609,6 @@ def show_results():
         return
 
     # Store cancer types and genes in session state if not already populated
-    # This ensures multiselects have options even if data was loaded in a previous session
     if not st.session_state.cancer_types and cancer_types:
         st.session_state.cancer_types = cancer_types
     if not st.session_state.genes and genes:
@@ -482,10 +619,11 @@ def show_results():
 
     # Perform search and filtering with a spinner for user feedback
     with st.spinner("Searching clinical knowledge base..."):
-        ranked_results = keyword_search(st.session_state.current_query, data, word_index)
+        ranked_results = combined_search(st.session_state.current_query, data, word_index, nlp)
         filtered_results = filter_results(
             ranked_results,
-            st.session_state.min_score,
+            st.session_state.min_keyword_score,
+            st.session_state.min_semantic_score,
             st.session_state.keyword_filters,
             st.session_state.cancer_type_filter,
             st.session_state.gene_filter
@@ -498,14 +636,29 @@ def show_results():
 
 def display_results(results, all_results):
     """
-    Displays the filtered search results, including download options and match details.
+    Displays the filtered search results, including download options, match details,
+    and the knowledge map.
     """
     st.success(f"Found {len(results)} relevant results (from {len(all_results)} total matches before filtering)")
     
-    # Display a bar chart of scores if there are multiple results
+    # --- Knowledge Map Display ---
+    st.markdown("---")
+    st.subheader("🌐 Knowledge Map for Current Search")
+    if results:
+        with st.spinner("Generating knowledge map..."):
+            knowledge_map_url = create_knowledge_map(st.session_state.current_query, results)
+            if knowledge_map_url:
+                st.image(knowledge_map_url, caption="Connections based on search results", use_column_width=True)
+            else:
+                st.info("Not enough data to generate a meaningful knowledge map for these results.")
+    else:
+        st.info("No results to generate a knowledge map. Try broadening your search.")
+    st.markdown("---")
+
+    # Score distribution chart
     if len(results) > 1:
-        scores = [r["score"] for r in results]
-        st.bar_chart(pd.DataFrame({"Match Score": scores}), use_container_width=True)
+        scores = [r["total_score"] for r in results]
+        st.bar_chart(pd.DataFrame({"Total Match Score": scores}), use_container_width=True)
     
     # Download buttons for all currently filtered results (JSON and CSV)
     all_results_data = [result["entry"] for result in results]
@@ -533,7 +686,7 @@ def display_results(results, all_results):
         highlight_terms = set(stemmer.stem(word) for word in st.session_state.current_query.lower().split() if word.strip())
         highlight_terms.update(result["matched_keywords"]) # Add actual matched keywords from entry
 
-        with st.expander(f"#{i} | Score: {result['score']:.2f} - {entry['prompt'][:70]}...", expanded=(i==1)):
+        with st.expander(f"#{i} | Total Score: {result['total_score']:.2f} - {entry['prompt'][:70]}...", expanded=(i==1)):
             st.markdown(f"**Question:** {highlight_keywords(entry['prompt'], highlight_terms)}")
             st.markdown(f"**Answer:** {highlight_keywords(entry['completion'], highlight_terms)}")
             
@@ -548,9 +701,11 @@ def display_results(results, all_results):
             
             # Detailed match information in a nested expander
             with st.expander("🔍 Match Details"):
-                st.markdown(f"**Total Score:** {result['score']:.2f}")
-                st.markdown(f"**Prompt Matches:** {result['prompt_matches']:.2f}")
-                st.markdown(f"**Answer Matches:** {result['completion_matches']:.2f}")
+                st.markdown(f"**Keyword Score:** {result['keyword_score']:.2f}")
+                st.markdown(f"**Semantic Similarity:** {result['semantic_score']:.2f}")
+                st.markdown(f"**Total Combined Score:** {result['total_score']:.2f}")
+                st.markdown(f"**Prompt Keyword Matches:** {result['prompt_matches']:.2f}")
+                st.markdown(f"**Answer Keyword Matches:** {result['completion_matches']:.2f}")
                 if result["matched_keywords"]:
                     # Display the stemmed keywords that contributed to the match
                     st.markdown(f"**Keywords Involved in Match:** `{', '.join(result['matched_keywords'])}`")
@@ -624,7 +779,7 @@ def show_no_results(data, word_index):
     st.markdown("---")
     st.markdown("""
     **General Search Tips:**
-    - Try lowering the **Minimum Match Score** filter.
+    - Try lowering the **Minimum Keyword Match Score** or **Minimum Semantic Similarity** filters.
     - Remove some **Keyword**, **Cancer Type**, or **Gene** filters to broaden your search.
     - Double-check for typos in your search terms.
     - Use more general terms if your search is too specific.
@@ -649,6 +804,8 @@ def main():
     # Load data and suggestions only once or if not already loaded (cached)
     # This populates the multiselect options for filters
     if not st.session_state.suggestions or not st.session_state.cancer_types or not st.session_state.genes:
+        # Ensure spaCy model is loaded before data
+        _ = nlp # This will trigger load_spacy_model if not already loaded
         data, word_index, cancer_types, genes, suggestions = load_and_index_data()
         if suggestions:
             st.session_state.suggestions = suggestions
@@ -674,9 +831,11 @@ def main():
         This **MVP (Minimum Viable Product)** allows researchers to quickly **extract and filter** information from **JSON-formatted clinical trial data**. 
         It supports:
         - **Keyword-based search** with enhanced fuzzy matching.
+        - **Semantic search** using pre-trained word embeddings for conceptual understanding.
         - Filtering by **cancer types** and **genes**.
         - Viewing and downloading **structured data**.
         - A **search history** for easy recall of past queries.
+        - A **knowledge map** to visualize relationships in search results.
         
         The app uses a basic text processing pipeline including **stemming** and **stop word removal** for more effective search results.
         """)
@@ -690,3 +849,4 @@ def main():
 # Entry point of the Streamlit application
 if __name__ == "__main__":
     main()
+
