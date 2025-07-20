@@ -1,6 +1,5 @@
- [ 
-   
 
+[  
   {
     "prompt": "What is the role of the PD-1/PD-L1 pathway in immune regulation?",
     "completion": "The PD-1/PD-L1 pathway is a key immune checkpoint that downregulates immune responses by inhibiting T-cell function upon ligand binding, helping to maintain peripheral tolerance and prevent autoimmunity."
@@ -57,7 +56,6 @@
     "prompt": "At what serum concentration does PD-L1 receptor saturation occur with atezolizumab?",
     "completion": "Saturation of PD-L1 on CD4 and CD8 T cells occurs at serum concentrations above 0.5 μg/mL, typically between 24–48 hours after dosing."
   },
-
 
 
   {
@@ -3918,70 +3916,6 @@
   },
 
 
-
-  {
-    "Sponsor": "Magnablate I",
-    "Indication": "Prostate Cancer",
-    "ClinicalTrials": "NCT02033447 (Phase 0)",
-    "MaterialDescription": "Magnetically sensitive iron nanoparticles for thermal ablation"
-  },
-  {
-    "Sponsor": "NC100150/Clariscan/Feruglose/PEG-fero (Nycomed)",
-    "Indication": "Microvascular imaging with MRI in tumors",
-    "ClinicalTrials": "NCT03455283 (Not Provided)",
-    "MaterialDescription": "USPIO Nanoparticles with a polyethylene glycol carbohydrate coating"
-  },
-  {
-    "Sponsor": "NanoTherm",
-    "Indication": "Thermal ablation; Local ablation in glioblastoma",
-    "ClinicalTrials": "Approved, 2010 (EMA)",
-    "MaterialDescription": "Magnetite nanoparticles coated with aminosilane"
-  },
-  {
-    "Sponsor": "Ferristene",
-    "Indication": "Cancer gastrointestinal tract",
-    "ClinicalTrials": "Approved, 1993 (Sweden); Discontinued, 2002",
-    "MaterialDescription": "Nanoparticles of iron oxide covered with polystyrene"
-  },
-  {
-    "Sponsor": "Diafer",
-    "Indication": "Deficiency in iron CKD-associated anemia",
-    "ClinicalTrials": "NCT02301026 (Not Provided); Approved, 2013",
-    "MaterialDescription": "Colloid Iron Isomaltoside 5%"
-  },
-  {
-    "Sponsor": "Radiogardase",
-    "Indication": "Thallium: radioactive/non-radioactive",
-    "ClinicalTrials": "Approved, 2003 (FDA)",
-    "MaterialDescription": "Prussian blue"
-  },
-  {
-    "Sponsor": "Ferumoxtran-10/AMI-277",
-    "Indication": "Breast Cancer; Bladder cancer",
-    "ClinicalTrials": "NCT02751606 (Phase III); NCT00188695 (Phase I/II)",
-    "MaterialDescription": "Dextran T-10-coated USPIO nanoparticles"
-  },
-  {
-    "Sponsor": "CosmoFer",
-    "Indication": "Iron deficiency in Anemia",
-    "ClinicalTrials": "NCT01428843 (Phase III), NCT01447628 (Phase II), NCT02086838 (Phase IV)",
-    "MaterialDescription": "Low molecular weight iron dextran colloid"
-  },
-  {
-    "Sponsor": "Monofer",
-    "Indication": "Malignancies; Esophageal Cancer; Colorectal Cancer",
-    "ClinicalTrials": "NCT01895218 (Phase III), NCT02172001 (Phase III), NCT03888768 (Not Applicable) (Phase IV), NCT03957057 (Phase III)",
-    "MaterialDescription": "1000 colloid units of iron isomaltoside, 10%"
-  },
-  {
-    "Sponsor": "MagProbe",
-    "Indication": "Leukemia detection",
-    "ClinicalTrials": "NCT01411904 (Not Applicable)",
-    "MaterialDescription": "Nanoparticles of magnetic iron oxide"
-  },
-
-
-
   {
     "prompt": "What is Magnablate I used for in cancer treatment?",
     "completion": "Magnablate I is used for prostate cancer treatment and involves magnetically sensitive iron nanoparticles for thermal ablation."
@@ -5742,96 +5676,50 @@
   },
 
   
+
   {
-    "Nanocomposites": "Graphene oxide/gemcitabine/montmorillonite/chitosan",
-    "Size": "130 nm",
-    "Cancer_cell_line": "MB-231-MDA cells",
-    "Drug_loading_efficiency": "-",
-    "Drug_used": "Gemcitabine",
-    "Drug_release_efficiency": "23% within 24 hours at pH 7.4",
-    "Stability": "Excellent physical, chemical, and thermal stability; timeframe not specified"
+    "prompt": "Provide detailed properties of the nanocomposite system used for drug delivery in MB-231-MDA cancer cells using Gemcitabine.",
+    "completion": "Nanocomposite: Graphene oxide/gemcitabine/montmorillonite/chitosan; Size: 130 nm; Drug Loading Efficiency: Not specified; Drug Used: Gemcitabine; Drug Release Efficiency: 23% within 24 hours at pH 7.4; Stability: Excellent physical, chemical, and thermal stability (timeframe not specified)."
   },
   {
-    "Nanocomposites": "Cyclodextrin dendritic-Graphene oxide",
-    "Size": "-",
-    "Cancer_cell_line": "Human breast cancer cells",
-    "Drug_loading_efficiency": "9.8%",
-    "Drug_used": "Doxorubicin",
-    "Drug_release_efficiency": "67% at pH 5.2, 85% at pH 7.4 within 144 hours",
-    "Stability": "-"
+    "prompt": "Summarize the characteristics of Cyclodextrin dendritic-Graphene oxide used in breast cancer treatment with Doxorubicin.",
+    "completion": "Nanocomposite: Cyclodextrin dendritic-Graphene oxide; Size: Not specified; Drug Loading Efficiency: 9.8%; Drug Used: Doxorubicin; Drug Release Efficiency: 67% at pH 5.2 and 85% at pH 7.4 within 144 hours; Stability: Not specified."
   },
   {
-    "Nanocomposites": "Superparamagnetic graphene oxide",
-    "Size": "9.3 (± 2.7) nm",
-    "Cancer_cell_line": "MCF-7, HeLa, Caov-4 cancer cell lines",
-    "Drug_loading_efficiency": "75%",
-    "Drug_used": "Methotrexate",
-    "Drug_release_efficiency": "46% at pH 7.4, 59% at pH 5.5 within 75 hours",
-    "Stability": "Functional at physiological pH; stability duration not specified"
+    "prompt": "List the drug delivery performance metrics of Superparamagnetic graphene oxide used on MCF-7, HeLa, and Caov-4 cancer cells.",
+    "completion": "Nanocomposite: Superparamagnetic graphene oxide; Size: 9.3 (± 2.7) nm; Drug Loading Efficiency: 75%; Drug Used: Methotrexate; Drug Release Efficiency: 46% at pH 7.4 and 59% at pH 5.5 within 75 hours; Stability: Functional at physiological pH (duration not specified)."
+  },
+
+
+  {
+    "prompt": "Describe the drug delivery features of Mesoporous silica/nanoparticles/GO/topotecan used in MDA-MB-231 breast cancer cells.",
+    "completion": "Nanocomposite: Mesoporous silica/nanoparticles/GO/topotecan; Size: 190 nm; Drug Loading Efficiency: 36.6%; Drug Used: Topotecan; Drug Release Efficiency: 76% at pH 5.5, 45% at pH 7.4 within 24 hours; Stability: Not specified."
   },
   {
-    "Nanocomposites": "Mesoporous silica/nanoparticles/GO/topotecan",
-    "Size": "190 nm",
-    "Cancer_cell_line": "MDA-MB-231 cells",
-    "Drug_loading_efficiency": "36.6%",
-    "Drug_used": "Topotecan",
-    "Drug_release_efficiency": "76% at pH 5.5, 45% at pH 7.4 within 24 hours",
-    "Stability": "-"
+    "prompt": "What are the characteristics of Cyclodextrin/cystamine/pegylated functionalized graphene oxide used in human liver cancer drug delivery?",
+    "completion": "Nanocomposite: Cyclodextrin/cystamine/pegylated functionalized graphene oxide; Size: 531 nm; Drug Loading Efficiency: 95.5%; Drug Used: Doxorubicin; Drug Release Efficiency: 65.2% at pH 7.4, 37.6% at pH 5.3 within 72 hours; Stability: Excellent resistance to salt solution in human body (timeframe unspecified)."
   },
   {
-    "Nanocomposites": "Cyclodextrin/cystamine/pegylated functionalized graphene oxide",
-    "Size": "531 nm",
-    "Cancer_cell_line": "Human liver cancer cell line",
-    "Drug_loading_efficiency": "95.5%",
-    "Drug_used": "Doxorubicin",
-    "Drug_release_efficiency": "65.2% at pH 7.4, 37.6% at pH 5.3 within 72 hours",
-    "Stability": "Excellent resistance to salt solution in human body; time limit unspecified"
+    "prompt": "Provide the nanocomposite drug delivery profile for amino acid-functionalized GO foams used in HepG2 and MCF-7 cells with Cisplatin.",
+    "completion": "Nanocomposite: Amino acids-functionalized GO foams; Size: 80 nm; Drug Loading Efficiency: 67.55%; Drug Used: Cisplatin; Drug Release Efficiency: 68.1% at pH 7.4 within 7 hours; Stability: Excellent biocompatibility and storage stability."
   },
   {
-    "Nanocomposites": "Amino acids-functionalized GO foams",
-    "Size": "80 nm",
-    "Cancer_cell_line": "HepG2 and MCF-7 cell lines",
-    "Drug_loading_efficiency": "67.55%",
-    "Drug_used": "Cisplatin",
-    "Drug_release_efficiency": "68.1% at pH 7.4 within 7 hours",
-    "Stability": "Excellent biocompatibility and storage stability"
+    "prompt": "Summarize the drug delivery characteristics of Ferric oxide/Reduced graphene oxide/chitosan/doxorubicin in MCF-7 and A549 cancer cells.",
+    "completion": "Nanocomposite: Ferric oxide/Reduced graphene oxide/chitosan/doxorubicin; Size: 60 nm; Drug Loading Efficiency: 98%; Drug Used: Doxorubicin; Drug Release Efficiency: 96.6% at pH 5.5, 10% at pH 7.4 within 10 hours; Stability: Not specified."
   },
   {
-    "Nanocomposites": "Ferric oxide/Reduced graphene oxide/chitosan/doxorubicin",
-    "Size": "60 nm",
-    "Cancer_cell_line": "MCF-7 and A549 cancer cells",
-    "Drug_loading_efficiency": "98%",
-    "Drug_used": "Doxorubicin",
-    "Drug_release_efficiency": "96.6% at pH 5.5, 10% at pH 7.4 within 10 hours",
-    "Stability": "-"
+    "prompt": "Explain the use of miRNA/-polyethylene glycol/nano-GO/folic acid - platinum nanocomposite in SKOV 3 cells for cancer drug delivery.",
+    "completion": "Nanocomposite: miRNA/-polyethylene glycol/nano-GO/folic acid - platinum; Size: 200–500 nm; Drug Loading Efficiency: 6%; Drug Used: Platinum; Drug Release Efficiency: 90% at pH 5, 63% at pH 7.4; Stability: Excellent two-week stability in water, MES, PBS, and cell media."
   },
   {
-    "Nanocomposites": "miRNA/-polyethylene glycol/nano-GO/folic acid - platinum",
-    "Size": "200-500 nm",
-    "Cancer_cell_line": "SKOV 3 cells, SKOV 3 DDP cells",
-    "Drug_loading_efficiency": "6%",
-    "Drug_used": "Platinum",
-    "Drug_release_efficiency": "90% at pH 5, 63% at pH 7.4",
-    "Stability": "Excellent two-week stability in water, MES, PBS, and cell media"
+    "prompt": "Detail the delivery profile of Graphene oxide/magnetic iron oxide nanoparticles used in SH-SY5Y neuroblastoma cells with Doxorubicin.",
+    "completion": "Nanocomposite: Graphene oxide/magnetic iron oxide nanoparticles; Size: <100 nm; Drug Loading Efficiency: Not specified; Drug Used: Doxorubicin; Drug Release Efficiency: 28% at pH 7.4, 45% at pH 5.5 within 120 hours; Stability: Increased solubility and stability for 24 hours."
   },
   {
-    "Nanocomposites": "Graphene oxide/magnetic iron oxide nanoparticles",
-    "Size": "< 100 nm",
-    "Cancer_cell_line": "Human neuroblastoma/SH-SY5Y cells",
-    "Drug_loading_efficiency": "-",
-    "Drug_used": "Doxorubicin",
-    "Drug_release_efficiency": "28% at pH 7.4, 45% at pH 5.5 within 120 hours",
-    "Stability": "Increased solubility and stability for 24 hours"
+    "prompt": "List the properties of Paclitaxel/graphene oxide/gold nanorods loaded into poly(tetramethylene ether) glycol/polyurethane used in A549 lung cancer cells.",
+    "completion": "Nanocomposite: Paclitaxel/graphene oxide/gold nanorods loaded into poly(tetramethylene ether) glycol/polyurethane; Size: Average length 34 ± 3 nm, width 9.8 ± 1.2 nm; Drug Loading Efficiency: Not specified; Drug Used: Paclitaxel; Drug Release Efficiency: 80% after 96 and 120 hours under pH 5.5 and 7.4; Stability: Not specified."
   },
-  {
-    "Nanocomposites": "Paclitaxel/graphene oxide/gold nanorods loaded into poly(tetramethylene ether) glycol/polyurethane",
-    "Size": "Average length 34 ± 3 nm, width 9.8 ± 1.2 nm",
-    "Cancer_cell_line": "Human lung cancer cell lines/A549",
-    "Drug_loading_efficiency": "-",
-    "Drug_used": "Paclitaxel",
-    "Drug_release_efficiency": "80% after 96 and 120 hours under pH 5.5 and 7.4",
-    "Stability": "-"
-  },
+
 
  
   {
@@ -6209,188 +6097,6 @@
   {
     "prompt": "Why is it difficult to translate nanoparticle-based therapies to clinical use?",
     "completion": "Limited understanding of in vivo toxicity, lack of standardized protocols, and complex production methods hinder clinical adoption."
-  },
-
-
-  {
-    "Type": "Liposomes",
-    "Name": "DaunoXome",
-    "Therapeutic_agent": "Dox",
-    "Status": "Approved"
-  },
-  {
-    "Type": "Liposomes",
-    "Name": "Doxil / Caelyx",
-    "Therapeutic_agent": "Dox",
-    "Status": "Approved"
-  },
-  {
-    "Type": "Liposomes",
-    "Name": "Myocet",
-    "Therapeutic_agent": "Dox",
-    "Status": "Approved (Europe)"
-  },
-  {
-    "Type": "Liposomes",
-    "Name": "SPI-077",
-    "Therapeutic_agent": "Cisplatin",
-    "Status": "Phase II"
-  },
-  {
-    "Type": "Liposomes",
-    "Name": "Oncolipin",
-    "Therapeutic_agent": "Interleukin 2",
-    "Status": "Phase II"
-  },
-  {
-    "Type": "Liposomes",
-    "Name": "OSI-7904L",
-    "Therapeutic_agent": "Thymidylate synthase inhibitor",
-    "Status": "Phase II"
-  },
-  {
-    "Type": "Liposomes",
-    "Name": "LEP ETU",
-    "Therapeutic_agent": "Paclitaxel",
-    "Status": "Phase I/II"
-  },
-  {
-    "Type": "Liposomes",
-    "Name": "LE-SN38",
-    "Therapeutic_agent": "SN-38",
-    "Status": "Phase I/II"
-  },
-  {
-    "Type": "Liposomes",
-    "Name": "OSI-211",
-    "Therapeutic_agent": "Lurtotecan",
-    "Status": "Phase II"
-  },
-  {
-    "Type": "Liposomes",
-    "Name": "Aroplatin",
-    "Therapeutic_agent": "Oxaliplatin",
-    "Status": "Phase II"
-  },
-  {
-    "Type": "Polymeric micelles",
-    "Name": "Genexol-PM",
-    "Therapeutic_agent": "Paclitaxel",
-    "Status": "Approved (South Korea)"
-  },
-  {
-    "Type": "Polymeric micelles",
-    "Name": "NK911",
-    "Therapeutic_agent": "Dox",
-    "Status": "Phase I"
-  },
-  {
-    "Type": "Polymeric micelles",
-    "Name": "SP1049C",
-    "Therapeutic_agent": "Dox",
-    "Status": "Phase I"
-  },
-  {
-    "Type": "Polymeric micelles",
-    "Name": "NC-6004",
-    "Therapeutic_agent": "Cisplatin",
-    "Status": "Phase I"
-  },
-  {
-    "Type": "Polymeric micelles",
-    "Name": "NK012",
-    "Therapeutic_agent": "SN-38",
-    "Status": "Phase I"
-  },
-  {
-    "Type": "Polymeric micelles",
-    "Name": "NK105",
-    "Therapeutic_agent": "Paclitaxel",
-    "Status": "Phase I"
-  },
-  {
-    "Type": "Polymer-drug conjugate-based nanoparticles",
-    "Name": "CT-2103; XyotaxTM",
-    "Therapeutic_agent": "Paclitaxel",
-    "Status": "Phase III"
-  },
-  {
-    "Type": "Polymer-drug conjugate-based nanoparticles",
-    "Name": "PK1; FCE28068",
-    "Therapeutic_agent": "Dox",
-    "Status": "Phase II"
-  },
-  {
-    "Type": "Polymer-drug conjugate-based nanoparticles",
-    "Name": "PK2; FCE28069",
-    "Therapeutic_agent": "Dox",
-    "Status": "Phase I/II"
-  },
-  {
-    "Type": "Polymer-drug conjugate-based nanoparticles",
-    "Name": "PNU166945",
-    "Therapeutic_agent": "Paclitaxel",
-    "Status": "Phase I"
-  },
-  {
-    "Type": "Polymer-drug conjugate-based nanoparticles",
-    "Name": "MAG-CPT",
-    "Therapeutic_agent": "Camptothecin",
-    "Status": "Phase I"
-  },
-  {
-    "Type": "Polymer-drug conjugate-based nanoparticles",
-    "Name": "AP5280",
-    "Therapeutic_agent": "Platinate",
-    "Status": "Phase I/II"
-  },
-  {
-    "Type": "Polymer-drug conjugate-based nanoparticles",
-    "Name": "AP5346",
-    "Therapeutic_agent": "Platinum",
-    "Status": "Phase II"
-  },
-  {
-    "Type": "Polymer-drug conjugate-based nanoparticles",
-    "Name": "AD-70, DOX-OXD",
-    "Therapeutic_agent": "Dox",
-    "Status": "Phase I"
-  },
-  {
-    "Type": "Polymer-drug conjugate-based nanoparticles",
-    "Name": "DE-310",
-    "Therapeutic_agent": "Camptothecin",
-    "Status": "Phase I/II"
-  },
-  {
-    "Type": "Polymer-drug conjugate-based nanoparticles",
-    "Name": "Prothecan",
-    "Therapeutic_agent": "Camptothecin",
-    "Status": "Phase II"
-  },
-  {
-    "Type": "Polymer-drug conjugate-based nanoparticles",
-    "Name": "EZN-2208",
-    "Therapeutic_agent": "SN-38",
-    "Status": "Phase I"
-  },
-  {
-    "Type": "Polymer-drug conjugate-based nanoparticles",
-    "Name": "IT-101",
-    "Therapeutic_agent": "Camptothecin",
-    "Status": "Phase II"
-  },
-  {
-    "Type": "Polymer-drug conjugate-based nanoparticles",
-    "Name": "NKTR-102",
-    "Therapeutic_agent": "Irinotecan",
-    "Status": "Phase II"
-  },
-  {
-    "Type": "Albumin-based nanoparticles",
-    "Name": "Abraxane or ABI-007",
-    "Therapeutic_agent": "Paclitaxel",
-    "Status": "Approved"
   },
 
 
@@ -6869,1162 +6575,1060 @@
 
   
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What is the NCT number of the EORTC study on intermittent androgen deprivation therapy?",
+    "prompt": "[NCT05974774] What is the NCT number of the EORTC study on intermittent androgen deprivation therapy?",
     "completion": "NCT05974774"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What phase is the EORTC 2238 trial?",
+    "prompt": "[NCT05974774] What phase is the EORTC 2238 trial?",
     "completion": "Phase 3"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What is the primary objective of trial NCT05974774?",
+    "prompt": "[NCT05974774] What is the primary objective of trial NCT05974774?",
     "completion": "To compare overall survival between intermittent and continuous androgen deprivation therapy."
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What condition is being studied in trial NCT05974774?",
+    "prompt": "[NCT05974774] What condition is being studied in trial NCT05974774?",
     "completion": "Metastatic hormone-naïve prostate cancer"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What is the study design of NCT05974774?",
+    "prompt": "[NCT05974774] What is the study design of NCT05974774?",
     "completion": "Randomized, open-label"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What type of therapy is iMAB?",
+    "prompt": "[NCT05974774] What type of therapy is iMAB?",
     "completion": "Intermittent maximum androgen blockade"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What type of therapy is cMAB?",
+    "prompt": "[NCT05974774] What type of therapy is cMAB?",
     "completion": "Continuous maximum androgen blockade"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "How many patients are expected to be enrolled?",
+    "prompt": "[NCT05974774] How many patients are expected to be enrolled?",
     "completion": "1600"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What is the estimated start date of the study?",
+    "prompt": "[NCT05974774] What is the estimated start date of the study?",
     "completion": "May 15, 2025"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What is the estimated primary completion date?",
+    "prompt": "[NCT05974774] What is the estimated primary completion date?",
     "completion": "May 15, 2033"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What is the estimated study completion date?",
+    "prompt": "[NCT05974774] What is the estimated study completion date?",
     "completion": "June 1, 2039"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "Which drugs are used in the trial?",
+    "prompt": "[NCT05974774] Which drugs are used in the trial?",
     "completion": "Goserelin, Abiraterone, Triptorelin, Leuprorelin, Enzalutamide, Degarelix, Apalutamide, Darolutamide, Relugolix"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What is the role of PSA in this trial?",
+    "prompt": "[NCT05974774] What is the role of PSA in this trial?",
     "completion": "PSA is used to monitor disease status and guide treatment interruption or resumption."
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What is the PSA eligibility requirement?",
+    "prompt": "[NCT05974774] What is the PSA eligibility requirement?",
     "completion": "PSA ≤ 0.2 ng/mL after 6–12 months of ADT and ARPI"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "Is prior docetaxel treatment allowed?",
+    "prompt": "[NCT05974774] Is prior docetaxel treatment allowed?",
     "completion": "Yes"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "Are patients with prior bilateral orchiectomy eligible?",
+    "prompt": "[NCT05974774] Are patients with prior bilateral orchiectomy eligible?",
     "completion": "No"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "Are healthy volunteers included in the study?",
+    "prompt": "[NCT05974774] Are healthy volunteers included in the study?",
     "completion": "No"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What is the sponsor of the study?",
+    "prompt": "[NCT05974774] What is the sponsor of the study?",
     "completion": "EORTC"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What is the other study ID number?",
+    "prompt": "[NCT05974774] What is the other study ID number?",
     "completion": "EORTC 2238"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What type of trial is NCT05974774?",
+    "prompt": "[NCT05974774] What type of trial is NCT05974774?",
     "completion": "Interventional"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What are some side effects of continuous androgen deprivation?",
+    "prompt": "[NCT05974774] What are some side effects of continuous androgen deprivation?",
     "completion": "Fatigue, cognitive decline, cardiovascular risks, loss of libido"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "Why is intermittent treatment being evaluated?",
+    "prompt": "[NCT05974774] Why is intermittent treatment being evaluated?",
     "completion": "To reduce side effects and improve quality of life without compromising survival"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What is the patient age range for eligibility?",
+    "prompt": "[NCT05974774] What is the patient age range for eligibility?",
     "completion": "18 to 100 years"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What is the inclusion criterion regarding ARPI?",
+    "prompt": "[NCT05974774] What is the inclusion criterion regarding ARPI?",
     "completion": "Patients must be treated with ADT and ARPI for 6–12 months"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What kind of imaging leads to exclusion?",
+    "prompt": "[NCT05974774] What kind of imaging leads to exclusion?",
     "completion": "Modern imaging showing M1a disease with plan for long-term hormone therapy"
   },
-
-
-
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What is the official title of trial NCT05974774?",
+    "prompt": "[NCT05974774] What is the official title of trial NCT05974774?",
     "completion": "Intermittent Androgen Deprivation Therapy in the Era of AR Pathway Inhibitors; a Phase 3 Pragmatic Randomized Trial."
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "Why is treatment optimization important in prostate cancer?",
+    "prompt": "[NCT05974774] Why is treatment optimization important in prostate cancer?",
     "completion": "To reduce side effects, improve quality of life, and lower healthcare burden while maintaining survival."
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What does continuous androgen deprivation lead to?",
+    "prompt": "[NCT05974774] What does continuous androgen deprivation lead to?",
     "completion": "Fatigue, cognitive effects, cardiovascular disease, loss of libido, and bone density loss."
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What is the main clinical question addressed by this trial?",
+    "prompt": "[NCT05974774] What is the main clinical question addressed by this trial?",
     "completion": "Whether intermittent therapy provides comparable overall survival to continuous treatment."
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What is the PSA threshold for restarting treatment in the iMAB group?",
+    "prompt": "[NCT05974774] What is the PSA threshold for restarting treatment in the iMAB group?",
     "completion": "When PSA increases above 0.2 ng/mL."
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What is the PSA threshold for stopping treatment again in the intermittent arm?",
+    "prompt": "[NCT05974774] What is the PSA threshold for stopping treatment again in the intermittent arm?",
     "completion": "When PSA falls to 0.2 ng/mL or lower."
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What quality-of-life benefit is expected with intermittent therapy?",
+    "prompt": "[NCT05974774] What quality-of-life benefit is expected with intermittent therapy?",
     "completion": "Testosterone recovery may improve energy, mood, and sexual function."
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "How does this study measure cancer status?",
+    "prompt": "[NCT05974774] How does this study measure cancer status?",
     "completion": "By monitoring prostate-specific antigen (PSA) levels."
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What are AR pathway inhibitors used in this trial?",
+    "prompt": "[NCT05974774] What are AR pathway inhibitors used in this trial?",
     "completion": "Abiraterone, Enzalutamide, Apalutamide, Darolutamide."
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What are androgen deprivation agents used in the trial?",
+    "prompt": "[NCT05974774] What are androgen deprivation agents used in the trial?",
     "completion": "Goserelin, Triptorelin, Leuprorelin, Degarelix, Relugolix."
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What kind of trial is this in terms of intervention model?",
+    "prompt": "[NCT05974774] What kind of trial is this in terms of intervention model?",
     "completion": "Parallel assignment"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "Is this study blinded?",
+    "prompt": "[NCT05974774] Is this study blinded?",
     "completion": "No, it is an open-label study."
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "Are patients required to give informed consent?",
+    "prompt": "[NCT05974774] Are patients required to give informed consent?",
     "completion": "Yes, in accordance with ICH/GCP and national/local regulations."
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "Can patients with M1a disease be enrolled?",
+    "prompt": "[NCT05974774] Can patients with M1a disease be enrolled?",
     "completion": "No, if long-term hormone therapy and radiation are planned."
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "Can patients with concurrent cancers be included?",
+    "prompt": "[NCT05974774] Can patients with concurrent cancers be included?",
     "completion": "No, if the malignancy may interfere with safety or efficacy assessments."
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "Can patients treated with EMA-unapproved drugs be included?",
+    "prompt": "[NCT05974774] Can patients treated with EMA-unapproved drugs be included?",
     "completion": "No, systemic therapies not approved by EMA lead to exclusion."
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What factors may affect study compliance and lead to exclusion?",
+    "prompt": "[NCT05974774] What factors may affect study compliance and lead to exclusion?",
     "completion": "Psychological, familial, sociological, or geographical barriers."
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What are the study arms in NCT05974774?",
+    "prompt": "[NCT05974774] What are the study arms in NCT05974774?",
     "completion": "Intermittent MAB (iMAB) and Continuous MAB (cMAB)."
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What is the comparator in the control arm?",
+    "prompt": "[NCT05974774] What is the comparator in the control arm?",
     "completion": "Continuous maximum androgen blockade (cMAB)."
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What is the estimated sample size?",
+    "prompt": "[NCT05974774] What is the estimated sample size?",
     "completion": "1600 participants."
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What is the primary endpoint of this trial?",
+    "prompt": "[NCT05974774] What is the primary endpoint of this trial?",
     "completion": "Overall survival (OS)."
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What follow-up period is estimated for final study completion?",
+    "prompt": "[NCT05974774] What follow-up period is estimated for final study completion?",
     "completion": "Until June 1, 2039."
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What is the potential risk of intermittent androgen deprivation?",
+    "prompt": "[NCT05974774] What is the potential risk of intermittent androgen deprivation?",
     "completion": "Possibly shorter overall survival if cancer regrowth occurs faster."
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What aspect of patient experience is prioritized in this study?",
+    "prompt": "[NCT05974774] What aspect of patient experience is prioritized in this study?",
     "completion": "Quality of life"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What imaging methods are mentioned for eligibility assessment?",
+    "prompt": "[NCT05974774] What imaging methods are mentioned for eligibility assessment?",
     "completion": "PET-Choline, PET-PSMA, Whole Body MRI"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What happens when PSA rises in intermittent group?",
+    "prompt": "[NCT05974774] What happens when PSA rises in intermittent group?",
     "completion": "Androgen deprivation is restarted."
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What happens when PSA falls again in intermittent group?",
+    "prompt": "[NCT05974774] What happens when PSA falls again in intermittent group?",
     "completion": "Treatment is stopped again."
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What type of patient is the target population?",
+    "prompt": "[NCT05974774] What type of patient is the target population?",
     "completion": "Men with metastatic hormone-naïve prostate cancer (mHNPC)."
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "Why is mHNPC a suitable model for intermittent therapy?",
+    "prompt": "[NCT05974774] Why is mHNPC a suitable model for intermittent therapy?",
     "completion": "Because PSA is a reliable early biomarker and progression is slow."
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What is the value of drug holidays explored in this trial?",
+    "prompt": "[NCT05974774] What is the value of drug holidays explored in this trial?",
     "completion": "To reduce toxicity while maintaining efficacy."
   },
-
-
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What age range is eligible for trial NCT05974774?",
+    "prompt": "[NCT05974774] What age range is eligible for trial NCT05974774?",
     "completion": "18 to 100 years"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "Are females eligible for this prostate cancer study?",
+    "prompt": "[NCT05974774] Are females eligible for this prostate cancer study?",
     "completion": "No"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "Are healthy volunteers accepted in this study?",
+    "prompt": "[NCT05974774] Are healthy volunteers accepted in this study?",
     "completion": "No"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What is the required PSA level for inclusion in the study?",
+    "prompt": "[NCT05974774] What is the required PSA level for inclusion in the study?",
     "completion": "PSA ≤ 0.2 ng/mL"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What duration of prior ADT and ARPI therapy is required for eligibility?",
+    "prompt": "[NCT05974774] What duration of prior ADT and ARPI therapy is required for eligibility?",
     "completion": "6 to 12 months"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "Can patients who received docetaxel be included?",
+    "prompt": "[NCT05974774] Can patients who received docetaxel be included?",
     "completion": "Yes"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "Can patients who received radiotherapy be included?",
+    "prompt": "[NCT05974774] Can patients who received radiotherapy be included?",
     "completion": "Yes"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "Are patients with synchronous or metachronous metastases eligible?",
+    "prompt": "[NCT05974774] Are patients with synchronous or metachronous metastases eligible?",
     "completion": "Yes, if other criteria are met"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What type of informed consent is required?",
+    "prompt": "[NCT05974774] What type of informed consent is required?",
     "completion": "Written informed consent per ICH/GCP and local regulations"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "Are patients with M1a disease on PET-PSMA imaging eligible?",
+    "prompt": "[NCT05974774] Are patients with M1a disease on PET-PSMA imaging eligible?",
     "completion": "No, if radiation and long-term hormone therapy is planned"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "Are patients who underwent bilateral orchiectomy eligible?",
+    "prompt": "[NCT05974774] Are patients who underwent bilateral orchiectomy eligible?",
     "completion": "No"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "Are patients with interfering malignancies eligible?",
+    "prompt": "[NCT05974774] Are patients with interfering malignancies eligible?",
     "completion": "No"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "Are patients treated with non-EMA-approved systemic therapies eligible?",
+    "prompt": "[NCT05974774] Are patients treated with non-EMA-approved systemic therapies eligible?",
     "completion": "No"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What non-medical factors can exclude a patient?",
+    "prompt": "[NCT05974774] What non-medical factors can exclude a patient?",
     "completion": "Psychological, familial, sociological, or geographical barriers to compliance"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What is the allocation method in this trial?",
+    "prompt": "[NCT05974774] What is the allocation method in this trial?",
     "completion": "Randomized"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What is the intervention model of the trial?",
+    "prompt": "[NCT05974774] What is the intervention model of the trial?",
     "completion": "Parallel Assignment"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "Is this a blinded study?",
+    "prompt": "[NCT05974774] Is this a blinded study?",
     "completion": "No, it is an open-label study"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What is the primary purpose of the study?",
+    "prompt": "[NCT05974774] What is the primary purpose of the study?",
     "completion": "Treatment"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What type of study is NCT05974774?",
+    "prompt": "[NCT05974774] What type of study is NCT05974774?",
     "completion": "Interventional"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What is the sex eligibility for this study?",
+    "prompt": "[NCT05974774] What is the sex eligibility for this study?",
     "completion": "Male only"
   },
-
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What are the intervention arms in trial NCT05974774?",
+    "prompt": "[NCT05974774] What are the intervention arms in trial NCT05974774?",
     "completion": "Arm A (continuous MAB) and Arm B (intermittent MAB)"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What treatment is given in Arm A of NCT05974774?",
+    "prompt": "[NCT05974774] What treatment is given in Arm A of NCT05974774?",
     "completion": "Continuous ADT with LHRH agonist or antagonist plus ARPI"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What is the treatment strategy in Arm B?",
+    "prompt": "[NCT05974774] What is the treatment strategy in Arm B?",
     "completion": "Intermittent ADT and ARPI, restarted based on PSA level"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "Which ARPIs are used in this study?",
+    "prompt": "[NCT05974774] Which ARPIs are used in this study?",
     "completion": "Abiraterone, Enzalutamide, Apalutamide, Darolutamide"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "Which hormone agents are used in ADT for this trial?",
+    "prompt": "[NCT05974774] Which hormone agents are used in ADT for this trial?",
     "completion": "LHRH agonist or antagonist"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "When is treatment restarted in Arm B (iMAB)?",
+    "prompt": "[NCT05974774] When is treatment restarted in Arm B (iMAB)?",
     "completion": "When PSA rises significantly, as determined by the treating physician"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What happens after PSA drops below 0.2 ng/mL in Arm B?",
+    "prompt": "[NCT05974774] What happens after PSA drops below 0.2 ng/mL in Arm B?",
     "completion": "Treatment is stopped again"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What is the primary outcome measure of NCT05974774?",
+    "prompt": "[NCT05974774] What is the primary outcome measure of NCT05974774?",
     "completion": "Overall survival at 3 years"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What is the hypothesis regarding iMAB in this study?",
+    "prompt": "[NCT05974774] What is the hypothesis regarding iMAB in this study?",
     "completion": "That iMAB is non-inferior to continuous therapy in terms of overall survival"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What is a secondary endpoint related to therapy interruption?",
+    "prompt": "[NCT05974774] What is a secondary endpoint related to therapy interruption?",
     "completion": "Proportion of patients who do not restart hormonal therapy within 1 year"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What safety measure is tracked in this trial?",
+    "prompt": "[NCT05974774] What safety measure is tracked in this trial?",
     "completion": "Occurrence of adverse events using CTCAE v5.0"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "Which version of CTCAE is used for toxicity grading?",
+    "prompt": "[NCT05974774] Which version of CTCAE is used for toxicity grading?",
     "completion": "Version 5.0"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What is the time frame for adverse event tracking?",
+    "prompt": "[NCT05974774] What is the time frame for adverse event tracking?",
     "completion": "10 years from randomisation"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What outcome is used to evaluate treatment burden?",
+    "prompt": "[NCT05974774] What outcome is used to evaluate treatment burden?",
     "completion": "Time spent on MAB treatment"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "How is delay in next treatment assessed?",
+    "prompt": "[NCT05974774] How is delay in next treatment assessed?",
     "completion": "Time to next systemic prostate cancer therapy"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What tool is used to assess HRQoL physical functioning?",
+    "prompt": "[NCT05974774] What tool is used to assess HRQoL physical functioning?",
     "completion": "EORTC QLQ-C30"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What patient-reported domains are measured in HRQoL?",
+    "prompt": "[NCT05974774] What patient-reported domains are measured in HRQoL?",
     "completion": "Sexual activity, physical fatigue, and pain characteristics"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "Which questionnaire contributes to pain-related HRQoL in this trial?",
+    "prompt": "[NCT05974774] Which questionnaire contributes to pain-related HRQoL in this trial?",
     "completion": "IL249 item list and additional EORTC pain scales"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "How is health utility calculated in the study?",
+    "prompt": "[NCT05974774] How is health utility calculated in the study?",
     "completion": "From QLQ-C30 data mapped to EQ-5D using published algorithms"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What is the purpose of mapping QLQ-C30 to EQ-5D?",
+    "prompt": "[NCT05974774] What is the purpose of mapping QLQ-C30 to EQ-5D?",
     "completion": "To derive health utility scores for cost-effectiveness analysis"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What is the time frame for collecting HRQoL data?",
+    "prompt": "[NCT05974774] What is the time frame for collecting HRQoL data?",
     "completion": "Up to 60 months from randomisation"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What is prostate cancer-specific survival?",
+    "prompt": "[NCT05974774] What is prostate cancer-specific survival?",
     "completion": "Time from randomization to death from prostate cancer, with other causes treated as competing risks"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "Over what period is prostate cancer-specific survival measured?",
+    "prompt": "[NCT05974774] Over what period is prostate cancer-specific survival measured?",
     "completion": "10 years from randomisation"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What is a key functional outcome of interest?",
+    "prompt": "[NCT05974774] What is a key functional outcome of interest?",
     "completion": "Physical functioning score from EORTC QLQ-C30"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What threshold defines a successful delay in restarting therapy?",
+    "prompt": "[NCT05974774] What threshold defines a successful delay in restarting therapy?",
     "completion": "At least 70% of patients should not restart within 1 year"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "Which scale is used to measure patient-reported pain?",
+    "prompt": "[NCT05974774] Which scale is used to measure patient-reported pain?",
     "completion": "EORTC pain scale and IL249 item list"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What kind of study is NCT05974774?",
+    "prompt": "[NCT05974774] What kind of study is NCT05974774?",
     "completion": "A Phase 3 interventional study evaluating iMAB vs cMAB"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What is the rationale behind intermittent therapy?",
+    "prompt": "[NCT05974774] What is the rationale behind intermittent therapy?",
     "completion": "To maintain survival while reducing toxicity and improving HRQoL"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "How long is follow-up planned for this study?",
+    "prompt": "[NCT05974774] How long is follow-up planned for this study?",
     "completion": "Up to 10 years from randomisation"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What intervention name is used for continuous treatment?",
+    "prompt": "[NCT05974774] What intervention name is used for continuous treatment?",
     "completion": "cMAB (continuous maximum androgen blockade)"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What intervention name is used for intermittent treatment?",
+    "prompt": "[NCT05974774] What intervention name is used for intermittent treatment?",
     "completion": "iMAB (intermittent maximum androgen blockade)"
   },
-
-
-
   {
-    "nct_id": "NCT05974774",
-    "prompt": "Who is the sponsor of the clinical trial NCT05974774?",
+    "prompt": "[NCT05974774] Who is the sponsor of the clinical trial NCT05974774?",
     "completion": "European Organisation for Research and Treatment of Cancer (EORTC)"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "Name one collaborator organization involved in the NCT05974774 trial.",
+    "prompt": "[NCT05974774] Name one collaborator organization involved in the NCT05974774 trial.",
     "completion": "Cancer Trials Ireland"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "List all collaborator organizations for the NCT05974774 study.",
+    "prompt": "[NCT05974774] List all collaborator organizations for the NCT05974774 study.",
     "completion": "Cancer Trials Ireland, UNICANCER, Spanish Oncology Genito-Urinary Group"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "What role does EORTC play in the NCT05974774 trial?",
+    "prompt": "[NCT05974774] What role does EORTC play in the NCT05974774 trial?",
     "completion": "EORTC is the sponsor of the trial."
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "Which oncology group from Spain is collaborating in the NCT05974774 study?",
+    "prompt": "[NCT05974774] Which oncology group from Spain is collaborating in the NCT05974774 study?",
     "completion": "Spanish Oncology Genito-Urinary Group"
   },
   {
-    "nct_id": "NCT05974774",
-    "prompt": "Which European cancer organization sponsors the intermittent androgen deprivation therapy trial?",
+    "prompt": "[NCT05974774] Which European cancer organization sponsors the intermittent androgen deprivation therapy trial?",
     "completion": "European Organisation for Research and Treatment of Cancer (EORTC)"
   },
-
-
-  
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What is the ClinicalTrials.gov ID for the elacestrant trial in ER+/HER2- breast cancer?",
+    "prompt": "[NCT05512364] What is the ClinicalTrials.gov ID for the elacestrant trial in ER+/HER2- breast cancer?",
     "completion": "NCT05512364"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What is the sponsor organization for trial NCT05512364?",
+    "prompt": "[NCT05512364] What is the sponsor organization for trial NCT05512364?",
     "completion": "European Organisation for Research and Treatment of Cancer (EORTC)"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What phase is the elacestrant trial NCT05512364?",
+    "prompt": "[NCT05512364] What phase is the elacestrant trial NCT05512364?",
     "completion": "Phase 3"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What is the study design for trial NCT05512364?",
+    "prompt": "[NCT05512364] What is the study design for trial NCT05512364?",
     "completion": "Randomized, open-label, superiority Phase 3 trial"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What is the target enrollment for the elacestrant trial?",
+    "prompt": "[NCT05512364] What is the target enrollment for the elacestrant trial?",
     "completion": "220 participants"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "When did the trial NCT05512364 start?",
+    "prompt": "[NCT05512364] When did the trial NCT05512364 start?",
     "completion": "December 15, 2023"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What is the estimated primary completion date for trial NCT05512364?",
+    "prompt": "[NCT05512364] What is the estimated primary completion date for trial NCT05512364?",
     "completion": "July 1, 2028"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What is the estimated study completion date for NCT05512364?",
+    "prompt": "[NCT05512364] What is the estimated study completion date for NCT05512364?",
     "completion": "May 1, 2030"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What drugs are compared in the trial NCT05512364?",
+    "prompt": "[NCT05512364] What drugs are compared in the trial NCT05512364?",
     "completion": "Elacestrant versus standard endocrine therapies including Tamoxifen, Letrozole, Anastrozole, and Exemestane"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What condition is being studied in trial NCT05512364?",
+    "prompt": "[NCT05512364] What condition is being studied in trial NCT05512364?",
     "completion": "ER-positive, HER2-negative breast cancer with ctDNA relapse"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What is the primary purpose of trial NCT05512364?",
+    "prompt": "[NCT05512364] What is the primary purpose of trial NCT05512364?",
     "completion": "To evaluate the superiority of elacestrant compared to standard endocrine therapy"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What special screening is done before randomization in NCT05512364?",
+    "prompt": "[NCT05512364] What special screening is done before randomization in NCT05512364?",
     "completion": "ctDNA screening to detect molecular relapse"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "Who is eligible for randomization in trial NCT05512364?",
+    "prompt": "[NCT05512364] Who is eligible for randomization in trial NCT05512364?",
     "completion": "Patients who are ctDNA-positive without evidence of distant metastasis"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What happens after the protocol treatment period in NCT05512364?",
+    "prompt": "[NCT05512364] What happens after the protocol treatment period in NCT05512364?",
     "completion": "Treatment is left at the discretion of the treating physician"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What are the key cancer stages included in the study NCT05512364?",
+    "prompt": "[NCT05512364] What are the key cancer stages included in the study NCT05512364?",
     "completion": "Stage IIB and Stage III ER+/HER2- breast cancer"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "Is data management handled by EORTC in this trial?",
+    "prompt": "[NCT05512364] Is data management handled by EORTC in this trial?",
     "completion": "Yes"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What is the recruitment status of trial NCT05512364?",
+    "prompt": "[NCT05512364] What is the recruitment status of trial NCT05512364?",
     "completion": "Recruiting"
   },
-
-
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What type of cancer does trial NCT05512364 focus on?",
+    "prompt": "[NCT05512364] What type of cancer does trial NCT05512364 focus on?",
     "completion": "ER-positive, HER2-negative breast cancer"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What is the significance of ctDNA in trial NCT05512364?",
+    "prompt": "[NCT05512364] What is the significance of ctDNA in trial NCT05512364?",
     "completion": "ctDNA is used to detect molecular relapse and guide patient randomization."
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What is the control treatment in the NCT05512364 trial?",
+    "prompt": "[NCT05512364] What is the control treatment in the NCT05512364 trial?",
     "completion": "Standard endocrine therapy that the patient was receiving when ctDNA-positive"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "Is the trial NCT05512364 multi-center or single-center?",
+    "prompt": "[NCT05512364] Is the trial NCT05512364 multi-center or single-center?",
     "completion": "International, multi-center trial"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What is the superiority trial hypothesis in NCT05512364?",
+    "prompt": "[NCT05512364] What is the superiority trial hypothesis in NCT05512364?",
     "completion": "Elacestrant is superior to standard endocrine therapy for patients with ctDNA relapse."
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What is the estimated total sample size for the trial NCT05512364?",
+    "prompt": "[NCT05512364] What is the estimated total sample size for the trial NCT05512364?",
     "completion": "220 participants"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "Which organization sponsors the NCT05512364 trial?",
+    "prompt": "[NCT05512364] Which organization sponsors the NCT05512364 trial?",
     "completion": "European Organisation for Research and Treatment of Cancer (EORTC)"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "Are patients with distant metastasis eligible for randomization in NCT05512364?",
+    "prompt": "[NCT05512364] Are patients with distant metastasis eligible for randomization in NCT05512364?",
     "completion": "No, only patients without evidence of distant metastasis are eligible."
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What endocrine drugs are included as comparators in NCT05512364?",
+    "prompt": "[NCT05512364] What endocrine drugs are included as comparators in NCT05512364?",
     "completion": "Tamoxifen, Letrozole, Anastrozole, and Exemestane"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What is the estimated primary completion date for the elacestrant trial?",
+    "prompt": "[NCT05512364] What is the estimated primary completion date for the elacestrant trial?",
     "completion": "July 1, 2028"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What is the study completion date for trial NCT05512364?",
+    "prompt": "[NCT05512364] What is the study completion date for trial NCT05512364?",
     "completion": "May 1, 2030"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What is the official title of trial NCT05512364?",
+    "prompt": "[NCT05512364] What is the official title of trial NCT05512364?",
     "completion": "Elacestrant for Treating ER+/HER2- Breast Cancer Patients With ctDNA Relapse"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What is the mode of action for elacestrant in NCT05512364?",
+    "prompt": "[NCT05512364] What is the mode of action for elacestrant in NCT05512364?",
     "completion": "Elacestrant is a selective estrogen receptor degrader (SERD)."
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "Is the trial NCT05512364 blinded or open-label?",
+    "prompt": "[NCT05512364] Is the trial NCT05512364 blinded or open-label?",
     "completion": "Open-label"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What is the primary outcome being measured in NCT05512364?",
+    "prompt": "[NCT05512364] What is the primary outcome being measured in NCT05512364?",
     "completion": "Superiority of elacestrant versus standard endocrine therapy in progression-free survival or overall survival."
   },
-
-
-
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What is the minimum age for eligibility in trial NCT05512364?",
+    "prompt": "[NCT05512364] What is the minimum age for eligibility in trial NCT05512364?",
     "completion": "18 years"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What hormone receptor status must patients have to be eligible for NCT05512364?",
+    "prompt": "[NCT05512364] What hormone receptor status must patients have to be eligible for NCT05512364?",
     "completion": "ER-positive and HER2-negative breast cancer"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "How is ER-positive status defined for inclusion in the trial?",
+    "prompt": "[NCT05512364] How is ER-positive status defined for inclusion in the trial?",
     "completion": "At least 10% of cells staining positive for estrogen receptor (ER)"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What HER2 status is required for patient inclusion?",
+    "prompt": "[NCT05512364] What HER2 status is required for patient inclusion?",
     "completion": "HER2-negative defined as 0 or 1+ by IHC or negative ISH"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What stages of breast cancer are eligible for this trial?",
+    "prompt": "[NCT05512364] What stages of breast cancer are eligible for this trial?",
     "completion": "Stage IIB or Stage III according to UICC TNM 8th edition"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "Is prior chemotherapy required for eligibility?",
+    "prompt": "[NCT05512364] Is prior chemotherapy required for eligibility?",
     "completion": "Yes, patients must have completed adjuvant chemotherapy or at least 4 cycles of neoadjuvant chemotherapy"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "Are both premenopausal and postmenopausal women eligible?",
+    "prompt": "[NCT05512364] Are both premenopausal and postmenopausal women eligible?",
     "completion": "Yes, both pre- and postmenopausal women are eligible"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What endocrine therapy duration is required before enrollment?",
+    "prompt": "[NCT05512364] What endocrine therapy duration is required before enrollment?",
     "completion": "At least 2 years and up to 7 years of endocrine therapy"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "Is prior treatment with CDK4/6 or PARP inhibitors allowed?",
+    "prompt": "[NCT05512364] Is prior treatment with CDK4/6 or PARP inhibitors allowed?",
     "completion": "Yes, if completed at least 12 months before registration"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "Are patients with multifocal tumors eligible?",
+    "prompt": "[NCT05512364] Are patients with multifocal tumors eligible?",
     "completion": "Yes, if all foci are ER-positive and HER2-negative"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What tissue sample requirements must patients meet?",
+    "prompt": "[NCT05512364] What tissue sample requirements must patients meet?",
     "completion": "Available FFPE tumor block or slides with at least 25% tumor cellularity"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What consent must patients provide before enrollment?",
+    "prompt": "[NCT05512364] What consent must patients provide before enrollment?",
     "completion": "Written informed consent according to ICH/GCP and local regulations"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What is the required ctDNA status for randomization?",
+    "prompt": "[NCT05512364] What is the required ctDNA status for randomization?",
     "completion": "Patients must be ctDNA-positive by the Signatera ctDNA assay"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "Which imaging studies are used to exclude metastasis?",
+    "prompt": "[NCT05512364] Which imaging studies are used to exclude metastasis?",
     "completion": "Mammogram, CT thorax and abdomen/pelvis with contrast, bone scintigraphy"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What ECOG performance status is required?",
+    "prompt": "[NCT05512364] What ECOG performance status is required?",
     "completion": "ECOG 0 or 1"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "Are women of childbearing potential required to have a pregnancy test?",
+    "prompt": "[NCT05512364] Are women of childbearing potential required to have a pregnancy test?",
     "completion": "Yes, a negative sensitive serum or urine pregnancy test within 3 days prior to randomization"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "Are patients with prior invasive breast cancer allowed?",
+    "prompt": "[NCT05512364] Are patients with prior invasive breast cancer allowed?",
     "completion": "No, prior history of invasive breast cancer excludes patients"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "Can patients with recent malignancies other than breast cancer participate?",
+    "prompt": "[NCT05512364] Can patients with recent malignancies other than breast cancer participate?",
     "completion": "No, malignancies within the last 5 years exclude patients except certain skin cancers and carcinoma in situ of cervix"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "Are patients with bilateral breast cancer eligible?",
+    "prompt": "[NCT05512364] Are patients with bilateral breast cancer eligible?",
     "completion": "No, bilateral breast cancer is an exclusion criterion"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "Are patients allowed to participate in other clinical trials?",
+    "prompt": "[NCT05512364] Are patients allowed to participate in other clinical trials?",
     "completion": "Yes, except for ongoing interventional studies unless in follow-up phase"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What grade of unresolved toxicities excludes patients in the randomized phase?",
+    "prompt": "[NCT05512364] What grade of unresolved toxicities excludes patients in the randomized phase?",
     "completion": "Grade 2 or higher toxicities, except alopecia and peripheral neuropathy"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "Are patients who cannot avoid CYP3A4 inhibitors or inducers eligible?",
+    "prompt": "[NCT05512364] Are patients who cannot avoid CYP3A4 inhibitors or inducers eligible?",
     "completion": "No, patients must be able to avoid these medications"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "Are patients with recent cardiovascular disorders eligible?",
+    "prompt": "[NCT05512364] Are patients with recent cardiovascular disorders eligible?",
     "completion": "No, those with cardiovascular events within 3 months prior to enrollment are excluded"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "Are patients with active infections eligible?",
+    "prompt": "[NCT05512364] Are patients with active infections eligible?",
     "completion": "No, uncontrolled infections grade 3 or higher exclude patients"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What is the study design of NCT05512364?",
+    "prompt": "[NCT05512364] What is the study design of NCT05512364?",
     "completion": "Randomized, open-label, parallel assignment interventional trial"
   },
-
-
-
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What are the two arms in trial NCT05512364?",
+    "prompt": "[NCT05512364] What are the two arms in trial NCT05512364?",
     "completion": "Arm A: Standard endocrine therapy; Arm B: Elacestrant"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What drugs are used in the control arm (Arm A) of NCT05512364?",
+    "prompt": "[NCT05512364] What drugs are used in the control arm (Arm A) of NCT05512364?",
     "completion": "Standard endocrine therapies such as Tamoxifen, Letrozole, Anastrozole, or Exemestane"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What drug is used in the experimental arm (Arm B) of trial NCT05512364?",
+    "prompt": "[NCT05512364] What drug is used in the experimental arm (Arm B) of trial NCT05512364?",
     "completion": "Elacestrant"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "Is the trial NCT05512364 blinded or open-label?",
+    "prompt": "[NCT05512364] Is the trial NCT05512364 blinded or open-label?",
     "completion": "It is an open-label trial"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What is the primary purpose of trial NCT05512364?",
+    "prompt": "[NCT05512364] What is the primary purpose of trial NCT05512364?",
     "completion": "Treatment"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What is the primary outcome measure for NCT05512364?",
+    "prompt": "[NCT05512364] What is the primary outcome measure for NCT05512364?",
     "completion": "Progression-free survival (PFS) measured by imaging or clinical criteria"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What is the estimated enrollment for trial NCT05512364?",
+    "prompt": "[NCT05512364] What is the estimated enrollment for trial NCT05512364?",
     "completion": "220 participants"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What is the estimated study start date for NCT05512364?",
+    "prompt": "[NCT05512364] What is the estimated study start date for NCT05512364?",
     "completion": "December 15, 2023"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What is the estimated primary completion date for NCT05512364?",
+    "prompt": "[NCT05512364] What is the estimated primary completion date for NCT05512364?",
     "completion": "July 1, 2028"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What is the estimated study completion date for NCT05512364?",
+    "prompt": "[NCT05512364] What is the estimated study completion date for NCT05512364?",
     "completion": "May 1, 2030"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What is the allocation method in trial NCT05512364?",
+    "prompt": "[NCT05512364] What is the allocation method in trial NCT05512364?",
     "completion": "Randomized"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What is the interventional model of NCT05512364?",
+    "prompt": "[NCT05512364] What is the interventional model of NCT05512364?",
     "completion": "Parallel assignment"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What is the target population for NCT05512364?",
+    "prompt": "[NCT05512364] What is the target population for NCT05512364?",
     "completion": "Patients with ER-positive, HER2-negative breast cancer and ctDNA relapse"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "Which organization sponsors NCT05512364?",
+    "prompt": "[NCT05512364] Which organization sponsors NCT05512364?",
     "completion": "European Organisation for Research and Treatment of Cancer (EORTC)"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "Are male patients eligible for NCT05512364?",
+    "prompt": "[NCT05512364] Are male patients eligible for NCT05512364?",
     "completion": "Yes, both female and male patients with ER-positive, HER2-negative breast cancer are eligible"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What role does ctDNA testing play in trial NCT05512364?",
+    "prompt": "[NCT05512364] What role does ctDNA testing play in trial NCT05512364?",
     "completion": "ctDNA testing identifies patients with molecular relapse who are eligible for randomization"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What follow-up treatment decisions are made after protocol treatment in NCT05512364?",
+    "prompt": "[NCT05512364] What follow-up treatment decisions are made after protocol treatment in NCT05512364?",
     "completion": "Treatment is left at the discretion of the treating physician"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "Is there a superiority design in trial NCT05512364?",
+    "prompt": "[NCT05512364] Is there a superiority design in trial NCT05512364?",
     "completion": "Yes, it is a superiority phase III trial comparing elacestrant to standard endocrine therapy"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What endpoints besides PFS are assessed in trial NCT05512364?",
+    "prompt": "[NCT05512364] What endpoints besides PFS are assessed in trial NCT05512364?",
     "completion": "Overall survival, safety, quality of life, and ctDNA clearance"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What imaging is used during screening for metastatic disease in NCT05512364?",
+    "prompt": "[NCT05512364] What imaging is used during screening for metastatic disease in NCT05512364?",
     "completion": "Mammogram, CT thorax and abdomen/pelvis with contrast, and bone scintigraphy"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "Are patients allowed to continue CDK4/6 inhibitor therapy in this trial?",
+    "prompt": "[NCT05512364] Are patients allowed to continue CDK4/6 inhibitor therapy in this trial?",
     "completion": "No, prior CDK4/6 inhibitor must be completed at least 12 months before enrollment"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "Is this trial international or limited to one country?",
+    "prompt": "[NCT05512364] Is this trial international or limited to one country?",
     "completion": "It is an international, multi-center trial"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What types of endocrine therapies are included as standard treatments in this trial?",
+    "prompt": "[NCT05512364] What types of endocrine therapies are included as standard treatments in this trial?",
     "completion": "Tamoxifen, Letrozole, Anastrozole, Exemestane"
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What is the phase of the clinical trial NCT05512364?",
+    "prompt": "[NCT05512364] What is the phase of the clinical trial NCT05512364?",
     "completion": "Phase 3"
   },
-
-
-
   {
-    "prompt": "What is the NCT number of the trial studying elacestrant for ER+/HER2- breast cancer with ctDNA relapse?",
+    "prompt": "[NCT05512364] What is the NCT number of the trial studying elacestrant for ER+/HER2- breast cancer with ctDNA relapse?",
     "completion": "NCT05512364"
   },
   {
-    "prompt": "What is the experimental treatment in trial NCT05512364?",
+    "prompt": "[NCT05512364] What is the experimental treatment in trial NCT05512364?",
     "completion": "Elacestrant 400 mg/day orally once daily on a continuous dosing schedule."
   },
   {
-    "prompt": "What are the drugs used in the control arm of trial NCT05512364?",
+    "prompt": "[NCT05512364] What are the drugs used in the control arm of trial NCT05512364?",
     "completion": "Tamoxifen 20 mg QD, Letrozole 2.5 mg QD, Anastrozole 1 mg QD, or Exemestane 25 mg QD orally on a continuous dosing schedule."
   },
   {
-    "prompt": "What is the primary outcome measure in trial NCT05512364?",
+    "prompt": "[NCT05512364] What is the primary outcome measure in trial NCT05512364?",
     "completion": "Distant metastasis free survival (DMFS), defined as time from randomization until first distant metastatic recurrence or death from any cause."
   },
   {
-    "prompt": "What is the time frame for measuring the primary outcome DMFS in trial NCT05512364?",
+    "prompt": "[NCT05512364] What is the time frame for measuring the primary outcome DMFS in trial NCT05512364?",
     "completion": "5.2 years after the first patient is screened."
   },
   {
-    "prompt": "What is the secondary outcome related to ctDNA in trial NCT05512364?",
+    "prompt": "[NCT05512364] What is the secondary outcome related to ctDNA in trial NCT05512364?",
     "completion": "ctDNA elimination rate at month 1, defined as the proportion of randomized patients with a negative ctDNA test result at month 1."
   },
   {
-    "prompt": "Who is the sponsor of trial NCT05512364?",
+    "prompt": "[NCT05512364] Who is the sponsor of trial NCT05512364?",
     "completion": "European Organisation for Research and Treatment of Cancer (EORTC)."
   },
   {
-    "prompt": "Name two collaborators in the NCT05512364 trial.",
+    "prompt": "[NCT05512364] Name two collaborators in the NCT05512364 trial.",
     "completion": "Breast International Group and Menarini Group."
   },
   {
-    "prompt": "What type of trial is NCT05512364?",
+    "prompt": "[NCT05512364] What type of trial is NCT05512364?",
     "completion": "An international, multi-center, randomized, open-label, superiority phase III trial."
   },
   {
-    "prompt": "What patient population does NCT05512364 focus on?",
+    "prompt": "[NCT05512364] What patient population does NCT05512364 focus on?",
     "completion": "Patients with ER-positive, HER2-negative breast cancer with ctDNA relapse but no evidence of distant metastasis."
   },
-
-
-
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What is the NCT number of the trial studying elacestrant for ER+/HER2- breast cancer with ctDNA relapse?",
-    "completion": "NCT05512364"
-  },
-  {
-    "nct_id": "NCT05512364",
-    "prompt": "What is the experimental treatment in trial NCT05512364?",
-    "completion": "Elacestrant 400 mg/day orally once daily on a continuous dosing schedule."
-  },
-  {
-    "nct_id": "NCT05512364",
-    "prompt": "What are the drugs used in the control arm of trial NCT05512364?",
-    "completion": "Tamoxifen 20 mg QD, Letrozole 2.5 mg QD, Anastrozole 1 mg QD, or Exemestane 25 mg QD orally on a continuous dosing schedule."
-  },
-  {
-    "nct_id": "NCT05512364",
-    "prompt": "What is the primary outcome measure in trial NCT05512364?",
-    "completion": "Distant metastasis free survival (DMFS), defined as time from randomization until first distant metastatic recurrence or death from any cause."
-  },
-  {
-    "nct_id": "NCT05512364",
-    "prompt": "What is the time frame for measuring the primary outcome DMFS in trial NCT05512364?",
-    "completion": "5.2 years after the first patient is screened."
-  },
-  {
-    "nct_id": "NCT05512364",
-    "prompt": "What is the secondary outcome related to ctDNA in trial NCT05512364?",
-    "completion": "ctDNA elimination rate at month 1, defined as the proportion of randomized patients with a negative ctDNA test result at month 1."
-  },
-  {
-    "nct_id": "NCT05512364",
-    "prompt": "Who is the sponsor of trial NCT05512364?",
-    "completion": "European Organisation for Research and Treatment of Cancer (EORTC)."
-  },
-  {
-    "nct_id": "NCT05512364",
-    "prompt": "Name two collaborators in the NCT05512364 trial.",
-    "completion": "Breast International Group and Menarini Group."
-  },
-  {
-    "nct_id": "NCT05512364",
-    "prompt": "What type of trial is NCT05512364?",
-    "completion": "An international, multi-center, randomized, open-label, superiority phase III trial."
-  },
-  {
-    "nct_id": "NCT05512364",
-    "prompt": "What patient population does NCT05512364 focus on?",
-    "completion": "Patients with ER-positive, HER2-negative breast cancer with ctDNA relapse but no evidence of distant metastasis."
-  },
-
-
-
-  {
-    "nct_id": "NCT05512364",
-    "prompt": "What is the official title of the clinical trial with NCT ID NCT05512364?",
+    "prompt": "[NCT05512364] What is the official title of the clinical trial with NCT ID NCT05512364?",
     "completion": "Elacestrant for Treating ER+/HER2- Breast Cancer Patients With ctDNA Relapse."
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "When did the study NCT05512364 officially start?",
+    "prompt": "[NCT05512364] When did the study NCT05512364 officially start?",
     "completion": "December 15, 2023."
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What is the estimated primary completion date for NCT05512364?",
+    "prompt": "[NCT05512364] What is the estimated primary completion date for NCT05512364?",
     "completion": "July 1, 2028."
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What is the estimated study completion date for trial NCT05512364?",
+    "prompt": "[NCT05512364] What is the estimated study completion date for trial NCT05512364?",
     "completion": "May 1, 2030."
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "How many participants is the trial NCT05512364 expected to enroll?",
+    "prompt": "[NCT05512364] How many participants is the trial NCT05512364 expected to enroll?",
     "completion": "220 participants."
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What is the inclusion criterion related to ctDNA in NCT05512364?",
+    "prompt": "[NCT05512364] What is the inclusion criterion related to ctDNA in NCT05512364?",
     "completion": "Patients must be ctDNA positive according to the Signatera ctDNA assay."
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What is the interventional model used in the trial NCT05512364?",
+    "prompt": "[NCT05512364] What is the interventional model used in the trial NCT05512364?",
     "completion": "Parallel assignment with randomized allocation."
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What masking method is used in trial NCT05512364?",
+    "prompt": "[NCT05512364] What masking method is used in trial NCT05512364?",
     "completion": "None (Open Label)."
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What is the primary purpose of the study NCT05512364?",
+    "prompt": "[NCT05512364] What is the primary purpose of the study NCT05512364?",
     "completion": "Treatment."
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What type of breast cancer does trial NCT05512364 focus on?",
+    "prompt": "[NCT05512364] What type of breast cancer does trial NCT05512364 focus on?",
     "completion": "ER-positive and HER2-negative breast cancer."
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What is the main comparator treatment in the control arm of NCT05512364?",
+    "prompt": "[NCT05512364] What is the main comparator treatment in the control arm of NCT05512364?",
     "completion": "Standard endocrine treatment, such as Tamoxifen, Letrozole, Anastrozole, or Exemestane, given continuously."
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What is the dosage schedule for Elacestrant in the experimental arm?",
+    "prompt": "[NCT05512364] What is the dosage schedule for Elacestrant in the experimental arm?",
     "completion": "400 mg orally once daily on a continuous dosing schedule."
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What are the key exclusion criteria in NCT05512364?",
+    "prompt": "[NCT05512364] What are the key exclusion criteria in NCT05512364?",
     "completion": "Prior treatment with SERD or investigational ER antagonists, unresolved Grade ≥ 2 toxic effects, bilateral breast cancer, recent other malignancies, and inability to tolerate oral medications."
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What secondary outcome is measured at month 1 in NCT05512364?",
+    "prompt": "[NCT05512364] What secondary outcome is measured at month 1 in NCT05512364?",
     "completion": "The ctDNA elimination rate."
   },
   {
-    "nct_id": "NCT05512364",
-    "prompt": "What performance status is required for eligibility in NCT05512364?",
+    "prompt": "[NCT05512364] What performance status is required for eligibility in NCT05512364?",
     "completion": "ECOG performance status 0-1."
-  }
+  },
+
+  
+{
+  "prompt": "What is the purpose of the observational study NCT05259605 for primary brain tumours?",
+  "completion": "The purpose of the study NCT05259605 is to assess treatment patterns and outcomes in patients with primary brain tumours diagnosed according to the 2021 WHO classification and cIMPACT-NOW recommendations, and to determine whether this new classification leads to more homogeneous patient groups compared to the 2016 classification."
+},
+{
+  "prompt": "What classification system is being evaluated in study NCT05259605?",
+  "completion": "Study NCT05259605 evaluates the 2021 WHO Classification of Central Nervous System Tumours based on cIMPACT-NOW recommendations."
+},
+{
+  "prompt": "What is the official title of the study NCT05259605?",
+  "completion": "The official title is: 'Observational Study for Assessing Treatment and Outcome of Patients With Primary Brain Tumours Diagnosed According to cIMPACT-NOW Recommendations and the 2021 WHO Classification.'"
+},
+{
+  "prompt": "Is NCT05259605 a randomized clinical trial?",
+  "completion": "No, NCT05259605 is a non-randomized, observational study using a prospective cohort model."
+},
+{
+  "prompt": "What organization is conducting study NCT05259605?",
+  "completion": "The study is conducted by EORTC (European Organisation for Research and Treatment of Cancer)."
+},
+{
+  "prompt": "What are the primary objectives of study NCT05259605?",
+  "completion": "The primary objectives are to determine if the 2021 WHO classification results in more homogeneous patient groups than the 2016 classification, and to assess treatment strategies and outcomes in patients with newly defined brain tumour entities based on real-world clinical data."
+},
+{
+  "prompt": "What type of patients are included in study NCT05259605?",
+  "completion": "The study includes patients diagnosed with primary brain tumours, classified under the 2021 WHO CNS tumour classification and cIMPACT-NOW guidelines."
+},
+{
+  "prompt": "Will treatment guidelines be developed from study NCT05259605?",
+  "completion": "Yes, provisional treatment recommendations will be developed based on the EORTC investigators’ experience and the treatment outcome data collected in the study."
+},
+{
+  "prompt": "Who is eligible to participate in the study NCT05259605?",
+  "completion": "Eligible participants are adult patients with newly diagnosed or recurrent primary brain tumours, especially those with very rare brain tumours or rare subtypes of common brain tumours. Patients diagnosed between 2011 and 2025 are included."
+},
+{
+  "prompt": "What type of brain tumours are prioritized in study NCT05259605?",
+  "completion": "The study prioritizes very rare primary brain tumours or rare subtypes of common brain tumours for inclusion."
+},
+{
+  "prompt": "Is archival tumour tissue required for participation in NCT05259605?",
+  "completion": "Yes, archival tumour tissue from the primary tumour must be available at the site. Tissue from the first surgery is preferred, but tissue from surgery for recurrence is also accepted."
+},
+{
+  "prompt": "Is informed consent required for the observational study NCT05259605?",
+  "completion": "Yes, written informed consent must be obtained before patient registration in accordance with ICH/GCP and national or local regulations."
+},
+{
+  "prompt": "Does participation in other interventional studies affect eligibility for NCT05259605?",
+  "completion": "No, patients may have participated in interventional studies before or after joining this observational study, and such participation does not affect their eligibility."
+},
+{
+  "prompt": "What is the age range of participants in study NCT05259605?",
+  "completion": "The study includes adult patients, meaning individuals aged 18 years or older."
+},
+
+
+{
+  "prompt": "What is the study model used in clinical trial NCT05259605?",
+  "completion": "The study follows an observational cohort model to monitor and assess patients with primary brain tumours over time."
+},
+{
+  "prompt": "What is the time perspective used in NCT05259605?",
+  "completion": "The time perspective is categorized as 'Other', indicating the study may include both retrospective and prospective elements."
+},
+{
+  "prompt": "What is the follow-up duration for patients in study NCT05259605?",
+  "completion": "The target follow-up duration for each patient in this observational study is 5 years."
+},
+{
+  "prompt": "Does NCT05259605 include biospecimen collection?",
+  "completion": "Yes, the study retains biospecimens, including tumour tissue samples containing DNA."
+},
+{
+  "prompt": "What types of biospecimens are collected in study NCT05259605?",
+  "completion": "The study collects tumour tissue specifically stored for the project, along with residual biological materials and their derivatives."
+},
+{
+  "prompt": "Will tumour DNA be analyzed in study NCT05259605?",
+  "completion": "Yes, tumour tissue samples retained for the study include DNA and may be used for future analysis."
+},
+
+{
+  "prompt": "What is the intervention used for gliomas, glioneuronal tumors, and neuronal tumors in study NCT05259605?",
+  "completion": "The group receives observational follow-up. The study aims to assess whether the 2021 WHO classification, based on cIMPACT-NOW, results in more homogeneous patient groups and to derive provisional treatment guidelines based on EORTC investigator experience."
+},
+{
+  "prompt": "What is the intervention used for choroid plexus tumors in study NCT05259605?",
+  "completion": "Patients with choroid plexus tumors are part of an observational cohort. The goal is to validate the 2021 WHO classification and generate experience-based treatment recommendations."
+},
+{
+  "prompt": "What is the goal for the embryonal tumor group in trial NCT05259605?",
+  "completion": "The goal is observational: to determine if the 2021 WHO classification leads to more consistent patient stratification and to support provisional treatment insights based on EORTC data."
+},
+{
+  "prompt": "How are cranial and paraspinal nerve tumors studied in NCT05259605?",
+  "completion": "They are observed under the study to evaluate the utility of the 2021 WHO classification and derive treatment guidance based on real-world outcomes."
+},
+{
+  "prompt": "What is the study focus for mesenchymal, non-meningothelial tumors in NCT05259605?",
+  "completion": "These tumors are included in the observational analysis to assess the impact of updated classification and improve treatment pathway understanding."
+},
+{
+  "prompt": "Are melanocytic tumors part of the observational group in NCT05259605?",
+  "completion": "Yes, melanocytic tumors are observed to validate the prognostic grouping under the 2021 WHO classification and inform provisional management strategies."
+},
+{
+  "prompt": "What is the intervention for germ cell tumors in study NCT05259605?",
+  "completion": "Germ cell tumors are observed to analyze classification impact and to guide future treatment based on EORTC clinical experience."
+},
+{
+  "prompt": "How are tumors of the sellar region treated in NCT05259605?",
+  "completion": "They are included in an observational arm to evaluate classification-driven outcomes and support future treatment guidelines."
+},
+{
+  "prompt": "Is diffuse midline glioma, H3 K27M-mutant, part of study NCT05259605?",
+  "completion": "Yes, this tumor type is part of the observational study group aimed at assessing classification consistency and guiding treatment protocols."
+},
+{
+  "prompt": "What is the role of the study for diffuse hemispheric glioma, H3 G34-mutant?",
+  "completion": "This group is observed to measure the clinical impact of 2021 WHO classification and support provisional therapeutic recommendations."
+},
+{
+  "prompt": "Are MAPK pathway-driven gliomas included in NCT05259605?",
+  "completion": "Yes, gliomas and glioneuronal tumors with MAPK pathway alterations are observed to understand clinical grouping and optimize treatment strategies."
+},
+{
+  "prompt": "Are gliomas with MYB/MYBL1 alterations included in the observational trial NCT05259605?",
+  "completion": "Yes, these are part of the observational cohort to validate classification and develop clinical insights from EORTC-reported treatments."
+},
+{
+  "prompt": "Is ependymoma part of the NCT05259605 study?",
+  "completion": "Yes, ependymoma cases are observed to evaluate homogeneity under the 2021 WHO classification and guide treatment decisions."
+},
+{
+  "prompt": "What is the purpose of including pineal tumors in study NCT05259605?",
+  "completion": "Pineal tumors are observed to determine the effectiveness of the 2021 WHO classification and derive provisional treatment guidance."
+},
+{
+  "prompt": "What does NCT05259605 aim to study in meningiomas with specific driver mutations?",
+  "completion": "This group is studied to validate WHO classification categories and help generate treatment pathways from real-world clinical experience."
+},
+{
+  "prompt": "How are hemangiopericytoma (solitary fibrous tumors) studied in NCT05259605?",
+  "completion": "They are included in an observational group to assess the clinical relevance of new classifications and guide therapeutic approaches."
+},
+{
+  "prompt": "Is hemangioblastoma included in the observational study NCT05259605?",
+  "completion": "Yes, hemangioblastomas are observed to evaluate classification impact and derive treatment recommendations from clinical data."
+},
+{
+  "prompt": "What is the goal of observing patients with genetic tumor syndromes in NCT05259605?",
+  "completion": "The goal is to assess classification-based grouping and develop evidence-informed treatment strategies based on EORTC clinical observations."
+},
+
+
+{
+  "prompt": "What is the primary outcome measure in clinical trial NCT05259605?",
+  "completion": "The primary outcome measure is overall survival, defined as the time from the date of surgery allowing the first pathological diagnosis to the date of death from any cause. Patients will be followed up for 5 years after enrolment, with final analysis planned for 2030."
+},
+{
+  "prompt": "How is overall survival measured in NCT05259605?",
+  "completion": "Overall survival is measured from the date of initial diagnostic surgery to the date of death from any cause. Patients will be tracked for a follow-up duration of 5 years."
+},
+{
+  "prompt": "What are the secondary outcomes in study NCT05259605?",
+  "completion": "The secondary outcomes include progression-free survival and best overall and objective response, both measured over a 5-year follow-up period after enrolment."
+},
+{
+  "prompt": "How is progression-free survival defined in NCT05259605?",
+  "completion": "Progression-free survival is defined as the time from the start of anti-tumor therapy to either the first objective progression as assessed by the local investigator or the patient’s death, whichever comes first."
+},
+{
+  "prompt": "What is measured by 'best overall and objective response' in NCT05259605?",
+  "completion": "Best overall and objective response is recorded from the start of anti-tumor therapy until disease progression or initiation of a new anti-tumor therapy. The data is collected over a 5-year follow-up period."
+},
+
+{
+  "prompt": "When is the final analysis of outcome data expected for NCT05259605?",
+  "completion": "The last patient is expected to enroll in 2025, and all patients will be followed for 5 years. The final analysis of outcomes is planned for 2030."
+}
+
 ]
